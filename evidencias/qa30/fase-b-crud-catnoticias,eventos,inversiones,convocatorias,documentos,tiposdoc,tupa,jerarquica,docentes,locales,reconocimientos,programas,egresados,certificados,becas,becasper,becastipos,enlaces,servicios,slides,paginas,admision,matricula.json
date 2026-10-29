@@ -220,5 +220,53 @@
   "caso": "locales: publicados visibles en portal (/nosotros/campus-e-informes)",
   "estado": "REVISAR",
   "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "reconocimientos: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "reconocimientos: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-01 reconocimientos editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "reconocimientos: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "reconocimientos: publicados visibles en portal (/nosotros/reconocimientos)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "programas: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "programas: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-01 programas editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "programas: eliminar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Eliminar en el listado"
+ },
+ {
+  "fase": "B",
+  "caso": "programas: publicados visibles en portal (/programas)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
  }
 ]

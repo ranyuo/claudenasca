@@ -241,5 +241,59 @@
    "txt": "QA30-05 locales prueba QA30",
    "col": "locales"
   }
+ ],
+ "reconocimientos": [
+  {
+   "id": "mvu22mrpbyyd1j",
+   "txt": "QA30-01 reconocimientos editado QA30",
+   "col": "reconocimientos"
+  },
+  {
+   "id": "mvu22pvzujxlvg",
+   "txt": "QA30-02 reconocimientos prueba QA30",
+   "col": "reconocimientos"
+  },
+  {
+   "id": "mvu22sc1h0v6oz",
+   "txt": "QA30-03 reconocimientos prueba QA30",
+   "col": "reconocimientos"
+  },
+  {
+   "id": "mvu22uth9xzziv",
+   "txt": "QA30-04 reconocimientos prueba QA30",
+   "col": "reconocimientos"
+  },
+  {
+   "id": "mvu22xa9edhg7u",
+   "txt": "QA30-05 reconocimientos prueba QA30",
+   "col": "reconocimientos"
+  }
+ ],
+ "programas": [
+  {
+   "id": "mvu239zuo56wja",
+   "txt": "QA30-01 programas editado QA30",
+   "col": "programas"
+  },
+  {
+   "id": "mvu23cx2msz7n9",
+   "txt": "QA30-02 programas prueba QA30",
+   "col": "programas"
+  },
+  {
+   "id": "mvu23ffl9r7ddh",
+   "txt": "QA30-03 programas prueba QA30",
+   "col": "programas"
+  },
+  {
+   "id": "mvu23hup1ncos8",
+   "txt": "QA30-04 programas prueba QA30",
+   "col": "programas"
+  },
+  {
+   "id": "mvu23kbdtue0ba",
+   "txt": "QA30-05 programas prueba QA30",
+   "col": "programas"
+  }
  ]
 }
