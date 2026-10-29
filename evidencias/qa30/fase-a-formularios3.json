@@ -1,0 +1,26 @@
+[
+ {
+  "fase": "A",
+  "caso": "Mesa de partes expediente 4 persona jurídica",
+  "estado": "OK",
+  "detalle": "registrado DOC-2026-000001 ·  · 201 {\"file\":{\"fileId\":\"fdc386d2f69d6157034ee5d6315e3915\",\"url\":\"\\/index.php?route=api%2Farchivo\\u0026id=fdc386d2f69d6157034ee5d6315e3915\",\"original\":\"qa30-documento || 201 {\"record\":{\"nombres\":\"QA30-2"
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes archivo .php no permitido",
+  "estado": "OK",
+  "detalle": "rechazado · “qa30-script.php”: formato .php no permitido. Formatos: PDF, DOC, DOCX, XLS, XLSX, JPG, JPEG, PNG. | Revise los campos marcados en rojo. | R · "
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes PHP renombrado a .pdf",
+  "estado": "OK",
+  "detalle": "rechazado · No se pudo registrar el documento. Intente nuevamente. | No se pudo registrar el documento. Intente nuevamente. · 422 {\"message\":\"El contenido del archivo no coincide con un formato permitido.\"}"
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes PDF de 25 MB",
+  "estado": "OK",
+  "detalle": "rechazado ·  · "
+ }
+]
