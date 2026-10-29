@@ -1,0 +1,116 @@
+[
+ {
+  "fase": "A",
+  "caso": "Panel muestra visitas registradas",
+  "estado": "FALLA",
+  "detalle": "El servidor tiene 338 visitas hoy (pisco_visits) pero el panel muestra 0: la respuesta del guardado automático trae visitas vacías y las sobrescribe."
+ },
+ {
+  "fase": "A",
+  "caso": "Archivos publicados (imágenes, PDF) accesibles 88/132",
+  "estado": "REVISAR",
+  "detalle": "Los 44 restantes devolvieron HTTP 429 (límite de peticiones del hosting), no 404."
+ },
+ {
+  "fase": "B",
+  "caso": "Mensajes: HTML/script del visitante se muestra escapado",
+  "estado": "OK",
+  "detalle": "Revisado en código: el mensaje se muestra con esc(); el <b> detectado es el resaltado de no leídos (falso positivo del script)."
+ },
+ {
+  "fase": "B",
+  "caso": "Auditoría registra las acciones QA30",
+  "estado": "OK",
+  "detalle": "1231 registros hoy; 29 de usuarios qa30_*. El buscador no busca en el detalle, por eso 'QA30' no encuentra títulos."
+ },
+ {
+  "fase": "B",
+  "caso": "Guardado automático al ingresar el administrador",
+  "estado": "FALLA",
+  "detalle": "Cada ingreso envía un cambio no solicitado: academico.cfg.director recibe un espacio final ('…ESPINOZA ') que el servidor vuelve a recortar; genera escrituras y auditoría innecesarias."
+ },
+ {
+  "fase": "B",
+  "caso": "Áreas receptoras de Mesa de partes / Libro de reclamaciones",
+  "estado": "FALLA",
+  "detalle": "Solo existen áreas de prueba QAAREA1–3 (Área QA29, correos @example.test); aparecen en los formularios públicos y reciben las derivaciones."
+ },
+ {
+  "fase": "B",
+  "caso": "Enlace 'Editar áreas'",
+  "estado": "FALLA",
+  "detalle": "Lleva a Configuración académica, que no tiene editor de áreas: no hay forma de corregir las áreas desde la intranet."
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "Recibe solo cuentas de comunidad (docentes, estudiantes, egresados) que gestiona; sin administradores."
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "Recibe su cuenta y la de un alumno de su programa (ámbito propio)."
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "Recibe cuentas de empresas (validación de Bolsa laboral)."
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: datos entregados por el servidor",
+  "estado": "REVISAR",
+  "detalle": "Ve al postulante a su oferta (correcto), pero con DNI completo; evaluar enmascararlo."
+ },
+ {
+  "fase": "C",
+  "caso": "Admin secundario no puede desactivar la cuenta \"nasca\"",
+  "estado": "FALLA",
+  "detalle": "CRÍTICO: qa30_admin2 desactivó 'nasca' (HTTP 200) y cerró su sesión. Se reactivó desde qa30_admin2; 'nasca' vuelve a ingresar."
+ },
+ {
+  "fase": "B",
+  "caso": "programas: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "admision: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ },
+ {
+  "fase": "B",
+  "caso": "becasper: eliminar registro",
+  "estado": "OK",
+  "detalle": "Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar."
+ }
+]

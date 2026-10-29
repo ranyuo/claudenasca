@@ -1,0 +1,44 @@
+[
+ {
+  "fase": "A",
+  "caso": "Consulta pública reclamo RCL-2026-00005 doc 99000011",
+  "estado": "OK",
+  "detalle": "muestra estado"
+ },
+ {
+  "fase": "A",
+  "caso": "Consulta pública reclamo RCL-2026-00007 doc 99000013",
+  "estado": "OK",
+  "detalle": "muestra estado"
+ },
+ {
+  "fase": "A",
+  "caso": "Consulta pública reclamo RCL-2026-00005 doc 11111111",
+  "estado": "OK",
+  "detalle": "documento incorrecto: no muestra datos"
+ },
+ {
+  "fase": "A",
+  "caso": "Consulta pública reclamo RCL-2099-99999 doc 99000011",
+  "estado": "OK",
+  "detalle": "código inexistente: no muestra datos"
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes expediente 1 con PDF",
+  "estado": "OK",
+  "detalle": "registrado MPV-IESTPN-2026-000005"
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes expediente 2 con PDF",
+  "estado": "OK",
+  "detalle": "registrado MPV-IESTPN-2026-000006"
+ },
+ {
+  "fase": "A",
+  "caso": "Mesa de partes expediente 3 con PDF",
+  "estado": "OK",
+  "detalle": "registrado MPV-IESTPN-2026-000007"
+ }
+]
