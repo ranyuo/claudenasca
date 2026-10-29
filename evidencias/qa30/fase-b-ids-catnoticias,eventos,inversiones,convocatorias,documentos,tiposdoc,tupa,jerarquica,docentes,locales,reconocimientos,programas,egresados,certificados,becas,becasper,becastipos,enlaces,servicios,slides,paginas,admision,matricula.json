@@ -295,5 +295,59 @@
    "txt": "QA30-05 programas prueba QA30",
    "col": "programas"
   }
+ ],
+ "egresados": [
+  {
+   "id": "mvu23uqvqlitq0",
+   "txt": "QA30-01 egresados editado QA30",
+   "col": "egresados"
+  },
+  {
+   "id": "mvu23xb3cgfk7j",
+   "txt": "QA30-02 egresados prueba QA30",
+   "col": "egresados"
+  },
+  {
+   "id": "mvu23zs7o1qtpa",
+   "txt": "QA30-03 egresados prueba QA30",
+   "col": "egresados"
+  },
+  {
+   "id": "mvu2428ddnesn7",
+   "txt": "QA30-04 egresados prueba QA30",
+   "col": "egresados"
+  },
+  {
+   "id": "mvu244qavvs8wk",
+   "txt": "QA30-05 egresados prueba QA30",
+   "col": "egresados"
+  }
+ ],
+ "certificados": [
+  {
+   "id": "mvu24eki672mb0",
+   "txt": "QA30-01 certificados editado QA30",
+   "col": "certificados"
+  },
+  {
+   "id": "mvu24h3sw4wyjw",
+   "txt": "QA30-02 certificados prueba QA30",
+   "col": "certificados"
+  },
+  {
+   "id": "mvu24jjyr24con",
+   "txt": "QA30-03 certificados prueba QA30",
+   "col": "certificados"
+  },
+  {
+   "id": "mvu24m236uh5s0",
+   "txt": "QA30-04 certificados prueba QA30",
+   "col": "certificados"
+  },
+  {
+   "id": "mvu24ok6ag1auv",
+   "txt": "QA30-05 certificados prueba QA30",
+   "col": "certificados"
+  }
  ]
 }

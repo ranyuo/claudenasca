@@ -268,5 +268,41 @@
   "caso": "programas: publicados visibles en portal (/programas)",
   "estado": "REVISAR",
   "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "egresados: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "egresados: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombres = QA30-01 egresados editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "egresados: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "certificados: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "certificados: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombres = QA30-01 certificados editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "certificados: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
  }
 ]
