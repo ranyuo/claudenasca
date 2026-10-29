@@ -1,5 +1,5 @@
 
-### Fase A · 76 casos · REVISAR: 1 · OK: 73 · FALLA: 2
+### Fase A · 76 casos · REVISAR: 1 · OK: 74 · FALLA: 1
 
 | Resultado | Caso | Detalle |
 |---|---|---|
@@ -64,7 +64,7 @@
 | OK | Ruta #/paginas/qa29-pagina-3 (Página adicional — QA29 3 · QA29 revisió) |  |
 | OK | Ruta #/noticias (Noticias) |  |
 | OK | Ruta #/contacto (Contáctanos) |  |
-| FALLA | Ruta #/buscar (Buscar en el sitio) | contenido vacío (46 car.) |
+| OK | Ruta #/buscar (Buscar en el sitio) | Sin término de búsqueda la página queda vacía, comportamiento esperado. |
 | OK | Ruta #/politica-de-privacidad (Política de Privacidad) |  |
 | OK | Ruta #/terminos-de-uso (Términos de Uso) |  |
 | OK | Ruta #/mapa-del-sitio (Mapa del sitio) |  |
@@ -80,38 +80,45 @@
 | OK | Móvil 375 px sin desplazamiento horizontal |  |
 | OK | Menú hamburguesa móvil abre |  |
 
-### Fase B · 138 casos · OK: 112 · FALLA: 8 · BLOQUEADO: 8 · REVISAR: 10
+### Fase B · 154 casos · OK: 133 · REVISAR: 10 · N/A: 6 · BLOQUEADO: 2 · FALLA: 3
 
 | Resultado | Caso | Detalle |
 |---|---|---|
 | OK | estudiantes (académico): crear 5 registros | 5/5 registrados |
 | OK | estudiantes (académico): editar registro | texto modificado y guardado |
 | OK | estudiantes (académico): eliminar registro | 5 → 4 filas QA30 |
-| FALLA | titulos (académico): crear 5 registros | 0/5 registrados · #1: Este egresado ya tiene un título registrado. / / / /  |
+| OK | titulos (académico): crear 5 registros | 5/5 registrados |
 | OK | modulos (académico): crear 5 registros | 5/5 registrados |
 | OK | modulos (académico): editar registro | texto modificado y guardado |
 | OK | modulos (académico): eliminar registro | 5 → 4 filas QA30 |
-| FALLA | certs (académico): crear 5 registros | 0/5 registrados · #1:  / / La fecha no puede ser futura. /  |
+| REVISAR | certs (académico): crear 5 registros | 3 certificaciones QA30 creadas en total (1 + 2 en reintentos; 1 eliminada en la prueba). Los demás intentos los bloquea correctamente la validación 'El estudiante ya tiene registrado este módulo'; el script no logró comb |
 | OK | certs (académico): editar registro | guardado sin cambio de texto |
-| OK | certs (académico): eliminar registro | 1 → 0 filas QA30 |
+| OK | certs (académico): eliminar registro | 4 → 3 filas QA30 |
 | OK | notas (académico): crear 5 registros | 5/5 registrados |
 | OK | notas (académico): editar registro | texto modificado y guardado |
 | OK | notas (académico): eliminar registro | 5 → 4 filas QA30 |
-| BLOQUEADO | empresas: crear 5 registros | no se encontró botón Nuevo en /admin/ix-bolsa/gestion |
-| FALLA | ofertas (académico): crear 5 registros | 0/5 registrados · #1:  / / / / / / / La fecha límite no puede estar en el pasado. /  |
-| BLOQUEADO | uds: crear 5 registros | no se encontró botón Nuevo en /admin/ix-horarios |
-| BLOQUEADO | ambientes: crear 5 registros | no se encontró botón Nuevo en /admin/ix-horarios |
+| N/A | empresas: crear 5 registros | Reemplazado por 'empresas (académico)': 5/5 tras ubicar la pestaña y usar RUC con dígito verificador válido. |
+| OK | ofertas (académico): crear 5 registros | 5/5 registrados |
+| N/A | uds: crear 5 registros | Reemplazado por 'uds (académico)': 5/5 en Horarios › Configuración. |
+| N/A | ambientes: crear 5 registros | Reemplazado por 'ambientes (académico)': 5/5. |
 | OK | docentes: crear 5 registros | 5/5 guardados en servidor |
-| BLOQUEADO | areas: crear 5 registros | no se encontró botón Nuevo en /admin/ix-mesa |
-| BLOQUEADO | tramites: crear 5 registros | no se encontró botón Nuevo en /admin/ix-mesa |
-| BLOQUEADO | ofertas: crear 5 registros | no se encontró botón Nuevo en /admin/ix-bolsa/gestion |
+| BLOQUEADO | areas: crear 5 registros | No existe editor de áreas accesible: 'Editar áreas' lleva a Configuración académica sin esa opción. |
+| BLOQUEADO | tramites: crear 5 registros | Igual que áreas: el catálogo de tipos de trámite de la Mesa de partes académica no tiene pantalla accesible en la intranet. |
+| N/A | ofertas: crear 5 registros | Reemplazado por 'ofertas (académico)': 5/5 con fecha límite futura. |
 | OK | uds (académico): crear 5 registros | 5/5 registrados |
 | OK | uds (académico): editar registro | texto modificado y guardado |
 | OK | uds (académico): eliminar registro | 5 → 4 filas QA30 |
 | OK | ambientes (académico): crear 5 registros | 5/5 registrados |
 | OK | ambientes (académico): editar registro | texto modificado y guardado |
 | OK | ambientes (académico): eliminar registro | 5 → 4 filas QA30 |
-| FALLA | docentes (académico): crear 5 registros | 0/5 registrados · #1:  / / Campo obligatorio. / / Debe ser posterior a la hora de inicio. |
+| OK | docentes (académico): crear 5 registros | 5/5 registrados |
+| OK | empresas (académico): crear 5 registros | 5/5 registrados |
+| OK | ofertas (académico): editar registro | texto modificado y guardado |
+| OK | ofertas (académico): eliminar registro | 5 → 4 filas QA30 |
+| OK | empresas (académico): editar registro | texto modificado y guardado |
+| OK | empresas (académico): eliminar registro | 5 → 4 filas QA30 |
+| OK | docentes (académico): editar registro | guardado sin cambio de texto |
+| OK | docentes (académico): eliminar registro | 4 → 3 filas QA30 |
 | OK | Mensajes QA30 recibidos en intranet | 3 mensajes |
 | OK | Mensajes: abrir detalle cambia estado a leído | Leído, Leído |
 | OK | Mensajes: HTML/script del visitante se muestra escapado | Revisado en código: el mensaje se muestra con esc(); el <b> detectado es el resaltado de no leídos (falso positivo del script). |
@@ -168,7 +175,7 @@
 | OK | becas: editar registro | campo nombres = QA30-01 becas editado QA30 |
 | OK | becas: eliminar registro | papelera |
 | OK | becasper: crear 5 registros | 5/5 guardados en servidor |
-| BLOQUEADO | becasper: editar registro | sin campo de texto editable |
+| N/A | becasper: editar registro | El periodo de becas no tiene campo de texto (solo año/periodo); no aplica. |
 | OK | becastipos: crear 5 registros | 5/5 guardados en servidor |
 | OK | becastipos: editar registro | campo nombre = QA30-01 becastipos editado QA30 |
 | OK | becastipos: eliminar registro | Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar. |
@@ -189,36 +196,45 @@
 | OK | matricula: crear 5 registros | 5/5 guardados en servidor |
 | OK | matricula: editar registro | campo titulo = QA30-01 matricula editado QA30 |
 | OK | matricula: eliminar registro | Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar. |
-| FALLA | docentes: editar registro | campo titulo = QA30-01 |
+| N/A | docentes: editar registro | Limitación del script: editó el campo 'título académico' (máx. corto) en lugar del nombre; la validación de longitud funcionó. |
 | OK | docentes: eliminar registro | papelera |
 | OK | becasper: eliminar registro | Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar. |
 | OK | admision: eliminar registro | Por diseño el módulo no permite eliminar (softDelete:false); solo despublicar/inactivar. |
 | OK | noticias: crear 5 registros | 5/5 guardados en servidor |
 | OK | noticias: editar registro | campo titulo = QA30-01 noticias editado QA30 |
-| BLOQUEADO | noticias: eliminar registro | no se encontró botón Eliminar en el listado |
+| OK | noticias: eliminar registro | Verificado aparte (del-noticia.cjs): enviada a papelera. |
 | OK | noticias: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | catnoticias: publicación en portal | 4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público |
 | OK | eventos: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | inversiones: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | convocatorias: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | documentos: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
+| REVISAR | documentos: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
 | OK | tiposdoc: publicación en portal | 4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público |
-| REVISAR | tupa: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
+| REVISAR | tupa: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
 | OK | jerarquica: publicación en portal | 4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público |
 | OK | docentes: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | locales: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | reconocimientos: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | programas: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | becas: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
+| REVISAR | programas: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
+| REVISAR | becas: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
 | OK | becastipos: publicación en portal | 5 publicados → 5 en datos públicos, render: visible; 0 borrador/eliminado → 0 filtrados al público |
 | OK | servicios: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | slides: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | admision: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 4 borrador/eliminado → 0 filtrados al público |
-| REVISAR | matricula: publicación en portal | 3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | enlaces: publicación en portal | 5 publicados → 5 en datos públicos, render: no visible en la página; 0 borrador/eliminado → 0 filtrados al público |
+| REVISAR | slides: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
+| REVISAR | admision: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
+| REVISAR | matricula: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
+| REVISAR | enlaces: publicación en portal | Los publicados sí llegan a los datos públicos y los borradores no; la página no los muestra en la primera vista por filtros de la propia página (vigente, periodo, paginación, carrusel). Ej.: /programas indica 'Ofrecemos  |
 | OK | paginas: publicación en portal | 3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público |
 | OK | egresados: publicación en portal | 3 publicados → 3 en datos públicos, render: n/a; 2 borrador/eliminado → 0 filtrados al público |
-| REVISAR | certificados: publicación en portal | 4 publicados → 0 en datos públicos, render: n/a; 2 borrador/eliminado → 0 filtrados al público |
+| OK | certificados: publicación en portal | Correcto: los certificados no se publican en bloque; solo se consultan por código. |
+| OK | Títulos: alumno egresado 1 para titular |  |
+| OK | Títulos: alumno egresado 2 para titular |  |
+| OK | Títulos: alumno egresado 3 para titular |  |
+| OK | Títulos: alumno egresado 4 para titular |  |
+| OK | Títulos: alumno egresado 5 para titular |  |
+| OK | Títulos: rechaza título duplicado y fecha incoherente | Este egresado ya tiene un título registrado. / Debe ser posterior a la fecha de culminación. |
+| OK | titulos (académico): editar registro |  |
+| OK | titulos (académico): eliminar registro |  |
+| OK | Títulos: página pública de consulta carga |  |
 | FALLA | Guardado automático al ingresar el administrador | Cada ingreso envía un cambio no solicitado: academico.cfg.director recibe un espacio final ('…ESPINOZA ') que el servidor vuelve a recortar; genera escrituras y auditoría innecesarias. |
 | FALLA | Áreas receptoras de Mesa de partes / Libro de reclamaciones | Solo existen áreas de prueba QAAREA1–3 (Área QA29, correos @example.test); aparecen en los formularios públicos y reciben las derivaciones. |
 | FALLA | Enlace 'Editar áreas' | Lleva a Configuración académica, que no tiene editor de áreas: no hay forma de corregir las áreas desde la intranet. |

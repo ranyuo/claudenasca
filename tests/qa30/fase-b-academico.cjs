@@ -48,6 +48,10 @@ async function fillModal(p, ek, i, sfx, shift = 0, past = false) {
     if (info.ml > 0) v = v.slice(0, info.ml);
     await f.fill(v);
   }
+  // Grupos de casillas (días, unidades): marcar las dos primeras de cada grupo
+  const groups = await m.locator('input[type=checkbox][name]').evaluateAll(cs => { const g = {}; cs.forEach((c, idx) => { (g[c.name] = g[c.name] || []).push(idx); }); return Object.values(g).filter(a => a.length > 1); });
+  const boxes = m.locator('input[type=checkbox][name]');
+  for (const g of groups) for (const idx of g.slice(0, 2)) await boxes.nth(idx).check({ force: true }).catch(() => {});
   return m;
 }
 (async () => {
