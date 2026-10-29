@@ -22,5 +22,29 @@
   "caso": "certs (académico): eliminar registro",
   "estado": "OK",
   "detalle": "4 → 3 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "empresas (académico): crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "0/5 registrados · #1:  | | | | | | "
+ },
+ {
+  "fase": "B",
+  "caso": "ofertas (académico): crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 registrados"
+ },
+ {
+  "fase": "B",
+  "caso": "ofertas (académico): editar registro",
+  "estado": "OK",
+  "detalle": "texto modificado y guardado"
+ },
+ {
+  "fase": "B",
+  "caso": "ofertas (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": "5 → 4 filas QA30"
  }
 ]

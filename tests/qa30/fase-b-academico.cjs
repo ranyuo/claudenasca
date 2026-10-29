@@ -8,6 +8,8 @@ const PLAN = [
   ['uds', '/admin/ix-horarios', ['horarios:config', 'hconf:uds']], ['ambientes', '/admin/ix-horarios', ['horarios:config', 'hconf:ambientes']], ['docentes', '/admin/ix-horarios', ['horarios:config', 'hconf:docentes']],
   ['areas', '/admin/ix-mesa', ['mesa:config']], ['tramites', '/admin/ix-mesa', ['mesa:config']],
 ];
+// RUC válido (dígito verificador SUNAT)
+function ruc(base10) { const w = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]; const s = [...base10].reduce((a, d, i) => a + d * w[i], 0); const r = 11 - (s % 11); return base10 + (r === 10 ? 0 : r === 11 ? 1 : r); }
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
 async function goTo(p, route, tab, ek) {
   await p.evaluate(h => { location.hash = h; }, route); await p.waitForTimeout(1500);
@@ -36,7 +38,7 @@ async function fillModal(p, ek, i, sfx, shift = 0, past = false) {
     else if (info.type === 'email') v = `qa30.${ek}${i}@portal.invalid`;
     else if (info.type === 'url' || /web|url|enlace/.test(k)) v = 'https://example.org/qa30';
     else if (/dni|documento/.test(k)) v = '9904' + sfx.slice(-3) + i;
-    else if (/ruc/.test(k)) v = '2099900' + sfx.slice(-3) + i;
+    else if (/ruc/.test(k)) v = ruc('2099' + sfx.slice(-4) + String(i).padStart(2, '0'));
     else if (/tel|cel|fono/.test(k)) v = '999000' + sfx.slice(-2) + i;
     else if (/^(cod|codigo|c[oó]digo)\b|\bc[oó]digo/.test(k)) v = ('Q3' + sfx.slice(-3) + i).slice(0, info.ml > 0 ? info.ml : 20);
     else if (/a[ñn]o/.test(k)) v = '2026';
