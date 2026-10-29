@@ -76,5 +76,47 @@
   "caso": "notas (académico): eliminar registro",
   "estado": "OK",
   "detalle": "5 → 4 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "empresas: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-bolsa"
+ },
+ {
+  "fase": "B",
+  "caso": "ofertas (académico): crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "0/5 registrados · #1:  | | | | | | | La fecha límite no puede estar en el pasado. | "
+ },
+ {
+  "fase": "B",
+  "caso": "uds: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-horarios"
+ },
+ {
+  "fase": "B",
+  "caso": "ambientes: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-horarios"
+ },
+ {
+  "fase": "B",
+  "caso": "docentes: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-horarios"
+ },
+ {
+  "fase": "B",
+  "caso": "areas: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-config"
+ },
+ {
+  "fase": "B",
+  "caso": "tramites: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-config"
  }
 ]
