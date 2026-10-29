@@ -36,7 +36,7 @@ const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
         if (col === 'becasPeriodos') { w.anio = 2070 + i; w.vigente = false; }
         if (col === 'becarios') { w.dni = '9902' + sfx.slice(-4); w.apellidos = 'Prueba QA30'; }
         if (col === 'certificados') { w.dni = '9903' + sfx.slice(-4); w.codigo = `QA30-CERT-${sfx}`; w.fecha = '2026-10-29'; }
-        if (col === 'admisiones') { w.anio = 2090 + i; w.vigente = false; }
+        if (col === 'admisiones') { w.anio = 2070 + i; w.vigente = false; }
         if (col === 'matriculas') { w.periodo = `2090-${i}`; w.vigente = false; }
         if (col === 'egresados') w.anio = 2025;
         if (col === 'eventos') w.fecha = ['2026-10-01T10:00', '2026-10-29T18:00', '2026-12-15T09:00', '2026-11-20T09:00', '2026-11-25T09:00'][i - 1];

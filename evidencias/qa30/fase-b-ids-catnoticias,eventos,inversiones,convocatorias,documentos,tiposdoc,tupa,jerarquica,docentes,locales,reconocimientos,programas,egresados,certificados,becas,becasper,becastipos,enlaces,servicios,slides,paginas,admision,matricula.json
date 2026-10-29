@@ -496,5 +496,44 @@
    "txt": "QA30-05 slides prueba QA30",
    "col": "slides"
   }
+ ],
+ "paginas": [
+  {
+   "id": "mvu28h0u11a2op",
+   "txt": "QA30-01 paginas editado QA30",
+   "col": "paginas"
+  },
+  {
+   "id": "mvu28jgpyu96dx",
+   "txt": "QA30-02 paginas prueba QA30",
+   "col": "paginas"
+  },
+  {
+   "id": "mvu28lw60duse3",
+   "txt": "QA30-03 paginas prueba QA30",
+   "col": "paginas"
+  },
+  {
+   "id": "mvu28oc9m3ax6g",
+   "txt": "QA30-04 paginas prueba QA30",
+   "col": "paginas"
+  },
+  {
+   "id": "mvu28qscpiam98",
+   "txt": "QA30-05 paginas prueba QA30",
+   "col": "paginas"
+  }
+ ],
+ "admision": [
+  {
+   "id": "mvu297njogh2en",
+   "txt": "QA30-04 admision editado QA30",
+   "col": "admisiones"
+  },
+  {
+   "id": "mvu29aza8ucg9f",
+   "txt": "QA30-05 admision prueba QA30",
+   "col": "admisiones"
+  }
  ]
 }

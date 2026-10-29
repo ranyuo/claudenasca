@@ -442,5 +442,47 @@
   "caso": "slides: publicados visibles en portal (/)",
   "estado": "REVISAR",
   "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-01 paginas editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: eliminar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Eliminar en el listado"
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: publicados visibles en portal (/paginas/qa30-paginas-1-6023501)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "admision: crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "2/5 guardados en servidor · errores: #1:  | Ya existe un registro con este valor (“Admisión 2091”). | Revise los campos marcados en rojo. ; #2:  | Ya existe un registro con este valor (“Admisión 2092”). | Revise los campos marcados en rojo. ; #3:  | Ya existe un registro con este valor (“Admisión 2093”). | Revise los campos marcados en rojo."
+ },
+ {
+  "fase": "B",
+  "caso": "admision: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-04 admision editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "admision: publicados visibles en portal (/admision)",
+  "estado": "REVISAR",
+  "detalle": "0/0 visibles en la primera página"
  }
 ]
