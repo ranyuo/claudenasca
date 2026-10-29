@@ -1,0 +1,62 @@
+[
+ {
+  "fase": "B",
+  "caso": "Títulos: alumno egresado 1 para titular",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: alumno egresado 2 para titular",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: alumno egresado 3 para titular",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: alumno egresado 4 para titular",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: alumno egresado 5 para titular",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "titulos (académico): crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 registrados"
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: rechaza título duplicado y fecha incoherente",
+  "estado": "OK",
+  "detalle": "Este egresado ya tiene un título registrado. | Debe ser posterior a la fecha de culminación."
+ },
+ {
+  "fase": "B",
+  "caso": "titulos (académico): editar registro",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "titulos (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "B",
+  "caso": "Títulos: página pública de consulta carga",
+  "estado": "OK",
+  "detalle": ""
+ }
+]

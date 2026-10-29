@@ -1,0 +1,62 @@
+[
+ {
+  "fase": "C",
+  "caso": "secretaria: cuentas visibles (detalle)",
+  "estado": "REVISAR",
+  "detalle": "qa29-docente-1(docente), qa29-docente-2(docente), qa29-docente-3(docente), qa29-editor-1(estudiante), qa29-editor-2(estudiante), qa29-editor-3(estudiante), qa30_docente(docente), qa30_egresado(egresado), qa30_estudiante(estudiante), qa30_secretaria(secretaria) · campos: programaId,personaId,vin,dni,area,cargo,id,server_id,ixId,usuario,nombre,correo,rol,estado,has_password,ultimoAcceso,intentos,blo"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: cuentas visibles (detalle)",
+  "estado": "REVISAR",
+  "detalle": "qa29-editor-1(estudiante), qa30_coordinador(coordinador) · campos: programaId,personaId,vin,dni,area,cargo,id,server_id,ixId,usuario,nombre,correo,rol,estado,has_password,ultimoAcceso,intentos,bloqueadoHasta"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: cuentas visibles (detalle)",
+  "estado": "REVISAR",
+  "detalle": "20999999019(empresa), 20999999027(empresa), 20999999035(empresa), qa30_atencion(atencion), qa30_empresa(empresa) · campos: programaId,personaId,vin,dni,area,cargo,id,server_id,ixId,usuario,nombre,correo,rol,estado,has_password,ultimoAcceso,intentos,bloqueadoHasta"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: cuentas visibles (detalle)",
+  "estado": "REVISAR",
+  "detalle": "qa30_empresa(empresa) · campos: programaId,personaId,vin,dni,area,cargo,id,server_id,ixId,usuario,nombre,correo,rol,estado,has_password,ultimoAcceso,intentos,bloqueadoHasta · alumnos: QA29 1 ALUMNO SINTÉTICO:90000101 · postulaciones: {\"id\":1,\"of\":1,\"est\":930000,\"fecha\":\"2026-10-29\",\"estado\":\"En revisión\",\"_qaRun\":\"QA29\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "qa30_imagen restaurado a su rol original",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Cuenta inactiva no puede ingresar",
+  "estado": "OK",
+  "detalle": "Login falló: Usuario o contraseña incorrectos."
+ },
+ {
+  "fase": "C",
+  "caso": "Cuenta reactivada vuelve a ingresar",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Contraseña incorrecta rechazada (6 intentos)",
+  "estado": "OK",
+  "detalle": "Usuario o contraseña incorrectos. / Cuenta bloqueada por intentos fallidos. Espera cinco minutos o solicita el desbloqueo."
+ },
+ {
+  "fase": "C",
+  "caso": "Bloqueo temporal tras 6 intentos fallidos",
+  "estado": "OK",
+  "detalle": "Login falló: Cuenta bloqueada por intentos fallidos. Espera cinco minutos o solicita el desbloqueo."
+ },
+ {
+  "fase": "C",
+  "caso": "Admin ve el bloqueo de la cuenta",
+  "estado": "OK",
+  "detalle": "{\"bloqueadoHasta\":1793311163000,\"intentos\":0}"
+ }
+]

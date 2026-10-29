@@ -1,0 +1,62 @@
+[
+ {
+  "fase": "A",
+  "caso": "Archivos publicados (imágenes, PDF) accesibles 88/132",
+  "estado": "FALLA",
+  "detalle": "/assets/nasca/HERTOR-WEB-e1731460188222-2bf45a8dcb.png → 429; /assets/nasca/HAIRO-e1731399223970-0e7dfcc232.png → 429; /assets/nasca/ALECSANDRO-WEB-2-e1731460210276-b8a36aa154.png → 429; /assets/nasca/FREDY-WEB-e1731461448934-6c54c4af7c.png → 429; /assets/nasca/CANALES-WEB-e1733189380158-eb71e73a02.png → 429; /assets/nasca/juan-ramos-web-e1733189438950-d9937c22c1.png → 429; /assets/nasca/LUQUE-WEB"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"admisión\"",
+  "estado": "OK",
+  "detalle": "6 enlaces en resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"contabilidad\"",
+  "estado": "OK",
+  "detalle": "7 enlaces en resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"enfermeria\"",
+  "estado": "OK",
+  "detalle": "6 enlaces en resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"xyzqwe123\"",
+  "estado": "OK",
+  "detalle": "sin resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"<script>alert(1)</script>\"",
+  "estado": "OK",
+  "detalle": "sin resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Buscador \"' OR 1=1 --\"",
+  "estado": "OK",
+  "detalle": "13 enlaces en resultados"
+ },
+ {
+  "fase": "A",
+  "caso": "Boletín rechaza correo inválido",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "A",
+  "caso": "Registro de visitas (POST /api/visitas)",
+  "estado": "OK",
+  "detalle": "respuestas: [200,200,200,200,200]"
+ },
+ {
+  "fase": "A",
+  "caso": "Panel muestra visitas registradas",
+  "estado": "FALLA",
+  "detalle": "Visitas al portal 0 ■ 0 % vs. 7 días previos"
+ }
+]

@@ -183,3 +183,14 @@ SPECS.usuarios.afterList=()=>{
   const panel=document.querySelector('#perm-h')?.closest('.panel');
   if(panel)panel.insertAdjacentHTML('afterbegin','<div class="pb"><a class="btn" href="/roles.php">Editar permisos por rol</a><p>Seleccione los módulos habilitados para cada perfil institucional. El administrador conserva acceso completo.</p></div>');
 };
+
+// Visitantes: el servidor envía las imágenes grandes como archivos cacheables (/assets/cache/).
+// Tras la carga se convierten otra vez a data: en memoria, porque jsPDF necesita los datos de la imagen.
+window.addEventListener('load',()=>{
+  if(portalBootstrap.user||typeof DB!=='object'||!DB)return;
+  const pattern=/^\/assets\/cache\/[a-f0-9]{32}\.(png|jpg|webp|gif)$/;const refs=[];const pending=new Map();
+  const walk=node=>{for(const [key,value] of Object.entries(node)){if(typeof value==='string'){if(pattern.test(value))refs.push([node,key,value]);}else if(value&&typeof value==='object')walk(value);}};
+  walk(DB);
+  const toDataURL=url=>fetch(url).then(r=>r.ok?r.blob():Promise.reject(new Error(url))).then(blob=>new Promise((ok,bad)=>{const reader=new FileReader();reader.onload=()=>ok(reader.result);reader.onerror=bad;reader.readAsDataURL(blob);}));
+  for(const [node,key,url] of refs){if(!pending.has(url))pending.set(url,toDataURL(url));pending.get(url).then(data=>{if(node[key]===url)node[key]=data;}).catch(()=>{});}
+});

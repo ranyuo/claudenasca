@@ -1,0 +1,140 @@
+[
+ {
+  "fase": "B",
+  "caso": "noticias: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "catnoticias: publicación en portal",
+  "estado": "OK",
+  "detalle": "4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "eventos: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "inversiones: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "convocatorias: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "documentos: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "tiposdoc: publicación en portal",
+  "estado": "OK",
+  "detalle": "4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "tupa: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "jerarquica: publicación en portal",
+  "estado": "OK",
+  "detalle": "4 publicados → 4 en datos públicos, render: visible; 1 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "docentes: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "locales: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "reconocimientos: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "programas: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "becas: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: publicación en portal",
+  "estado": "OK",
+  "detalle": "5 publicados → 5 en datos públicos, render: visible; 0 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "servicios: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "slides: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "admision: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 4 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "3 publicados → 3 en datos públicos, render: no visible en la página; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "5 publicados → 5 en datos públicos, render: no visible en la página; 0 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "paginas: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: visible; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "egresados: publicación en portal",
+  "estado": "OK",
+  "detalle": "3 publicados → 3 en datos públicos, render: n/a; 2 borrador/eliminado → 0 filtrados al público"
+ },
+ {
+  "fase": "B",
+  "caso": "certificados: publicación en portal",
+  "estado": "REVISAR",
+  "detalle": "4 publicados → 0 en datos públicos, render: n/a; 2 borrador/eliminado → 0 filtrados al público"
+ }
+]

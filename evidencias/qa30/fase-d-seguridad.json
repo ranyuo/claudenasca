@@ -1,0 +1,110 @@
+[
+ {
+  "fase": "D",
+  "caso": "install.php inaccesible",
+  "estado": "OK",
+  "detalle": "HTTP 410"
+ },
+ {
+  "fase": "D",
+  "caso": "actualizar.php publicado",
+  "estado": "FALLA",
+  "detalle": "HTTP 200: formulario de actualización expuesto (protegido por install_key, pero debe eliminarse)"
+ },
+ {
+  "fase": "D",
+  "caso": "recuperar.php publicado",
+  "estado": "FALLA",
+  "detalle": "HTTP 200: recuperación de acceso expuesta (protegida por install_key, pero debe eliminarse)"
+ },
+ {
+  "fase": "D",
+  "caso": "Páginas privadas sin sesión (backup, respaldos, accounts, roles, auditoria)",
+  "estado": "OK",
+  "detalle": "HTTP 403"
+ },
+ {
+  "fase": "D",
+  "caso": ".env, .git/config, config.php, schema.sql",
+  "estado": "OK",
+  "detalle": "403/404"
+ },
+ {
+  "fase": "D",
+  "caso": "Archivo adjunto privado sin sesión",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes acceso a ese archivo"
+ },
+ {
+  "fase": "D",
+  "caso": "API pública no expone datos privados",
+  "estado": "OK",
+  "detalle": "usuarios, reclamos, expedientes, mensajes, alumnos y certificados vacíos; DNI de becarios enmascarados (****)"
+ },
+ {
+  "fase": "D",
+  "caso": "API pública no expone borradores ni eliminados",
+  "estado": "OK",
+  "detalle": "0 registros en borrador/despublicados/papelera en la respuesta anónima"
+ },
+ {
+  "fase": "D",
+  "caso": "Cookie de sesión",
+  "estado": "OK",
+  "detalle": "Secure; HttpOnly; SameSite=Lax"
+ },
+ {
+  "fase": "D",
+  "caso": "Cabeceras X-Content-Type-Options, X-Frame-Options, Referrer-Policy",
+  "estado": "OK",
+  "detalle": "nosniff, SAMEORIGIN, strict-origin-when-cross-origin"
+ },
+ {
+  "fase": "D",
+  "caso": "Cabecera HSTS (Strict-Transport-Security)",
+  "estado": "REVISAR",
+  "detalle": "no enviada"
+ },
+ {
+  "fase": "D",
+  "caso": "Content-Security-Policy",
+  "estado": "REVISAR",
+  "detalle": "solo upgrade-insecure-requests"
+ },
+ {
+  "fase": "D",
+  "caso": "Cabecera X-Powered-By",
+  "estado": "REVISAR",
+  "detalle": "expone PHP/8.3.36"
+ },
+ {
+  "fase": "D",
+  "caso": "Subida de .php y PHP renombrado a .pdf",
+  "estado": "OK",
+  "detalle": "rechazados (extensión y contenido)"
+ },
+ {
+  "fase": "D",
+  "caso": "XSS en buscador y en mensaje de contacto",
+  "estado": "OK",
+  "detalle": "se muestra como texto; no se ejecuta"
+ },
+ {
+  "fase": "D",
+  "caso": "Protección CSRF y escalamiento de privilegios por API",
+  "estado": "OK",
+  "detalle": "9 perfiles no administradores reciben 403 al intentar crear un administrador"
+ },
+ {
+  "fase": "D",
+  "caso": "Bloqueo por intentos fallidos",
+  "estado": "OK",
+  "detalle": "bloqueo de 5 minutos tras 6 intentos; registrado en auditoría"
+ },
+ {
+  "fase": "D",
+  "caso": "Límite de peticiones (rate limit) del hosting",
+  "estado": "REVISAR",
+  "detalle": "descargas masivas de imágenes devuelven HTTP 429"
+ }
+]
