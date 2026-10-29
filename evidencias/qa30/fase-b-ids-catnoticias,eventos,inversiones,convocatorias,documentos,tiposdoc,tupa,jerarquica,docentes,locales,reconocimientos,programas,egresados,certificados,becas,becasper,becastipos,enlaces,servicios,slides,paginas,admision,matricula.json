@@ -442,5 +442,59 @@
    "txt": "QA30-05 enlaces prueba QA30",
    "col": "enlaces"
   }
+ ],
+ "servicios": [
+  {
+   "id": "mvu277k21ki1w0",
+   "txt": "QA30-01 servicios editado QA30",
+   "col": "servicios"
+  },
+  {
+   "id": "mvu27aex9pwfsl",
+   "txt": "QA30-02 servicios prueba QA30",
+   "col": "servicios"
+  },
+  {
+   "id": "mvu27cu3b7iavy",
+   "txt": "QA30-03 servicios prueba QA30",
+   "col": "servicios"
+  },
+  {
+   "id": "mvu27faiuqspuj",
+   "txt": "QA30-04 servicios prueba QA30",
+   "col": "servicios"
+  },
+  {
+   "id": "mvu27hqct4w2o5",
+   "txt": "QA30-05 servicios prueba QA30",
+   "col": "servicios"
+  }
+ ],
+ "slides": [
+  {
+   "id": "mvu27u6bjit5cl",
+   "txt": "QA30-01 slides editado QA30",
+   "col": "slides"
+  },
+  {
+   "id": "mvu27wn0sqsb7x",
+   "txt": "QA30-02 slides prueba QA30",
+   "col": "slides"
+  },
+  {
+   "id": "mvu27z3zlzui1o",
+   "txt": "QA30-03 slides prueba QA30",
+   "col": "slides"
+  },
+  {
+   "id": "mvu281j7nv8uvr",
+   "txt": "QA30-04 slides prueba QA30",
+   "col": "slides"
+  },
+  {
+   "id": "mvu283yl6xycul",
+   "txt": "QA30-05 slides prueba QA30",
+   "col": "slides"
+  }
  ]
 }

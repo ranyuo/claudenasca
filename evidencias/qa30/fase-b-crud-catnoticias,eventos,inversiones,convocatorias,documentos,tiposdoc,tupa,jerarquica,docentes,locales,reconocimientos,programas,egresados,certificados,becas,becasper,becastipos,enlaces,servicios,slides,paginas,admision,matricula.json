@@ -394,5 +394,53 @@
   "caso": "enlaces: publicados visibles en portal (/servicios)",
   "estado": "REVISAR",
   "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "servicios: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "servicios: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombre = QA30-01 servicios editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "servicios: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "servicios: publicados visibles en portal (/servicios/complementarios)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "slides: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "slides: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-01 slides editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "slides: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "slides: publicados visibles en portal (/)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
  }
 ]
