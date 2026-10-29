@@ -50,7 +50,10 @@ for(const asset of sources.archivos){
  assert.equal(new URL(asset.fuente).hostname,'istpnasca.edu.pe');
  if(asset.type==='application/pdf')assert.equal(bytes.subarray(0,5).toString(),'%PDF-');
 }
-const view=fs.readFileSync(path.join(root,'portal-private/views/portal.php'),'utf8');
-for(const script of view.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))if(!script[1].includes('<?'))new vm.Script(script[1]);
+// La vista solo contiene el armazón; el CSS y el JavaScript estáticos están en public_html/assets/app/.
+const appDir=path.join(root,'public_html/assets/app'),appScripts=fs.readdirSync(appDir).filter(f=>/^portal-\d+\.js$/.test(f)).sort();
+assert.ok(appScripts.length>=4,'Scripts del portal publicados como archivos estáticos');
+for(const file of appScripts)new vm.Script(fs.readFileSync(path.join(appDir,file),'utf8'),{filename:file});
+const view=[fs.readFileSync(path.join(root,'portal-private/views/portal.php'),'utf8'),...appScripts.map(f=>fs.readFileSync(path.join(appDir,f),'utf8')),fs.readFileSync(path.join(appDir,'portal.css'),'utf8')].join('\n');
 assert.ok(!/OF_DOC|OF_NEWS|Profesional de Ejemplo/.test(view),'Sin catálogos de demostración heredados');
 console.log(`Nasca: 8 programas, 59 fichas, 40 tasas, 37 becarios, relaciones y ${sources.archivos.length} archivos oficiales verificados; sin contenido heredado.`);

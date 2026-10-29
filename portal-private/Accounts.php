@@ -127,6 +127,9 @@ trait PortalAccounts
         if($data['username']!==$old['username'])throw new PortalError(422,'El nombre de usuario existente no se puede cambiar.');
         if((int)$actor['server_id']===$id&&(!$active||$data['role']!=='admin'))throw new PortalError(422,'No puedes quitarte el acceso de administrador.');
         if($old['role']==='admin'&&(!$active||$data['role']!=='admin')&&(int)$this->db()->query("SELECT COUNT(*) FROM pisco_users WHERE role='admin' AND active=1")->fetchColumn()<=1)throw new PortalError(422,'Debe quedar al menos un administrador activo.');
+        // La cuenta administradora principal (la más antigua, creada al instalar) solo se modifica a sí misma.
+        $primary=(int)$this->db()->query("SELECT MIN(id) FROM pisco_users WHERE role='admin'")->fetchColumn();
+        if($id===$primary&&(int)$actor['server_id']!==$id&&(!$active||$data['role']!=='admin'||$data['password']!==''))throw new PortalError(403,'La cuenta administradora principal solo puede cambiar su estado, rol o contraseña desde su propia sesión.');
         $revoke=($data['role']!==$old['role']||!$active||$data['password']!==''||!PortalPolicy::equal($data['profile'],json_decode($old['profile']??'{}',true)??[]));
         $hash=$data['password']!==''?password_hash($data['password'],PASSWORD_DEFAULT):$old['password'];
         try{$this->db()->prepare('UPDATE pisco_users SET name=?,email=?,password=?,role=?,profile=?,active=?,auth_version=auth_version+?,login_failures=0,locked_until=NULL WHERE id=?')->execute([$data['name'],$data['email'],$hash,$data['role'],json_encode($data['profile'],JSON_THROW_ON_ERROR),$active,(int)$revoke,$id]);}

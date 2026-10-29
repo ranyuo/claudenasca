@@ -1,6 +1,7 @@
 /* Regresiones sin red: identidad con datos limitados, turnos y catálogo institucional. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto').webcrypto;
-const source=fs.readFileSync(require('node:path').join(__dirname,'../../portal-private/views/portal.php'),'utf8');
+const appDir=require('node:path').join(__dirname,'../../public_html/assets/app');
+const source=fs.readdirSync(appDir).filter(f=>/^portal-\d+\.js$/.test(f)).sort().map(f=>fs.readFileSync(require('node:path').join(appDir,f),'utf8')).join('\n');
 const fn=name=>{const m=source.match(new RegExp('function '+name+'\\([^]*?\\n}'));assert.ok(m,name+' disponible');return m[0]};
 const id=source.match(/const nextId = arr => \{[^]*?\n};/)[0];
 const catalog=[{id:'cont',codigo:'CONT',nombre:'Contabilidad'},{id:'got',codigo:'GOT',nombre:'Guía Oficial de Turismo'},{id:'ei',codigo:'EI',nombre:'Electricidad Industrial'},{id:'eli',codigo:'ELI',nombre:'Electrónica Industrial'},{id:'ma',codigo:'MA',nombre:'Mecatrónica Automotriz'},{id:'apsti',codigo:'APSTI',nombre:'Arquitectura de Plataformas y Servicios de Tecnologías de Información'}];

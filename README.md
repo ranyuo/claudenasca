@@ -10,6 +10,7 @@ Se incorporaron identidad, historia, misión y valores, directorios, perfiles de
 
 - [Fuentes, correspondencia por sección y pendientes](MAPEO-NASCA.md).
 - [Instalación y actualización](INSTRUCCIONES.md).
+- [Correcciones y optimización QA30](CORRECCIONES-QA30.md): el CSS y el JavaScript del portal están en `public_html/assets/app/` (la vista `portal-private/views/portal.php` solo contiene el armazón).
 - [Manifiesto de páginas y archivos con SHA-256](portal-private/data/nasca-sources.json).
 
 ## Instalación nueva
@@ -38,6 +39,7 @@ php tests/demo-validation.php
 PORTAL_CONFIG_FILE=/ruta/config.test.php php tests/run.php
 PORTAL_CONFIG_FILE=/ruta/config.test.php php tests/parity.php
 PORTAL_CONFIG_FILE=/ruta/config.test.php php tests/nasca-import.php
+PORTAL_CONFIG_FILE=/ruta/config.test.php php tests/qa30-correcciones.php
 PORTAL_CONFIG_FILE=/ruta/config.test.php php tests/functional-fixes.php
 PISCO_BASE_URL=http://127.0.0.1:8083 node tests/browser-nasca.cjs
 ```

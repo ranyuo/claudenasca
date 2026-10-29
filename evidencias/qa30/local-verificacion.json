@@ -1,0 +1,80 @@
+[
+ {
+  "fase": "V",
+  "caso": "Portal público carga sin errores ni recursos fallidos",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "V",
+  "caso": "CSS y JS servidos como archivos versionados",
+  "estado": "OK",
+  "detalle": "/assets/app/portal.css?v=1793315576 200, /assets/app/portal-4.js?v=1793315576 200, /portal-server.js?v=1793315599 200, /assets/app/portal-3.js?v=1793315576 200, /assets/app/portal-1.js?v=1793315576 200, /assets/app/portal-2.js?v=1793315576 200"
+ },
+ {
+  "fase": "V",
+  "caso": "Logo enviado como archivo cacheable y rehidratado a data: para PDF",
+  "estado": "OK",
+  "detalle": "/assets/cache/c9bb8ad8699cc746cc44ed93fe → data:image/png;base64,"
+ },
+ {
+  "fase": "V",
+  "caso": "Navegación por 5 secciones públicas sin errores",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "V",
+  "caso": "Ingreso del administrador sin guardados automáticos",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "V",
+  "caso": "El panel recibe las visitas reales",
+  "estado": "OK",
+  "detalle": "{\"2026-10-29\":15}"
+ },
+ {
+  "fase": "V",
+  "caso": "Botón \"Editar áreas\" apunta al editor",
+  "estado": "OK",
+  "detalle": "#/admin/expedientes/areas/editar"
+ },
+ {
+  "fase": "V",
+  "caso": "Editor de áreas y tipos de trámite visible",
+  "estado": "OK",
+  "detalle": "9 áreas"
+ },
+ {
+  "fase": "V",
+  "caso": "Crear área desde el editor y guardarla en el servidor",
+  "estado": "OK",
+  "detalle": "9 → 10; servidor: true"
+ },
+ {
+  "fase": "V",
+  "caso": "Mesa de partes: el error del servidor llega al usuario",
+  "estado": "OK",
+  "detalle": "No se pudo registrar el documento: El contenido del archivo no coincide con un formato permitido. | No se pudo registrar el documento: El contenido del archivo no coincide con un formato permitido."
+ },
+ {
+  "fase": "V",
+  "caso": "Eliminar el área de prueba",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "V",
+  "caso": "Recorrido de 38 módulos de la intranet sin errores JS",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "V",
+  "caso": "Sin guardados automáticos durante el recorrido",
+  "estado": "OK",
+  "detalle": "2 PUT (2 corresponden al área creada y eliminada)"
+ }
+]
