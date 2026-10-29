@@ -28,7 +28,7 @@ async function fillModal(p, ek, i, sfx) {
     if (info.tag === 'SELECT') { const opts = info.opts.filter(([v]) => v !== ''); if (!opts.length) continue; const qas = opts.filter(([, t]) => /QA30/.test(t)); const qa = qas.length ? qas[(i - 1) % qas.length] : null; if (!info.val || qa) await f.selectOption(qa ? qa[0] : opts[Math.min(i - 1, opts.length - 1)][0]); continue; }
     let v;
     if (info.type === 'number') v = /a[ñn]o|year/.test(k) ? '2026' : /nota|calif/.test(k) ? String(12 + i) : /cr[eé]dito|hora|cap|vacan|ciclo|sem/.test(k) ? String(i + 1) : String(info.min ? Math.max(+info.min, 1) : i);
-    else if (info.type === 'date') v = '2026-10-' + String(20 + i).padStart(2, '0');
+    else if (info.type === 'date') v = /fin|l[ií]mite|cierre|vence/.test(k) ? '2026-12-' + String(10 + i) : '2026-11-' + String(10 + i);
     else if (info.type === 'time') v = ['08:00', '09:00', '10:00', '11:00', '14:00'][i - 1];
     else if (info.type === 'month') v = '2026-10';
     else if (info.type === 'datetime-local') v = '2026-10-29T09:00';
