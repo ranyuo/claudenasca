@@ -484,5 +484,29 @@
   "caso": "admision: publicados visibles en portal (/admision)",
   "estado": "REVISAR",
   "detalle": "0/0 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: editar registro",
+  "estado": "OK",
+  "detalle": "campo titulo = QA30-01 matricula editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: eliminar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Eliminar en el listado"
+ },
+ {
+  "fase": "B",
+  "caso": "matricula: publicados visibles en portal (/matricula)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
  }
 ]

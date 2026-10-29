@@ -25,7 +25,7 @@ async function fillModal(p, ek, i, sfx) {
     if (!(await f.isVisible())) continue;
     const info = await f.evaluate(e => ({ tag: e.tagName, type: e.type, name: (e.name || e.id || '').toLowerCase(), label: (e.closest('.fld')?.querySelector('label')?.innerText || '').toLowerCase(), min: e.min, max: e.max, ml: e.maxLength, pattern: e.pattern, val: e.value, opts: e.tagName === 'SELECT' ? [...e.options].map(o => [o.value, o.text]) : null }));
     const k = info.name + ' ' + info.label;
-    if (info.tag === 'SELECT') { const opts = info.opts.filter(([v]) => v !== ''); if (!opts.length) continue; const qa = opts.find(([, t]) => /QA30/.test(t)); if (!info.val || qa) await f.selectOption(qa ? qa[0] : opts[Math.min(i - 1, opts.length - 1)][0]); continue; }
+    if (info.tag === 'SELECT') { const opts = info.opts.filter(([v]) => v !== ''); if (!opts.length) continue; const qas = opts.filter(([, t]) => /QA30/.test(t)); const qa = qas.length ? qas[(i - 1) % qas.length] : null; if (!info.val || qa) await f.selectOption(qa ? qa[0] : opts[Math.min(i - 1, opts.length - 1)][0]); continue; }
     let v;
     if (info.type === 'number') v = /a[ñn]o|year/.test(k) ? '2026' : /nota|calif/.test(k) ? String(12 + i) : /cr[eé]dito|hora|cap|vacan|ciclo|sem/.test(k) ? String(i + 1) : String(info.min ? Math.max(+info.min, 1) : i);
     else if (info.type === 'date') v = '2026-10-' + String(20 + i).padStart(2, '0');

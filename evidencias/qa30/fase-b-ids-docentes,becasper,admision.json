@@ -1,0 +1,83 @@
+{
+ "docentes": [
+  {
+   "id": "mvu2akqvgx2rbm",
+   "txt": "QA30-01 docentes prueba QA30",
+   "col": "personas"
+  },
+  {
+   "id": "mvu2an9i3rtfo6",
+   "txt": "QA30-02 docentes prueba QA30",
+   "col": "personas"
+  },
+  {
+   "id": "mvu2aq28g6hwmv",
+   "txt": "QA30-03 docentes prueba QA30",
+   "col": "personas"
+  },
+  {
+   "id": "mvu2aslc4aikfw",
+   "txt": "QA30-04 docentes prueba QA30",
+   "col": "personas"
+  },
+  {
+   "id": "mvu2av2tgpuf7b",
+   "txt": "QA30-05 docentes prueba QA30",
+   "col": "personas"
+  }
+ ],
+ "becasper": [
+  {
+   "id": "mvu2bah9f5qemk",
+   "txt": "QA30-01 becasper prueba QA30",
+   "col": "becasPeriodos"
+  },
+  {
+   "id": "mvu2bddnkd6e4d",
+   "txt": "QA30-02 becasper prueba QA30",
+   "col": "becasPeriodos"
+  },
+  {
+   "id": "mvu2bfxm8ednvp",
+   "txt": "QA30-03 becasper prueba QA30",
+   "col": "becasPeriodos"
+  },
+  {
+   "id": "mvu2big0ti4fkd",
+   "txt": "QA30-04 becasper prueba QA30",
+   "col": "becasPeriodos"
+  },
+  {
+   "id": "mvu2bkwy68wrex",
+   "txt": "QA30-05 becasper prueba QA30",
+   "col": "becasPeriodos"
+  }
+ ],
+ "admision": [
+  {
+   "id": "mvu2bt64k7d437",
+   "txt": "QA30-01 admision editado QA30",
+   "col": "admisiones"
+  },
+  {
+   "id": "mvu2bw3co7ypy4",
+   "txt": "QA30-02 admision prueba QA30",
+   "col": "admisiones"
+  },
+  {
+   "id": "mvu2byxeqweixw",
+   "txt": "QA30-03 admision prueba QA30",
+   "col": "admisiones"
+  },
+  {
+   "id": "mvu2c1hczcffik",
+   "txt": "QA30-04 admision prueba QA30",
+   "col": "admisiones"
+  },
+  {
+   "id": "mvu2c413998enr",
+   "txt": "QA30-05 admision prueba QA30",
+   "col": "admisiones"
+  }
+ ]
+}

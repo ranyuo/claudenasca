@@ -535,5 +535,32 @@
    "txt": "QA30-05 admision prueba QA30",
    "col": "admisiones"
   }
+ ],
+ "matricula": [
+  {
+   "id": "mvu29jdkr4cqcy",
+   "txt": "QA30-01 matricula editado QA30",
+   "col": "matriculas"
+  },
+  {
+   "id": "mvu29ma2b158dv",
+   "txt": "QA30-02 matricula prueba QA30",
+   "col": "matriculas"
+  },
+  {
+   "id": "mvu29ounu7i0wr",
+   "txt": "QA30-03 matricula prueba QA30",
+   "col": "matriculas"
+  },
+  {
+   "id": "mvu29rdl1bpnq8",
+   "txt": "QA30-04 matricula prueba QA30",
+   "col": "matriculas"
+  },
+  {
+   "id": "mvu29twncntt4k",
+   "txt": "QA30-05 matricula prueba QA30",
+   "col": "matriculas"
+  }
  ]
 }
