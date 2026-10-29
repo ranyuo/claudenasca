@@ -40,5 +40,41 @@
   "caso": "uds (académico): eliminar registro",
   "estado": "OK",
   "detalle": "5 → 4 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "ambientes (académico): crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 registrados"
+ },
+ {
+  "fase": "B",
+  "caso": "ambientes (académico): editar registro",
+  "estado": "OK",
+  "detalle": "texto modificado y guardado"
+ },
+ {
+  "fase": "B",
+  "caso": "ambientes (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": "5 → 4 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "docentes (académico): crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "0/5 registrados · #1:  | | Campo obligatorio. | | Debe ser posterior a la hora de inicio."
+ },
+ {
+  "fase": "B",
+  "caso": "areas: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-mesa"
+ },
+ {
+  "fase": "B",
+  "caso": "tramites: crear 5 registros",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Nuevo en /admin/ix-mesa"
  }
 ]

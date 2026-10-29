@@ -4,7 +4,7 @@ const L = require('./lib.cjs'); const fs = require('node:fs');
 const PLAN = [
   ['estudiantes', '/admin/ix-alumnos', null], ['titulos', '/admin/ix-titulos', null],
   ['modulos', '/admin/ix-certificados', 'Módulos formativos'], ['certs', '/admin/ix-certificados', 'Certificaciones'], ['notas', '/admin/ix-certificados', 'Historial académico'],
-  ['empresas', '/admin/ix-bolsa/gestion', null], ['ofertas', '/admin/ix-bolsa/gestion', null],
+  ['empresas', '/admin/ix-bolsa/gestion', ['bolsa:empresas']], ['ofertas', '/admin/ix-bolsa/gestion', ['bolsa:ofertas']],
   ['uds', '/admin/ix-horarios', ['horarios:config', 'hconf:uds']], ['ambientes', '/admin/ix-horarios', ['horarios:config', 'hconf:ambientes']], ['docentes', '/admin/ix-horarios', ['horarios:config', 'hconf:docentes']],
   ['areas', '/admin/ix-mesa', ['mesa:config']], ['tramites', '/admin/ix-mesa', ['mesa:config']],
 ];
@@ -19,18 +19,18 @@ async function goTo(p, route, tab, ek) {
       if (await p.locator(`[data-new="${ek}"]`).count()) return true; } return false; }
   return true;
 }
-async function fillModal(p, ek, i, sfx) {
+async function fillModal(p, ek, i, sfx, shift = 0, past = false) {
   const m = p.locator('.modal:visible, dialog[open], [role=dialog]:visible').last();
   const fields = await m.locator('input:not([type=hidden]):not([type=checkbox]):not([type=radio]):not([type=file]):not([readonly]):not([disabled]), select:not([disabled]), textarea:not([disabled])').all();
   for (const f of fields) {
     if (!(await f.isVisible())) continue;
     const info = await f.evaluate(e => ({ tag: e.tagName, type: e.type, name: (e.name || e.id || '').toLowerCase(), label: (e.closest('.fld')?.querySelector('label')?.innerText || '').toLowerCase(), min: e.min, max: e.max, ml: e.maxLength, pattern: e.pattern, val: e.value, opts: e.tagName === 'SELECT' ? [...e.options].map(o => [o.value, o.text]) : null }));
     const k = info.name + ' ' + info.label;
-    if (info.tag === 'SELECT') { const opts = info.opts.filter(([v]) => v !== ''); if (!opts.length) continue; const qas = opts.filter(([, t]) => /QA30/.test(t)); const qa = qas.length ? qas[(i - 1) % qas.length] : null; if (!info.val || qa) await f.selectOption(qa ? qa[0] : opts[Math.min(i - 1, opts.length - 1)][0]); continue; }
+    if (info.tag === 'SELECT') { const opts = info.opts.filter(([v]) => v !== ''); if (!opts.length) continue; const qas = opts.filter(([, t]) => /QA30/.test(t)); const pool = qas.length && !shift ? qas : opts; const pick = pool[(i - 1 + shift) % pool.length]; if (!info.val || qas.length || shift) await f.selectOption(pick[0]); continue; }
     let v;
     if (info.type === 'number') v = /a[ñn]o|year/.test(k) ? '2026' : /nota|calif/.test(k) ? String(12 + i) : /cr[eé]dito|hora|cap|vacan|ciclo|sem/.test(k) ? String(i + 1) : String(info.min ? Math.max(+info.min, 1) : i);
-    else if (info.type === 'date') v = /fin|l[ií]mite|cierre|vence/.test(k) ? '2026-12-' + String(10 + i) : '2026-11-' + String(10 + i);
-    else if (info.type === 'time') v = ['08:00', '09:00', '10:00', '11:00', '14:00'][i - 1];
+    else if (info.type === 'date') v = past ? '2026-10-' + String(10 + i) : /fin|l[ií]mite|cierre|vence/.test(k) ? '2026-12-' + String(10 + i) : '2026-11-' + String(10 + i);
+    else if (info.type === 'time') v = /fin|hasta|t[eé]rmino|salida/.test(k) ? ['09:30', '10:30', '11:30', '12:30', '15:30'][i - 1] : ['08:00', '09:00', '10:00', '11:00', '14:00'][i - 1];
     else if (info.type === 'month') v = '2026-10';
     else if (info.type === 'datetime-local') v = '2026-10-29T09:00';
     else if (info.type === 'email') v = `qa30.${ek}${i}@portal.invalid`;
@@ -56,10 +56,15 @@ async function fillModal(p, ek, i, sfx) {
     let ok = 0; const errs = [];
     for (let i = 1; i <= 5; i++) {
       const sfx = String(Date.now()).slice(-5);
-      await p.locator(`[data-new="${ek}"]`).first().click(); await p.waitForTimeout(700);
-      const m = await fillModal(p, ek, i, sfx);
-      await m.locator('button').filter({ hasText: /^\s*Registrar\s*$/ }).last().click(); await p.waitForTimeout(1800);
-      const still = await p.locator('.modal:visible, dialog[open]').count();
+      let still = 0, m, past = false;
+      for (let shift = 0; shift < 10; shift++) {
+        await p.locator(`[data-new="${ek}"]`).first().click(); await p.waitForTimeout(700);
+        m = await fillModal(p, ek, i, sfx, shift, past);
+        await m.locator('button').filter({ hasText: /^\s*Registrar\s*$/ }).last().click(); await p.waitForTimeout(1800);
+        still = await p.locator('.modal:visible, dialog[open]').count(); if (!still) break;
+        const e = (await m.innerText().catch(() => '')); console.log(`  intento ${ek} #${i} desplazamiento ${shift}: ${(e.match(/[^\n]*(ya tiene|ya existe|futura|obligatorio|posterior)[^\n]*/i) || ['otro error'])[0].slice(0, 90)}`); if (/futura/.test(e)) past = true; else if (!/ya tiene|ya existe|duplicad|registrado/i.test(e)) break;
+        await p.keyboard.press('Escape'); await p.locator('.modal:visible button').filter({ hasText: /Cancelar|Cerrar|✕/ }).first().click().catch(() => {}); await p.waitForTimeout(500);
+      }
       if (still) { const e = (await m.locator('.err, .ferr, .alert, [aria-invalid=true]').allInnerTexts().catch(() => [])).join(' | ').replace(/\s+/g, ' '); errs.push(`#${i}: ${e.slice(0, 220)}`); await L.shot(p, `B-ix-${ek}-error-${i}`); await p.keyboard.press('Escape'); await p.locator('.modal:visible button').filter({ hasText: /Cancelar|Cerrar|✕/ }).first().click().catch(() => {}); await p.waitForTimeout(500); }
       else ok++;
       if (i === 1 && still) break; // si el primero falla, el resto también

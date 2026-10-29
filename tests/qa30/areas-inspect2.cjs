@@ -1,0 +1,10 @@
+const L=require('./lib.cjs');
+(async()=>{const b=await L.browser();const {p}=await L.login(b,'nasca',process.env.QA30_PASS);
+await p.evaluate(()=>{location.hash='/admin/expedientes/areas'});await p.waitForTimeout(2000);
+await p.locator('main a, main button').filter({hasText:'Editar áreas'}).first().click();await p.waitForTimeout(2000);
+console.log(await p.evaluate(()=>location.hash));
+console.log((await p.locator('main').innerText()).replace(/\s+/g,' ').slice(0,700));
+console.log('BTN:',(await p.$$eval('main button, .modal button',bs=>bs.map(b=>(b.innerText||b.title||'').trim().slice(0,25)+'{'+[...b.attributes].filter(a=>a.name.startsWith('data-')).map(a=>a.name+'='+a.value).join(' ')+'}'))).slice(0,30).join(' · '));
+await p.locator('main button').filter({hasText:/Agregar/}).first().click().catch(e=>console.log('no agregar'));await p.waitForTimeout(1000);
+console.log('FORM:',await p.$$eval('.modal input, .modal select, .modal textarea, main [data-rowform] input',e=>e.map(x=>x.name||x.id).join(',')));
+await L.shot(p,'B-areas-editor');await b.close();})();
