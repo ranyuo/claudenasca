@@ -58,5 +58,23 @@
   "caso": "certs (académico): eliminar registro",
   "estado": "OK",
   "detalle": "1 → 0 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "notas (académico): crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 registrados"
+ },
+ {
+  "fase": "B",
+  "caso": "notas (académico): editar registro",
+  "estado": "OK",
+  "detalle": "texto modificado y guardado"
+ },
+ {
+  "fase": "B",
+  "caso": "notas (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": "5 → 4 filas QA30"
  }
 ]
