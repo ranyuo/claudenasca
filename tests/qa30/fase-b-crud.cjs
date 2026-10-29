@@ -33,7 +33,7 @@ const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
         if (col === 'programas') { w.codigo = 'Q3' + sfx.slice(-4); w.slug = `qa30-programa-${sfx}`; w.coordinadorId = ''; }
         if (col === 'enlaces') w.url = `https://example.org/qa30-${i}`;
         if (col === 'tupa') { w.anio = 2026; w.codigo = `QA30-${sfx}`; w.monto = 10 * i; }
-        if (col === 'becasPeriodos') { w.anio = 2090 + i; w.vigente = false; }
+        if (col === 'becasPeriodos') { w.anio = 2070 + i; w.vigente = false; }
         if (col === 'becarios') { w.dni = '9902' + sfx.slice(-4); w.apellidos = 'Prueba QA30'; }
         if (col === 'certificados') { w.dni = '9903' + sfx.slice(-4); w.codigo = `QA30-CERT-${sfx}`; w.fecha = '2026-10-29'; }
         if (col === 'admisiones') { w.anio = 2090 + i; w.vigente = false; }

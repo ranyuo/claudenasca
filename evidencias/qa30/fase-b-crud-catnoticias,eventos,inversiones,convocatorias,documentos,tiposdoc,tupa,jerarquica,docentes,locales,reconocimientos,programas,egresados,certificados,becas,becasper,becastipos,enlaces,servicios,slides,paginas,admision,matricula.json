@@ -304,5 +304,47 @@
   "caso": "certificados: eliminar registro",
   "estado": "OK",
   "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "becas: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "becas: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombres = QA30-01 becas editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "becas: eliminar registro",
+  "estado": "OK",
+  "detalle": "papelera"
+ },
+ {
+  "fase": "B",
+  "caso": "becas: publicados visibles en portal (/becas)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "becasper: crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "2/5 guardados en servidor · errores: #1: I II | Ya existe ese año y periodo. | Revise los campos marcados en rojo. ; #2: I II | Ya existe ese año y periodo. | Revise los campos marcados en rojo. ; #3: I II | Ya existe ese año y periodo. | Revise los campos marcados en rojo."
+ },
+ {
+  "fase": "B",
+  "caso": "becasper: editar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "sin campo de texto editable"
+ },
+ {
+  "fase": "B",
+  "caso": "becasper: publicados visibles en portal (/becas)",
+  "estado": "REVISAR",
+  "detalle": "0/0 visibles en la primera página"
  }
 ]

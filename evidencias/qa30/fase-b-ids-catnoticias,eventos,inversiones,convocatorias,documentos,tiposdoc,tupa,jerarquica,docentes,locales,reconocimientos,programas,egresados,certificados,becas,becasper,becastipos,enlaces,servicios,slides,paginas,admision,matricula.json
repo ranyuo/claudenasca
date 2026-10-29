@@ -349,5 +349,44 @@
    "txt": "QA30-05 certificados prueba QA30",
    "col": "certificados"
   }
+ ],
+ "becas": [
+  {
+   "id": "mvu24yqgmh77ja",
+   "txt": "QA30-01 becas editado QA30",
+   "col": "becarios"
+  },
+  {
+   "id": "mvu2517nh1uysq",
+   "txt": "QA30-02 becas prueba QA30",
+   "col": "becarios"
+  },
+  {
+   "id": "mvu253pnoy10wv",
+   "txt": "QA30-03 becas prueba QA30",
+   "col": "becarios"
+  },
+  {
+   "id": "mvu256bf18bseu",
+   "txt": "QA30-04 becas prueba QA30",
+   "col": "becarios"
+  },
+  {
+   "id": "mvu258tnsfmi9o",
+   "txt": "QA30-05 becas prueba QA30",
+   "col": "becarios"
+  }
+ ],
+ "becasper": [
+  {
+   "id": "mvu25rtswormkt",
+   "txt": "QA30-04 becasper prueba QA30",
+   "col": "becasPeriodos"
+  },
+  {
+   "id": "mvu25v6f99k0yr",
+   "txt": "QA30-05 becasper prueba QA30",
+   "col": "becasPeriodos"
+  }
  ]
 }
