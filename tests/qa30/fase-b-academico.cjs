@@ -4,14 +4,15 @@ const L = require('./lib.cjs'); const fs = require('node:fs');
 const PLAN = [
   ['estudiantes', '/admin/ix-alumnos', null], ['titulos', '/admin/ix-titulos', null],
   ['modulos', '/admin/ix-certificados', 'Módulos formativos'], ['certs', '/admin/ix-certificados', 'Certificaciones'], ['notas', '/admin/ix-certificados', 'Historial académico'],
-  ['empresas', '/admin/ix-bolsa', null], ['ofertas', '/admin/ix-bolsa', null],
-  ['uds', '/admin/ix-horarios', 'Configuración'], ['ambientes', '/admin/ix-horarios', 'Configuración'], ['docentes', '/admin/ix-horarios', 'Configuración'],
-  ['areas', '/admin/ix-config', null], ['tramites', '/admin/ix-config', null],
+  ['empresas', '/admin/ix-bolsa/gestion', null], ['ofertas', '/admin/ix-bolsa/gestion', null],
+  ['uds', '/admin/ix-horarios', ['horarios:config', 'hconf:uds']], ['ambientes', '/admin/ix-horarios', ['horarios:config', 'hconf:ambientes']], ['docentes', '/admin/ix-horarios', ['horarios:config', 'hconf:docentes']],
+  ['areas', '/admin/ix-mesa', ['mesa:config']], ['tramites', '/admin/ix-mesa', ['mesa:config']],
 ];
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
 async function goTo(p, route, tab, ek) {
   await p.evaluate(h => { location.hash = h; }, route); await p.waitForTimeout(1500);
-  if (tab) { const t = p.locator('main button, main a, main [role=tab]').filter({ hasText: new RegExp('^\\s*' + tab) }); if (await t.count()) { await t.first().click(); await p.waitForTimeout(1000); } }
+  if (Array.isArray(tab)) { for (const dt of tab) { const t = p.locator(`[data-tab="${dt}"]`); if (await t.count()) { await t.first().click(); await p.waitForTimeout(1000); } } }
+  else if (tab) { const t = p.locator('main button, main a, main [role=tab]').filter({ hasText: new RegExp('^\\s*' + tab) }); if (await t.count()) { await t.first().click(); await p.waitForTimeout(1000); } }
   if (!(await p.locator(`[data-new="${ek}"]`).count())) { // buscar en otras pestañas
     for (const t of await p.$$eval('main .tabs button, main [role=tab], main .seg button', b => b.map(x => x.innerText.trim()).filter(Boolean))) {
       await p.locator('main .tabs button, main [role=tab], main .seg button').filter({ hasText: t }).first().click().catch(() => {}); await p.waitForTimeout(800);
