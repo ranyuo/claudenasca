@@ -388,5 +388,59 @@
    "txt": "QA30-05 becasper prueba QA30",
    "col": "becasPeriodos"
   }
+ ],
+ "becastipos": [
+  {
+   "id": "mvu261uaghspsd",
+   "txt": "QA30-01 becastipos editado QA30",
+   "col": "tiposBeca"
+  },
+  {
+   "id": "mvu264ye6g2ddf",
+   "txt": "QA30-02 becastipos prueba QA30",
+   "col": "tiposBeca"
+  },
+  {
+   "id": "mvu267izkxxdz7",
+   "txt": "QA30-03 becastipos prueba QA30",
+   "col": "tiposBeca"
+  },
+  {
+   "id": "mvu26a1vm272vg",
+   "txt": "QA30-04 becastipos prueba QA30",
+   "col": "tiposBeca"
+  },
+  {
+   "id": "mvu26cjgdi6dv7",
+   "txt": "QA30-05 becastipos prueba QA30",
+   "col": "tiposBeca"
+  }
+ ],
+ "enlaces": [
+  {
+   "id": "mvu26mshcykums",
+   "txt": "QA30-01 enlaces editado QA30",
+   "col": "enlaces"
+  },
+  {
+   "id": "mvu26pv7dangqg",
+   "txt": "QA30-02 enlaces prueba QA30",
+   "col": "enlaces"
+  },
+  {
+   "id": "mvu26sd17ay34c",
+   "txt": "QA30-03 enlaces prueba QA30",
+   "col": "enlaces"
+  },
+  {
+   "id": "mvu26usxrjbk3h",
+   "txt": "QA30-04 enlaces prueba QA30",
+   "col": "enlaces"
+  },
+  {
+   "id": "mvu26xadhprgzg",
+   "txt": "QA30-05 enlaces prueba QA30",
+   "col": "enlaces"
+  }
  ]
 }

@@ -346,5 +346,53 @@
   "caso": "becasper: publicados visibles en portal (/becas)",
   "estado": "REVISAR",
   "detalle": "0/0 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombre = QA30-01 becastipos editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: eliminar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Eliminar en el listado"
+ },
+ {
+  "fase": "B",
+  "caso": "becastipos: publicados visibles en portal (/becas)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 guardados en servidor"
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: editar registro",
+  "estado": "OK",
+  "detalle": "campo nombre = QA30-01 enlaces editado QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: eliminar registro",
+  "estado": "BLOQUEADO",
+  "detalle": "no se encontró botón Eliminar en el listado"
+ },
+ {
+  "fase": "B",
+  "caso": "enlaces: publicados visibles en portal (/servicios)",
+  "estado": "REVISAR",
+  "detalle": "0/3 visibles en la primera página"
  }
 ]
