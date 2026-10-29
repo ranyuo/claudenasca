@@ -16,5 +16,47 @@
   "caso": "estudiantes (académico): eliminar registro",
   "estado": "OK",
   "detalle": "5 → 4 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "titulos (académico): crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "0/5 registrados · #1: Este egresado ya tiene un título registrado. | | | | "
+ },
+ {
+  "fase": "B",
+  "caso": "modulos (académico): crear 5 registros",
+  "estado": "OK",
+  "detalle": "5/5 registrados"
+ },
+ {
+  "fase": "B",
+  "caso": "modulos (académico): editar registro",
+  "estado": "OK",
+  "detalle": "texto modificado y guardado"
+ },
+ {
+  "fase": "B",
+  "caso": "modulos (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": "5 → 4 filas QA30"
+ },
+ {
+  "fase": "B",
+  "caso": "certs (académico): crear 5 registros",
+  "estado": "FALLA",
+  "detalle": "1/5 registrados · #2:  | El estudiante ya tiene registrado este módulo. | |  ; #3:  | El estudiante ya tiene registrado este módulo. | |  ; #4:  | El estudiante ya tiene registrado este módulo. | |  ; #5:  | El estudiante ya tiene registrado este módulo. | | "
+ },
+ {
+  "fase": "B",
+  "caso": "certs (académico): editar registro",
+  "estado": "OK",
+  "detalle": "guardado sin cambio de texto"
+ },
+ {
+  "fase": "B",
+  "caso": "certs (académico): eliminar registro",
+  "estado": "OK",
+  "detalle": "1 → 0 filas QA30"
  }
 ]
