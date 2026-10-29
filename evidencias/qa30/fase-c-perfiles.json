@@ -1,0 +1,662 @@
+[
+ {
+  "fase": "C",
+  "caso": "Vínculos disponibles",
+  "estado": "OK",
+  "detalle": "{\"docente\":\"doc:930000\",\"estudiante\":\"est:3317635313059786\",\"egresado\":\"est:2227983297995665\",\"empresa\":\"emp:1\",\"programa\":\"cont\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_imagen (Imagen institucional)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_secretaria (Secretaría académica)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_coordinador (Coordinador de programa)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_transparencia (Transparencia / administración)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_atencion (Atención al ciudadano)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_directivo (Directivo)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_docente (Docente)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_estudiante (Estudiante)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_egresado (Egresado)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_empresa (Empresa)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Crear usuario qa30_admin2 (Administrador)",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "Contraseña de menos de 12 caracteres rechazada",
+  "estado": "OK",
+  "detalle": ""
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"imagen\",\"u\":\"qa30_imagen\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, paginas, portada, noticias, eventos, locales, enlaces, temas"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: URL directa #/admin/reclamos",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":0,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":0}"
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: API — modificar noticia (permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 200 "
+ },
+ {
+  "fase": "C",
+  "caso": "imagen: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"secretaria\",\"u\":\"qa30_secretaria\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, jerarquica, docentes, cvdocente, ix-alumnos, ix-horarios, egresados, admision, matricula, becas, ix-certificados, ix-titulos, certificados, estadisticas"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: datos entregados por el servidor",
+  "estado": "FALLA",
+  "detalle": "{\"usuarios\":10,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":7,\"postulaciones\":0,\"certs\":3,\"dniVisibles\":43} · recibe lista de usuarios"
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "secretaria: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 Solo el administrador puede editar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"coordinador\",\"u\":\"qa30_coordinador\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, programas, ix-alumnos, ix-horarios, egresados"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: datos entregados por el servidor",
+  "estado": "FALLA",
+  "detalle": "{\"usuarios\":2,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":1,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":2} · recibe lista de usuarios, 2 DNI completos"
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "coordinador: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 Solo el administrador puede editar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"transparencia\",\"u\":\"qa30_transparencia\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, documentos, tupa, licenciamiento, inversiones, convocatorias, servicios"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":0,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":0}"
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "transparencia: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"atencion\",\"u\":\"qa30_atencion\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, mensajes, reclamos, expedientes, ix-bolsa"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: datos entregados por el servidor",
+  "estado": "FALLA",
+  "detalle": "{\"usuarios\":5,\"reclamos\":7,\"expedientes\":7,\"mensajes\":6,\"estudiantes\":0,\"postulaciones\":3,\"certs\":0,\"dniVisibles\":0} · recibe lista de usuarios"
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "atencion: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"directivo\",\"u\":\"qa30_directivo\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, ix-alumnos, ix-horarios, ix-certificados, ix-titulos, estadisticas, reclamos, expedientes, ix-bolsa"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":7,\"expedientes\":7,\"mensajes\":0,\"estudiantes\":7,\"postulaciones\":3,\"certs\":3,\"dniVisibles\":7}"
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "directivo: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "docente: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"docente\",\"u\":\"qa30_docente\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, cvdocente, ix-horarios"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":0,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":0}"
+ },
+ {
+  "fase": "C",
+  "caso": "docente: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "docente: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"estudiante\",\"u\":\"qa30_estudiante\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, ix-horarios, ix-certificados, ix-bolsa"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":1,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":2}"
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "estudiante: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"egresado\",\"u\":\"qa30_egresado\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, ix-certificados, ix-titulos, ix-bolsa"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":1,\"postulaciones\":0,\"certs\":0,\"dniVisibles\":2}"
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "egresado: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"empresa\",\"u\":\"qa30_empresa\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, ix-bolsa"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: URL directa #/admin/usuarios",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: URL directa #/admin/config",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: URL directa #/admin/auditoria",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: URL directa #/admin/noticias",
+  "estado": "OK",
+  "detalle": "denegado/redirigido"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: datos entregados por el servidor",
+  "estado": "FALLA",
+  "detalle": "{\"usuarios\":1,\"reclamos\":0,\"expedientes\":0,\"mensajes\":0,\"estudiantes\":1,\"postulaciones\":1,\"certs\":1,\"dniVisibles\":1} · ve alumnos, 1 DNI completos"
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: API — modificar noticia (no permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 403 Tu rol no puede modificar noticias."
+ },
+ {
+  "fase": "C",
+  "caso": "empresa: intento de crear cuenta administradora",
+  "estado": "OK",
+  "detalle": "HTTP 403 No tienes permiso para gestionar cuentas."
+ },
+ {
+  "fase": "C",
+  "caso": "admin: ingreso",
+  "estado": "OK",
+  "detalle": "{\"rol\":\"admin\",\"u\":\"qa30_admin2\"}"
+ },
+ {
+  "fase": "C",
+  "caso": "admin: menú según permisos",
+  "estado": "OK",
+  "detalle": "menú: dashboard, aprobaciones, paginas, portada, noticias, eventos, jerarquica, docentes, cvdocente, locales, programas, ix-alumnos, ix-horarios, egresados, admision, matricula, becas, ix-certificados, ix-titulos, certificados, documentos, tupa, estadisticas, licenciamiento, inversiones, convocatorias, mensajes, reclamos, expedientes, ix-bolsa, enlaces, servicios, config, ix-config, temas, usuario"
+ },
+ {
+  "fase": "C",
+  "caso": "admin: datos entregados por el servidor",
+  "estado": "OK",
+  "detalle": "{\"usuarios\":22,\"reclamos\":7,\"expedientes\":7,\"mensajes\":6,\"estudiantes\":7,\"postulaciones\":3,\"certs\":3,\"dniVisibles\":43}"
+ },
+ {
+  "fase": "C",
+  "caso": "admin: API — modificar noticia (permitido)",
+  "estado": "OK",
+  "detalle": "HTTP 200 "
+ },
+ {
+  "fase": "C",
+  "caso": "Cambio de rol cierra la sesión abierta del usuario",
+  "estado": "OK",
+  "detalle": "tras el cambio, la sesión anterior ve user=null"
+ },
+ {
+  "fase": "C",
+  "caso": "Nuevo ingreso muestra el menú del nuevo rol",
+  "estado": "OK",
+  "detalle": "transparencia"
+ },
+ {
+  "fase": "C",
+  "caso": "Admin secundario no puede desactivar la cuenta \"nasca\"",
+  "estado": "FALLA",
+  "detalle": "HTTP 200 "
+ }
+]
