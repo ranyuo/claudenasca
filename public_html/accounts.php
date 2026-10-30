@@ -37,7 +37,7 @@ function e(string $value): string { return htmlspecialchars($value, ENT_QUOTES, 
 <section><h2>Crear usuario</h2><form method="post">
 <input type="hidden" name="_csrf" value="<?= e($_SESSION['csrf']) ?>"><input type="hidden" name="action" value="create">
 <label>Nombre<input name="name" required maxlength="150" autocomplete="name"></label>
-<label>Usuario<input name="username" required pattern="[a-z0-9._-]{3,80}" autocomplete="off"></label>
+<label>Usuario<input name="username" required pattern="[a-z0-9._\-]{3,80}" autocomplete="off"></label>
 <label>Correo<input type="email" name="email" required maxlength="254" autocomplete="email"></label>
 <label>Rol<select name="role" style="display:block;width:100%;padding:10px"><?php foreach(PortalPolicy::definitions()['roles'] as $key=>$r):?><option value="<?=e($key)?>"><?=e($r['label'])?></option><?php endforeach ?></select></label>
 <label>Programa del coordinador<input name="programaId" placeholder="Ej.: apsti"></label><label>Vínculo académico<input name="vin" placeholder="doc:2, est:1 o emp:1"></label><label>Persona del docente<input name="personaId" placeholder="ID de la persona en Plana docente"></label><label>DNI / RUC<input name="dni"></label><label>Área<input name="area"></label>
