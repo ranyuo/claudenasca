@@ -560,7 +560,9 @@ final class PortalApp
             if ($type === 'certificados') {
                 $record = array_intersect_key($record, array_flip(['id', 'codigo', 'nombres', 'programaId', 'tipo', 'detalle', 'fecha', 'estado', 'origen', 'motivo']));
             } else {
-                $record['historial'] = array_map(fn ($item) => array_intersect_key($item, array_flip(['fecha', 'estado'])), $record['historial'] ?? []);
+                // Los proveídos internos no se publican; la observación y la respuesta del expediente sí, porque son para el ciudadano.
+                $citizen = $type === 'expedientes' ? ['Observado', 'Atendido', 'Archivado'] : [];
+                $record['historial'] = array_map(fn ($item) => array_intersect_key($item, array_flip(in_array($item['estado'] ?? '', $citizen, true) ? ['fecha', 'estado', 'nota'] : ['fecha', 'estado'])), $record['historial'] ?? []);
             }
             return ['record' => $record];
         }

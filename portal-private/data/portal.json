@@ -5994,7 +5994,7 @@
       {
         "id": 1,
         "cod": "MP",
-        "nivel": "Oficina",
+        "nivel": "Mesa de Partes",
         "nombre": "Mesa de Partes",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6003,7 +6003,7 @@
       {
         "id": 2,
         "cod": "DG",
-        "nivel": "Oficina",
+        "nivel": "Dirección",
         "nombre": "Dirección General",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6012,7 +6012,7 @@
       {
         "id": 3,
         "cod": "ADM",
-        "nivel": "Oficina",
+        "nivel": "Unidades",
         "nombre": "Unidad Administrativa",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6021,7 +6021,7 @@
       {
         "id": 4,
         "cod": "UA",
-        "nivel": "Oficina",
+        "nivel": "Unidades",
         "nombre": "Unidad Académica",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6030,7 +6030,7 @@
       {
         "id": 5,
         "cod": "SA",
-        "nivel": "Oficina",
+        "nivel": "Áreas",
         "nombre": "Secretaría Académica",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6039,7 +6039,7 @@
       {
         "id": 6,
         "cod": "UBE",
-        "nivel": "Oficina",
+        "nivel": "Áreas",
         "nombre": "Bienestar y Empleabilidad",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6048,7 +6048,7 @@
       {
         "id": 7,
         "cod": "UI",
-        "nivel": "Oficina",
+        "nivel": "Áreas",
         "nombre": "Investigación",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6057,7 +6057,7 @@
       {
         "id": 8,
         "cod": "UFC",
-        "nivel": "Oficina",
+        "nivel": "Áreas",
         "nombre": "Formación Continua",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
@@ -6066,7 +6066,7 @@
       {
         "id": 9,
         "cod": "CAL",
-        "nivel": "Oficina",
+        "nivel": "Áreas",
         "nombre": "Calidad",
         "resp": "Confirmar responsable con la institución",
         "correo": "mesapartes2020@istpnasca.edu.pe",
