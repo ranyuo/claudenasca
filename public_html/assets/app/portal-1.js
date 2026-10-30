@@ -448,7 +448,7 @@ ENT.programas = { col:"programas", one:"programa de estudios", title:"Programas 
   label:r => r.cod,
   refs:r => { const n = cnt(DB.uds,u => u.prog === r.id) + cnt(DB.estudiantes,e => e.prog === r.id) + cnt(DB.modulos,m => m.prog === r.id); return n ? `El programa ${r.cod} tiene ${n} registro(s) asociados (unidades didácticas, módulos o estudiantes). Puede desactivarlo en lugar de eliminarlo.` : "" } };
 
-ENT.uds = { col:"uds", one:"unidad didáctica", title:"Unidades didácticas", mod:"Horarios", permMod:"horarios",
+ENT.uds = { col:"uds", one:"unidad didáctica", title:"Unidades didácticas", mod:"Horarios", permMod:"horarios",mod2:"config",
   fields:() => [
     {k:"cod",l:"Código",req:true,uniq:true,upper:true},
     {k:"nombre",l:"Nombre de la unidad didáctica",req:true,w:1},
@@ -462,7 +462,7 @@ ENT.uds = { col:"uds", one:"unidad didáctica", title:"Unidades didácticas", mo
   refs:r => { const n = cnt(DB.sesiones,s => s.ud === r.id); return n ? `La unidad ${r.nombre} está programada en ${n} sesión(es) de horario.` : "" },
   afterDel:r => DB.docentes.forEach(d => d.uds = d.uds.filter(x => x !== r.id)) };
 
-ENT.docentes = { col:"docentes", one:"docente", title:"Carga docente", mod:"Horarios", permMod:"horarios", wide:true,
+ENT.docentes = { col:"docentes", one:"docente", title:"Carga docente", mod:"Horarios", permMod:"horarios",mod2:"config", wide:true,
   fields:() => [
     {k:"per",l:"Docente (de la Plana docente)",t:"select",req:true,w:1,opts:() => HOST.docentes().map(p => [p.id, `${p.nom} · ${p.esp}`]),hint:"Los datos personales y la hoja de vida se mantienen en Plana docente."},
     {k:"uds",l:"Unidades didácticas que puede asumir",t:"multi",num:true,w:1,opts:() => DB.uds.map(u => [u.id, `${prog(u.prog).cod} · ${u.nombre}`])},
@@ -476,7 +476,7 @@ ENT.docentes = { col:"docentes", one:"docente", title:"Carga docente", mod:"Hora
   after:r => { syncDocentes() },
   refs:r => { const n = cnt(DB.sesiones,s => s.doc === r.id); return n ? `${r.nom} tiene ${n} sesión(es) asignadas en el horario. Reasígnelas antes de eliminar.` : "" } };
 
-ENT.ambientes = { col:"ambientes", one:"ambiente", title:"Ambientes académicos", mod:"Horarios", permMod:"horarios",
+ENT.ambientes = { col:"ambientes", one:"ambiente", title:"Ambientes académicos", mod:"Horarios", permMod:"horarios",mod2:"config",
   fields:() => [
     {k:"cod",l:"Código",req:true,uniq:true,upper:true},
     {k:"tipo",l:"Tipo",t:"select",req:true,opts:() => [["Aula","Aula"],["Laboratorio","Laboratorio"],["Taller","Taller"]]},
@@ -489,7 +489,7 @@ ENT.ambientes = { col:"ambientes", one:"ambiente", title:"Ambientes académicos"
   label:r => r.cod,
   refs:r => { const n = cnt(DB.sesiones,s => s.amb === r.id); return n ? `El ambiente ${r.cod} está asignado en ${n} sesión(es).` : "" } };
 
-ENT.modulos = { col:"modulos", one:"módulo formativo", title:"Módulos formativos", mod:"Certificados", permMod:"certificados",
+ENT.modulos = { col:"modulos", one:"módulo formativo", title:"Módulos formativos", mod:"Certificados", permMod:"certificados",mod2:"config",
   fields:() => [
     {k:"prog",l:"Programa de estudios",t:"select",req:true,num:true,opts:optsProg(true)},
     {k:"cod",l:"Código",req:true,upper:true,ph:"MF1"},
@@ -557,7 +557,7 @@ ENT.titulos = { col:"titulos", one:"título", title:"Registro institucional de t
   sort:(a,b) => b.tit.localeCompare(a.tit),
   label:r => r.cod };
 
-ENT.areas = { col:"areas", one:"área", title:"Áreas o unidades receptoras", mod:"Mesa de partes", permMod:"mesa",
+ENT.areas = { col:"areas", one:"área", title:"Áreas o unidades receptoras", mod:"Mesa de partes", permMod:"mesa",mod2:"config",
   fields:() => [
     {k:"cod",l:"Código",req:true,uniq:true,upper:true},
     {k:"nivel",l:"Nivel / clasificación",t:"select",req:true,opts:() => ["Mesa de Partes","Dirección","Órganos y comités","Áreas","Unidades","Coordinaciones de programas de estudio"].map(x => [x,x])},
@@ -569,7 +569,7 @@ ENT.areas = { col:"areas", one:"área", title:"Áreas o unidades receptoras", mo
   label:r => r.cod,
   refs:r => { const n = cnt(DB.tramites,t => t.area === r.cod) + cnt(HOST.exps(),e => e.area === r.cod); return n ? `El área ${r.nombre} tiene ${n} trámite(s) o expediente(s) asociados. Puede desactivarla.` : "" } };
 
-ENT.tramites = { col:"tramites", one:"tipo de trámite", title:"Tipos de trámite", mod:"Mesa de partes", permMod:"mesa",
+ENT.tramites = { col:"tramites", one:"tipo de trámite", title:"Tipos de trámite", mod:"Mesa de partes", permMod:"mesa",mod2:"config",
   fields:() => [
     {k:"nombre",l:"Nombre del trámite",req:true,uniq:true,w:1},
     {k:"area",l:"Área responsable",t:"select",req:true,opts:() => DB.areas.filter(a => a.activo).map(a => [a.cod, a.nombre])},
@@ -590,6 +590,8 @@ ENT.empresas = { col:"empresas", one:"empresa", title:"Empresas e instituciones"
     {k:"validada",l:"Validación institucional",t:"bool",yes:"Empresa validada"}],
   cols:[{h:"RUC",v:r => mono(r.ruc)},{h:"Razón social",v:r => esc(r.nom)},{h:"Sector",v:r => esc(r.sector)},{h:"Ubicación",v:r => esc(r.ubic)},{h:"Contacto",v:r => `${esc(r.contacto)}<br><span class="note">${esc(r.correo)}</span>`,x:r => `${r.contacto} ${r.correo}`},{h:"Ofertas",v:r => cnt(DB.ofertas,o => o.emp === r.id)},{h:"Estado",v:r => r.validada ? pill("Validada","p-ok") : pill("Por validar","p-warn")}],
   label:r => r.nom,
+  // El estado de validación acompaña a la casilla "Empresa validada" (lo usan las notificaciones del servidor).
+  after:r => { if(r.validada) r.estadoVal = "Aprobada"; else if(r.estadoVal === "Aprobada") r.estadoVal = "Pendiente"; },
   refs:r => { const n = cnt(DB.ofertas,o => o.emp === r.id); return n ? `${r.nom} tiene ${n} oferta(s) publicadas.` : "" } };
 
 ENT.ofertas = { col:"ofertas", one:"oferta laboral", title:"Ofertas laborales", mod:"Bolsa laboral", permMod:"bolsa", wide:true,
@@ -1267,7 +1269,7 @@ function gestionExp(id){
       if(!save())return false; toast(`${x.num}: ${vals.accion.toLowerCase()}. Se notificó al solicitante por correo.`); return true; }});
 }
 V.mesaCfg = () => {
-  if(lvl("mesa") < 2) return empty("No tiene acceso a este módulo.");
+  if(lvl("config") < 2) return empty("No tiene acceso a este módulo.");
   return crud("areas") + crud("tramites", {note:"Estados del flujo: Recibido → Derivado → En evaluación → (Observado) → Atendido → Cerrado."});
 };
 V.mesa = () => {
@@ -1712,7 +1714,7 @@ function render(){
   root.innerHTML = renderView();
   if(fid){ const el = document.getElementById(fid); if(el && el.tagName === "INPUT"){ el.focus(); try{ if(sel) el.setSelectionRange(sel[0], sel[1]) }catch(e){} } }
 }
-const VIEW_PERM = { mesaCfg: "mesa" };
+const VIEW_PERM = { mesaCfg: "config" };
 function renderView(){ const f = V[S.view]; if(!f) return ""; if(!S.view.startsWith("pub:") && (!S.user || lvl(VIEW_PERM[S.view] || S.view) === 0)) return empty("No tiene acceso a este módulo."); return f() }
 function go(view){ S.ui.dsel = null; S.ui.dd = null; closeModal(); HOST.go(view) }
 function logout(){ HOST.logout() }

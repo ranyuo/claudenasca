@@ -341,10 +341,17 @@ const fsize = b => !b ? '' : b > 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Ma
 const genDoc = (nombre, titulo, lineas = [], size = 0) => ({ nombre, titulo, lineas, size: size || (180000 + hashStr(nombre) % 2000000), fecha: nowISO() });
 
 /* ---------- Validación de archivos subidos (extensión + MIME + tamaño) ---------- */
+/* Convierte enlaces habituales de video (el que se copia del navegador) a su URL de inserción. */
+function videoEmbedURL(v) {
+  const u = String(v || '').trim(); let m;
+  if ((m = u.match(/^https?:\/\/(?:www\.|m\.)?youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/)([\w-]{11})/)) || (m = u.match(/^https?:\/\/youtu\.be\/([\w-]{11})/))) return 'https://www.youtube.com/embed/' + m[1];
+  if ((m = u.match(/^https?:\/\/(?:www\.)?vimeo\.com\/(\d+)/))) return 'https://player.vimeo.com/video/' + m[1];
+  return u.replace(/^http:\/\//, 'https://');
+}
 const FILE_RULES = {
-  image: { ext: ['jpg', 'jpeg', 'png', 'webp'], mime: ['image/jpeg', 'image/png', 'image/webp'], max: 5 * 1048576, label: 'JPG, PNG o WEBP · máx. 5 MB' },
-  pdf: { ext: ['pdf'], mime: ['application/pdf'], max: 10 * 1048576, label: 'PDF · máx. 10 MB' },
-  attach: { ext: ['pdf', 'jpg', 'jpeg', 'png'], mime: ['application/pdf', 'image/jpeg', 'image/png'], max: 5 * 1048576, label: 'PDF, JPG o PNG · máx. 5 MB' },
+  image: { ext: ['jpg', 'jpeg', 'png', 'webp'], mime: ['image/jpeg', 'image/png', 'image/webp'], max: 15 * 1048576, label: 'JPG, PNG o WEBP · máx. 15 MB' },
+  pdf: { ext: ['pdf'], mime: ['application/pdf'], max: 20 * 1048576, label: 'PDF · máx. 20 MB' },
+  attach: { ext: ['pdf', 'jpg', 'jpeg', 'png'], mime: ['application/pdf', 'image/jpeg', 'image/png'], max: 10 * 1048576, label: 'PDF, JPG o PNG · máx. 10 MB' },
   csv: { ext: ['csv', 'txt'], mime: ['text/csv', 'text/plain', 'application/vnd.ms-excel', ''], max: 2 * 1048576, label: 'CSV (plantilla) · máx. 2 MB' },
   json: { ext: ['json'], mime: ['application/json', ''], max: 15 * 1048576, label: 'JSON' },
 };
@@ -694,7 +701,7 @@ R('', path => {
   const c = DB.config, h = c.home; const i = inst();
   setSEO({ title: '', desc: c.seo.descripcion });
   const blocks = {
-    slider: () => { const sl = sortO(P('slides').filter(isPub)); if (!sl.length) return ''; return `<section class="hero" aria-roledescription="carrusel" aria-label="Destacados">${sl.map((s, k) => `<div class="slide ${k ? '' : 'on'}" role="group" aria-roledescription="diapositiva" aria-label="${k + 1} de ${sl.length}"><img src="${img(s.imagen)}" alt="" ${k ? 'loading="lazy"' : ''}><div class="cap"><div class="wrap"><span class="hero-kicker">${ic('grad')} ${esc(inst().nombreCorto)}</span><h2>${esc(s.titulo)}</h2><p>${esc(s.texto)}</p>${s.boton && resolveLink(s.enlace) ? `<a class="btn gold" ${linkAttrs(resolveLink(s.enlace))}>${esc(s.boton)} ${ic('arrow').replace('<svg', '<svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"')}</a>` : ''}</div></div></div>`).join('')}${sl.length > 1 ? `<button class="hero-arrow l" data-sl="-1" aria-label="Diapositiva anterior">‹</button><button class="hero-arrow r" data-sl="1" aria-label="Diapositiva siguiente">›</button><div class="hero-dots">${sl.map((_, k) => `<button data-dot="${k}" aria-label="Ir a diapositiva ${k + 1}" aria-current="${k === 0}"></button>`).join('')}</div>` : ''}</section>`; },
+    slider: () => { const sl = sortO(P('slides').filter(isPub)); if (!sl.length) return ''; return `<section class="hero" aria-roledescription="carrusel" aria-label="Destacados">${sl.map((s, k) => `<div class="slide ${k ? '' : 'on'}" role="group" aria-roledescription="diapositiva" aria-label="${k + 1} de ${sl.length}">${k ? `<img data-src="${img(s.imagen)}" alt="" decoding="async">` : `<img src="${img(s.imagen)}" alt="" fetchpriority="high">`}<div class="cap"><div class="wrap"><span class="hero-kicker">${ic('grad')} ${esc(inst().nombreCorto)}</span><h2>${esc(s.titulo)}</h2><p>${esc(s.texto)}</p>${s.boton && resolveLink(s.enlace) ? `<a class="btn gold" ${linkAttrs(resolveLink(s.enlace))}>${esc(s.boton)} ${ic('arrow').replace('<svg', '<svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"')}</a>` : ''}</div></div></div>`).join('')}${sl.length > 1 ? `<button class="hero-arrow l" data-sl="-1" aria-label="Diapositiva anterior">‹</button><button class="hero-arrow r" data-sl="1" aria-label="Diapositiva siguiente">›</button><div class="hero-dots">${sl.map((_, k) => `<button data-dot="${k}" aria-label="Ir a diapositiva ${k + 1}" aria-current="${k === 0}"></button>`).join('')}</div>` : ''}</section>`; },
     accesos: () => `<section class="wrap quick" aria-label="Accesos rápidos"><div class="grid g4">${h.accesos.map(a => { const u = resolveLink(a.enlace); return u ? `<a ${linkAttrs(u)}><span class="ic">${ic(a.icono)}</span><span><strong>${esc(a.titulo)}</strong><small>${esc(a.texto)}</small></span></a>` : ''; }).join('')}</div></section>`,
     bienvenida: () => { const pr = page('presentacion'); const dir = persona((P('jerarquica').find(j => j.esDirector) || {}).personaId); if (!pr || !isPub(pr)) return ''; const ps = (pr.contenido.match(/<p>[\s\S]*?<\/p>/g) || []).slice(0, 2).join(''); return `<section class="sec"><div class="wrap welcome"><img src="${img(dir && dir.foto)}" alt="Fotografía de ${esc(fullName(dir))}" loading="lazy"><div><div class="sec-h" style="text-align:left;margin:0 0 10px"><span class="kicker">Bienvenida</span><h2>Mensaje de la Dirección General</h2></div><div class="prose">${sanitize(ps)}</div><p><strong>${esc(fullName(dir))}</strong><br><span style="color:var(--muted)">${esc((P('jerarquica').find(j => j.esDirector) || {}).cargo || '')}</span></p><a class="btn" href="#/nosotros/presentacion">Leer presentación completa</a></div></div></section>`; },
     cifras: () => `<section class="sec stats" aria-label="Cifras institucionales"><div class="wrap grid g4">${h.cifras.map((x, k) => `<div class="stat"><span class="st-ic">${ic(['calendar', 'grad', 'users', 'award', 'star', 'building'][k % 6])}</span><b>${esc(cifra(x.valor))}</b><span>${esc(x.label)}</span><small>Corte: ${esc(x.corte)}</small></div>`).join('')}</div></section>`,
@@ -1106,7 +1113,7 @@ R('transparencia/tupa', (path, q) => {
   return {
     html, after: () => {
       const f = $('[data-tf]');
-      const run = () => { const s = normTitle(f.s.value), c = f.c.value; const rs = rows.filter(r => (!c || r.categoria === c) && (!s || normTitle(r.denominacion + ' ' + r.codigo).includes(s)));
+      const run = () => { const s = normTitle(f.s.value), c = f.c.value; const words = s.split(/\s+/).filter(w => w.length > 2 || /\d/.test(w)); const rs = rows.filter(r => { const t = normTitle(r.denominacion + ' ' + r.codigo); return (!c || r.categoria === c) && (!s || t.includes(s) || (words.length && words.every(w => t.includes(w)))); });
         $('#tres').innerHTML = rs.length ? `<p role="status">${rs.length} concepto(s)</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Código</th><th>Categoría</th><th>Denominación</th><th class="num">Monto</th><th class="num">% UIT</th><th>Lugar de pago</th></tr></thead><tbody>${rs.map(r => `<tr><td>${esc(r.codigo)}</td><td>${esc(r.categoria)}</td><td>${esc(r.denominacion)}</td><td class="num"><b>${money(r.monto)}</b></td><td class="num">${uit ? (r.monto / uit * 100).toFixed(2) + ' %' : '—'}</td><td><small>${esc(r.cuenta)}</small></td></tr>`).join('')}</tbody></table></div>` : `<div class="empty" role="status">No hay conceptos que coincidan con la búsqueda.</div>`; };
       f.oninput = run; f.onsubmit = e => e.preventDefault(); $('[data-clear]').onclick = () => { f.reset(); run(); }; run();
       $$('[data-td]').forEach(b => b.onclick = () => openDoc(DB.tupaDocs[b.dataset.td]));
@@ -1330,7 +1337,9 @@ function bindPublicChrome() {
   // carrusel
   const slides = $$('.slide');
   if (slides.length > 1) {
-    let k = 0, paused = false; const show = n => { k = (n + slides.length) % slides.length; slides.forEach((s, i) => { s.classList.toggle('on', i === k); s.inert = i !== k; if (i === k) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true'); }); $$('[data-dot]').forEach((d, i) => d.setAttribute('aria-current', i === k)); };
+    let k = 0, paused = false; const show = n => { k = (n + slides.length) % slides.length;
+      // Solo se descargan la diapositiva visible y la siguiente (antes bajaban todas, ~9 MB en la portada).
+      [k, (k + 1) % slides.length].forEach(j => { const im = slides[j].querySelector('img[data-src]'); if (im) { im.src = im.dataset.src; im.removeAttribute('data-src'); } }); slides.forEach((s, i) => { s.classList.toggle('on', i === k); s.inert = i !== k; if (i === k) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true'); }); $$('[data-dot]').forEach((d, i) => d.setAttribute('aria-current', i === k)); };
     show(0);
     $$('[data-sl]').forEach(b => b.onclick = () => show(k + +b.dataset.sl)); $$('[data-dot]').forEach(b => b.onclick = () => show(+b.dataset.dot));
     const hero = $('.hero'); hero.onmouseenter = () => paused = true; hero.onmouseleave = () => paused = false; hero.addEventListener('focusin', () => paused = true); hero.addEventListener('focusout', () => paused = false);
@@ -1726,7 +1735,7 @@ SPECS.noticias = {
     { n: 'slug', l: 'URL amigable (slug)', side: true, unique: true, hint: 'Se genera a partir del título.' },
   ]; },
   beforeSave: w => { w.slug = slugify(w.slug || w.titulo); },
-  validate: w => w.video && !/^https:\/\/(www\.)?(youtube\.com\/embed|player\.vimeo\.com|www\.facebook\.com\/plugins)/.test(w.video) ? { video: 'Use una URL de inserción de YouTube, Vimeo o Facebook (https).' } : {},
+  validate: w => { if (w.video) w.video = videoEmbedURL(w.video); return w.video && !/^https:\/\/(www\.)?(youtube\.com\/embed|player\.vimeo\.com|www\.facebook\.com\/plugins)/.test(w.video) ? { video: 'Pegue el enlace del video de YouTube, Vimeo o Facebook (https).' } : {}; },
 };
 SPECS.catnoticias = {
   key: 'catnoticias', mod: 'noticias', coll: 'categoriasNoticia', title: 'Categorías de noticias', singular: 'categoría', icon: 'list', label: r => r.nombre, states: ['Activo', 'Inactivo'], pubState: 'Activo', softDelete: true,
