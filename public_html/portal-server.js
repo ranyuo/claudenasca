@@ -211,5 +211,9 @@ window.addEventListener('load',()=>{
 const portalVendors={pdf:['/assets/vendor/jspdf.umd.min.js','/assets/vendor/jspdf.plugin.autotable.min.js','/assets/vendor/qrcode.min.js'],xlsx:['/assets/vendor/xlsx.full.min.js']};
 const portalVendorLoaded=new Set();
 function portalLoadVendor(group){for(const src of portalVendors[group]){if(portalVendorLoaded.has(src))continue;portalVendorLoaded.add(src);const script=document.createElement('script');script.src=src;script.async=false;document.head.append(script);}}
-document.addEventListener('DOMContentLoaded',()=>{portalLoadVendor('pdf');if(location.hash.startsWith('#/admin'))portalLoadVendor('xlsx');});
-window.addEventListener('hashchange',()=>{if(location.hash.startsWith('#/admin'))portalLoadVendor('xlsx');});
+// En el portal público, PDF/QR se cargan con la primera interacción del visitante o cuando la página queda en reposo; en la intranet, de inmediato.
+function portalLoadPdfSoon(){const events=['pointerdown','keydown','touchstart','focusin'];const go=()=>{events.forEach(e=>removeEventListener(e,go,true));portalLoadVendor('pdf');};
+ if(location.hash.startsWith('#/admin'))return go();events.forEach(e=>addEventListener(e,go,{capture:true,passive:true}));
+ addEventListener('load',()=>setTimeout(()=>window.requestIdleCallback?requestIdleCallback(go,{timeout:3000}):go(),2500));}
+document.addEventListener('DOMContentLoaded',()=>{portalLoadPdfSoon();if(location.hash.startsWith('#/admin'))portalLoadVendor('xlsx');});
+window.addEventListener('hashchange',()=>{if(location.hash.startsWith('#/admin')){portalLoadVendor('pdf');portalLoadVendor('xlsx');}});

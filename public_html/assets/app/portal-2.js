@@ -460,12 +460,24 @@ function stamp(rec, isNew) {
 /* ---------- Captcha simple + anti-spam (prototipo) ---------- */
 function captchaHTML(id) {
   const purpose=id==='cap-c'?'mensajes':id==='cap-nl'?'suscriptores':id.includes('cq')?'certificados':id.includes('lr')?'reclamos':'expedientes';
-  try { const c=portalRequest('POST','/api/desafio',{purpose});return `<div class="field"><span class="lbl">Verificación anti-spam *</span><div class="captcha" id="${id}" data-challenge="${c.id}" data-purpose="${purpose}"><span>¿Cuánto es</span><b>${esc(c.question)}</b><span>?</span><input class="inp" name="captcha" inputmode="numeric" aria-label="Resultado de la suma" required autocomplete="off"></div></div><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">`; }
-  catch(error){return `<p role="alert">${esc(error.message)} Recarga la página para habilitar el formulario.</p>`;}
+  return `<div class="field"><span class="lbl">Verificación anti-spam *</span><div class="captcha" id="${id}" data-purpose="${purpose}"><span>¿Cuánto es</span><b aria-live="polite">…</b><span>?</span><input class="inp" name="captcha" inputmode="numeric" aria-label="Resultado de la suma" required autocomplete="off"></div></div><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">`;
 }
+/* El desafío se pide al servidor en segundo plano cuando el formulario se acerca a la pantalla o se usa:
+   antes se pedía de forma síncrona al dibujar cada página (también el boletín del pie) y congelaba la carga. */
+function loadCaptcha(box) {
+  if (!box || box.dataset.challenge || box.dataset.loading) return; box.dataset.loading = '1'; const q = $('b', box);
+  fetch(portalURL('/api/desafio'), { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': portalBootstrap.csrf }, body: JSON.stringify({ purpose: box.dataset.purpose }) })
+    .then(r => r.json().catch(() => ({})).then(c => { if (!r.ok || !c.id) throw new Error(c.message || 'No se pudo cargar la verificación.'); return c; }))
+    .then(c => { box.dataset.challenge = c.id; q.textContent = c.question; })
+    .catch(error => { delete box.dataset.loading; q.textContent = '—'; toast(error.message + ' Recarga la página para habilitar el formulario.', 'warn'); });
+}
+const CAPTCHA_IO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { CAPTCHA_IO.unobserve(e.target); loadCaptcha(e.target); } }), { rootMargin: '400px 0px' }) : null;
+function watchCaptchas() { $$('.captcha[data-purpose]:not([data-watch])').forEach(b => { b.dataset.watch = '1'; if (CAPTCHA_IO) CAPTCHA_IO.observe(b); else loadCaptcha(b); }); }
+new MutationObserver(() => watchCaptchas()).observe(document.documentElement, { childList: true, subtree: true });
+document.addEventListener('focusin', e => { const f = e.target.closest && e.target.closest('form'); if (f) loadCaptcha($('.captcha[data-purpose]', f)); }, true);
 function checkCaptcha(form, id) {
   if (form.website && form.website.value) return 'Envío bloqueado por el filtro anti-spam.';
-  const box = $('#' + id, form);if(!box||!box.dataset.challenge)return 'Recarga la página para verificar el formulario.';
+  const box = $('#' + id, form);if(!box)return 'Recarga la página para verificar el formulario.';if(!box.dataset.challenge){loadCaptcha(box);return 'La verificación anti-spam aún se está cargando. Espera un momento e inténtalo de nuevo.';}
   const answer=String(form.querySelector('[name="captcha"]')?.value||'').trim();if(!/^\d{1,3}$/.test(answer))return 'Escribe el resultado de la suma.';
   portalProofs[box.dataset.purpose]={challenge_id:box.dataset.challenge,answer,website:form.website?.value||'',accept:form.querySelector('[name="acepto"]')?.checked===true,declare:form.querySelector('[name="declaro"]')?.checked===true};
   return '';
@@ -2793,6 +2805,7 @@ function init() {
   window.addEventListener('hashchange', route);
   let lastTouch = 0; ['click', 'keydown'].forEach(ev => document.addEventListener(ev, () => { if (SESSION && Date.now() - lastTouch > 15000) { lastTouch = Date.now(); if (sessionExpired()) route(); else touchSession(); } }, true));
   if (!location.hash) history.replaceState(null, '', '#/');
+  if (typeof window.pzEnsure === 'function') try { pzEnsure(); } catch (e) { console.error(e); }
   route();
 }
 document.addEventListener('DOMContentLoaded', init);

@@ -30,6 +30,7 @@ function pzEnsure() {
     const set = (id, url) => { const e = E(id); if (e && (!e.url || /ica\.bibliotecalatina|www\.dreica\.gob\.pe\/?$/.test(e.url))) Object.assign(e, { url, estado: 'Activo', verificado: '2026-10-23' }); };
     set('biblioteca', ''); set('aula', ''); set('dre', 'https://dreica.gob.pe/ica'); c.enlacesV2 = true; }
 }
+window.pzEnsure = pzEnsure;
 const mpvCfg = () => { pzEnsure(); return DB.config.mpv; };
 /* Una sola lista de trámites: los del catálogo "Tipos de trámite" (con su plazo) y luego los tipos de documento configurados, sin repetir. */
 const mpvCatalogo = () => (IX && IX.tramitesFull ? IX.tramitesFull() : []).filter(t => t && t.nombre);
@@ -1409,8 +1410,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       X.cfg.docs = X.cfg.docs || {};
       if (!X.cfg.docsLogoInit) { const lg = await logoPng(); if (lg) { X.cfg.docs.logoIzq = { src: lg, w: 240, h: 310 }; X.cfg.docsLogoInit = true; ch = true; } }
       if (ch) if(!IX.persist())return false;
-      try { if (window.pzSyncCerts && pzSyncCerts(X)) saveDB(); } catch (e) { console.error(e); } }
-    route();
+      try { if (window.pzSyncCerts && pzSyncCerts(X)) { saveDB(); ch = true; } } catch (e) { console.error(e); }
+      // init() ya dibujó la página con pzEnsure aplicado: solo se vuelve a dibujar si algo cambió aquí.
+      if (ch) route(); }
   } catch (e) { console.error(e); }
 });
 })();
