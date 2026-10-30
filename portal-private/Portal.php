@@ -268,6 +268,7 @@ final class PortalApp
     public function save(array $input): array
     {
         $user=$this->requireUser();$this->rate('save',120,60);
+        if(!empty($user['cambiarClave']))throw new PortalError(403,'Cambia tu contraseña temporal antes de continuar (Mi cuenta).');
         if(!isset($input['revision'])||!is_int($input['revision'])||(!isset($input['patch'])&&!is_array($input['data']??null)))throw new PortalError(422,'Contenido o revisión no válidos.');
         return $this->transaction(function()use($input,$user){
             $state=$this->state(true);$user=$this->requireUser();if(!isset($input['patch'])&&(int)$state['revision']!==$input['revision'])throw new PortalError(409,'Otra persona guardó cambios. Recarga la página antes de continuar.');

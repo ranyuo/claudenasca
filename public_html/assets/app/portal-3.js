@@ -31,6 +31,10 @@ function pzEnsure() {
     set('biblioteca', ''); set('aula', ''); set('dre', 'https://dreica.gob.pe/ica'); c.enlacesV2 = true; }
 }
 const mpvCfg = () => { pzEnsure(); return DB.config.mpv; };
+/* Una sola lista de trámites: los del catálogo "Tipos de trámite" (con su plazo) y luego los tipos de documento configurados, sin repetir. */
+const mpvCatalogo = () => (IX && IX.tramitesFull ? IX.tramitesFull() : []).filter(t => t && t.nombre);
+const mpvTipos = () => { const cat = mpvCatalogo().map(t => t.nombre); return [...cat, ...mpvCfg().tipos.filter(t => !cat.includes(t))]; };
+const mpvPlazo = t => (mpvCfg().plazos || {})[t] || +(mpvCatalogo().find(x => x.nombre === t) || {}).dias || EXP_PLAZOS[t] || 10;
 const lrCfg = () => { pzEnsure(); return DB.config.lr; };
 window.pzBolsaCfg = () => { pzEnsure(); return DB.config.bolsa; };
 window.pzMail = (para, asunto, cuerpo) => { if (para) mailOut(para, asunto, cuerpo); saveDB(); };
@@ -59,7 +63,7 @@ function diasHabiles(fromISO, days) {
   return { due: d, left: n };
 }
 window.pzEfectiva = iso => { const r = recepcionDe(iso); return r.enHorario ? null : r.fecha; };
-window.pzPlazo = x => diasHabiles(x.fechaRecepcion || x.fecha, (mpvCfg().plazos || {})[x.tipoTramite] || EXP_PLAZOS[x.tipoTramite] || 10);
+window.pzPlazo = x => diasHabiles(x.fechaRecepcion || x.fecha, mpvPlazo(x.tipoTramite));
 const lrPlazoDias = r => r.plazoDias || (r.tipo === 'Queja' ? lrCfg().plazoQueja : lrCfg().plazoReclamo);
 const lrPlazo = r => diasHabiles(r.fecha, lrPlazoDias(r));
 const lrSem = r => { if (r.anulado || r.estado === 'Atendido') return '<span class="badge gray">Cerrado</span>'; const p = lrPlazo(r); return p.left < 0 ? `<span class="badge err">Vencido (${-p.left} d)</span>` : p.left <= lrCfg().alerta ? `<span class="badge warn">${p.left} d hábiles</span>` : `<span class="badge ok">${p.left} d hábiles</span>`; };
@@ -166,7 +170,7 @@ function mpvForm() {
     <div class="field full"><label for="mv-dir">Dirección (opcional)</label><input id="mv-dir" name="direccion" maxlength="160" autocomplete="street-address"></div>
    </div>
    <div class="pz-sec-h"><span>2</span><h2>Datos del documento</h2></div><div class="form-grid">
-    <div class="field"><label for="mv-tt">Tipo de documento a presentar <span class="req">*</span></label><select id="mv-tt" name="tipoTramite"><option value="">Seleccione</option>${c.tipos.map(t => `<option>${esc(t)}</option>`).join('')}</select></div>
+    <div class="field"><label for="mv-tt">Tipo de documento a presentar <span class="req">*</span></label><select id="mv-tt" name="tipoTramite"><option value="">Seleccione</option>${mpvTipos().map(t => `<option>${esc(t)}</option>`).join('')}</select></div>
     <div class="field"><label for="mv-ref">N.º o referencia de su documento</label><input id="mv-ref" name="docRef" maxlength="80" placeholder="Ej.: Oficio N.º 012-2026-MPP"></div>
     <div class="field full"><label for="mv-ar">Área de destino <span class="req">*</span></label><select id="mv-ar" name="areaDestino">${areaOptions('', { skipMP: true })}</select><div class="hint" data-arhint>La Mesa de Partes Virtual recibe el documento y lo deriva al área seleccionada.</div></div>
     <div class="field full"><label for="mv-as">Asunto <span class="req">*</span></label><textarea id="mv-as" name="asunto" maxlength="600" style="min-height:76px" data-count></textarea><div class="hint"><span data-c>0</span>/600 caracteres</div></div>
@@ -188,13 +192,13 @@ function mpvConsulta() {
 function mpvInfo() {
   const c = mpvCfg(); const as = areasAll().filter(a => a.activo);
   return `<section class="card cb" style="padding:20px"><h2 style="font-size:18px;margin-top:0">¿Cómo funciona?</h2><ol class="pz-steps"><li><b>Registra</b> tus datos, el tipo de documento, el área de destino y adjunta tus archivos.</li><li><b>Recibe</b> al instante tu N.º de expediente (${esc(c.prefijo)}-AAAA-NNNNNN), tu N.º de documento (DOC-AAAA-NNNNNN) y el cargo de recepción en PDF.</li><li><b>Mesa de Partes</b> deriva tu documento al área competente. Consulta las novedades en el seguimiento; el envío por correo está pendiente de habilitación.</li><li><b>Consulta</b> el estado en cualquier momento con tu N.º de expediente y tu DNI/RUC o el código de verificación.</li></ol>
-   <h3>Tipos de documento admitidos y plazos referenciales</h3><div class="tbl-wrap"><table class="tbl light no-rt"><thead><tr><th>Tipo de documento</th><th class="num">Plazo (días hábiles)</th></tr></thead><tbody>${c.tipos.map(t => `<tr><td>${esc(t)}</td><td class="num">${c.plazos[t] || 10}</td></tr>`).join('')}</tbody></table></div>
+   <h3>Tipos de documento admitidos y plazos referenciales</h3><div class="tbl-wrap"><table class="tbl light no-rt"><thead><tr><th>Tipo de documento</th><th class="num">Plazo (días hábiles)</th></tr></thead><tbody>${mpvTipos().map(t => `<tr><td>${esc(t)}</td><td class="num">${mpvPlazo(t)}</td></tr>`).join('')}</tbody></table></div>
    <h3>Recepción fuera del horario</h3><p>Puedes registrar documentos las 24 horas. Los presentados después de las ${fmt12(c.horaFin)}, en sábado, domingo o feriado se consideran recibidos el <b>siguiente día hábil a las ${fmt12(c.horaIni)}</b>; los presentados antes de las ${fmt12(c.horaIni)} de un día hábil, ese mismo día a las ${fmt12(c.horaIni)}. El cargo indica la fecha y hora exacta de presentación y la de recepción administrativa.</p>
    <h3>Áreas receptoras</h3><div class="tbl-wrap"><table class="tbl light"><thead><tr><th>Nivel</th><th>Área / cargo / órgano</th><th>Correo institucional</th></tr></thead><tbody>${as.map(a => `<tr><td>${esc(a.nivel || '')}</td><td>${esc(a.nombre)}</td><td><a href="mailto:${esc(a.correo)}">${esc(a.correo)}</a></td></tr>`).join('')}</tbody></table></div></section>`;
 }
 R('servicios/mesa-de-partes', (path, q0) => {
   const c = mpvCfg(); const t0 = q0 && q0.get && q0.get('tab'); const cur = t0 === 'consulta' || (q0 && q0.get && q0.get('exp')) ? 'c' : t0 === 'info' ? 'i' : 'n';
-  const body = `${svNav('mesa-de-partes')}${svHead('mpv', [['file', `${c.tipos.length} tipos de documento`], ['upload', `Hasta ${c.maxArchivos} archivos de ${c.maxMB} MB`], ['shield', 'Cargo en PDF con código QR']])}
+  const body = `${svNav('mesa-de-partes')}${svHead('mpv', [['file', `${mpvTipos().length} tipos de documento`], ['upload', `Hasta ${c.maxArchivos} archivos de ${c.maxMB} MB`], ['shield', 'Cargo en PDF con código QR']])}
    ${horarioBox()}
    ${svSteps([['Registra', 'Tus datos, el documento y los archivos.'], ['Recibe tu cargo', 'N.º de expediente y cargo en PDF al instante.'], ['Derivación', 'Mesa de Partes lo envía al área competente.'], ['Consulta', 'Sigue el estado con tu N.º de expediente.']])}
    ${svTabs([['n', 'send', 'Nuevo trámite'], ['c', 'search', 'Consultar expediente'], ['i', 'book', 'Información']], cur)}
@@ -255,7 +259,7 @@ function bindMpv(q0) {
       f.reset();
       const m = modal({ title: 'Documento registrado', size: 'lg', body: `<div class="notice ok">Tu documento fue <b>recibido por la Mesa de Partes Virtual</b>.</div>
         <div class="pz-codes"><div><span>N.º de expediente</span><b class="mono">${esc(numero)}</b></div><div><span>N.º de documento</span><b class="mono">${esc(numDocumento)}</b></div><div><span>Código de verificación</span><b class="mono">${esc(x.cargoCod || '—')}</b></div></div>
-        <dl class="kv"><dt>Fecha y hora de presentación</dt><dd>${fdate(fecha, true)}</dd><dt>Fecha y hora de recepción</dt><dd>${fdate(rec.fecha, true)}${rec.enHorario ? '' : ' <span class="badge warn">Fuera de horario: siguiente día hábil</span>'}</dd><dt>Área de destino</dt><dd>${esc(areaName(x.areaDestino))}</dd><dt>Plazo referencial</dt><dd>${c.plazos[x.tipoTramite] || 10} días hábiles</dd></dl>
+        <dl class="kv"><dt>Fecha y hora de presentación</dt><dd>${fdate(fecha, true)}</dd><dt>Fecha y hora de recepción</dt><dd>${fdate(rec.fecha, true)}${rec.enHorario ? '' : ' <span class="badge warn">Fuera de horario: siguiente día hábil</span>'}</dd><dt>Área de destino</dt><dd>${esc(areaName(x.areaDestino))}</dd><dt>Plazo referencial</dt><dd>${mpvPlazo(x.tipoTramite)} días hábiles</dd></dl>
         <p>Descarga y conserva tu cargo. Correo de contacto: <b>${esc(x.correo)}</b>.</p>`, foot: `<a class="btn ghost" href="${esc('#/servicios/mesa-de-partes?exp=' + numero + '&c=' + (x.cargoCod || ''))}" data-seg>Ver seguimiento</a>${cargoBtn(x)}` });
       $('[data-seg]', m.el).onclick = () => m.close();
     } catch (err) { console.error(err); toast(err && err.message ? `No se pudo registrar el documento: ${err.message}` : 'No se pudo registrar el documento. Intente nuevamente.', 'err'); }
@@ -317,7 +321,7 @@ cargoExp = async function (id) {
   const tx = M + 41, tw = W - M - 4 - tx; let ty = y + 7;
   doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5); doc.setTextColor(...NAVY); doc.text(doc.splitTextToSize(`El presente documento fue RECIBIDO por la Mesa de Partes Virtual del ${inst().nombre}.`, tw), tx, ty); ty += 9;
   doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(50);
-  [`La recepción no implica la conformidad con el contenido del documento. El trámite será atendido por el área de destino dentro del plazo de ${c.plazos[x.tipoTramite] || EXP_PLAZOS[x.tipoTramite] || 10} días hábiles, contados desde la fecha de recepción.`,
+  [`La recepción no implica la conformidad con el contenido del documento. El trámite será atendido por el área de destino dentro del plazo de ${mpvPlazo(x.tipoTramite)} días hábiles, contados desde la fecha de recepción.`,
    `Consulte el estado escaneando el código QR o en Mesa de Partes Virtual › Consultar expediente, con el N.° ${x.numero} y su documento de identidad o el código ${x.cargoCod}.`,
    'El envío de notificaciones por correo está pendiente de habilitación; consulte el seguimiento del expediente.'].forEach(s => { const t = doc.splitTextToSize('• ' + s, tw); doc.text(t, tx, ty); ty += 3.6 * t.length + .6; });
   pdfPie(doc);
@@ -336,7 +340,7 @@ CUSTOM.expedientes = (parts) => {
   const top = `<div class="kpis">${kpi('inbox', 'var(--blue)', all.filter(r => String(r.fecha).startsWith(y)).length, 'Expedientes ' + y)}${kpi('clock', 'var(--warn)', all.filter(r => r.estado === 'Recibido').length, 'Por derivar (recibidos)')}${kpi('send', 'var(--navy2)', all.filter(r => ['Derivado', 'En proceso'].includes(r.estado)).length, 'Derivados / en proceso')}${kpi('check', 'var(--ok)', all.filter(r => r.estado === 'Atendido').length, 'Atendidos')}${kpi('alert', venc ? 'var(--err)' : 'var(--ok)', venc, 'Con plazo vencido')}</div>${horarioBox(true)}`;
   const ib = inbox({
     key: 'expedientes', collName: 'expedientes', title: 'Mesa de partes virtual', sub: 'Documentos recibidos por la Mesa de Partes Virtual. Numeración ' + esc(mpvCfg().prefijo) + '-AAAA-NNNNNN y DOC-AAAA-NNNNNN, única y correlativa por año.', icon: 'inbox', states: EXP_STATES, trash: false, top, tabs: mpTabs('b'),
-    filterExtra: [{ n: 'tipoTramite', l: 'Tipo de documento', opts: mpvCfg().tipos }, { n: 'areaDestino', l: 'Área de destino', opts: areasAll().map(a => a.cod) }],
+    filterExtra: [{ n: 'tipoTramite', l: 'Tipo de documento', opts: mpvTipos() }, { n: 'areaDestino', l: 'Área de destino', opts: areasAll().map(a => a.cod) }],
     search: r => [r.numero, r.numDocumento, r.nombres, r.asunto, r.tipoTramite, r.numDoc, r.cargoCod].join(' '),
     extraActs: `<button class="btn sec" data-xcsv>${sic('download')} Reporte Excel (CSV)</button><a class="btn ghost" href="#/servicios/mesa-de-partes" target="_blank">Ver formulario público</a>`,
     cols: [{ l: 'N.º expediente', f: r => `<b class="mono" style="font-size:12.5px">${esc(r.numero)}</b>${r.numDocumento ? `<br><small class="mono">${esc(r.numDocumento)}</small>` : ''}` }, { l: 'Presentación / recepción', f: r => `${fshort(r.fecha, true)}${r.fechaRecepcion && r.fechaRecepcion.slice(0, 16) !== String(r.fecha).slice(0, 16) ? `<br><small style="color:var(--warn)">Rec. ${fshort(r.fechaRecepcion, true)}</small>` : ''}` }, { l: 'Remitente', f: r => `${esc(r.nombres)}<br><small>${esc(r.tipoDoc)} ${dniCell(r.numDoc)}</small>` }, { l: 'Tipo de documento', f: r => esc(r.tipoTramite) }, { l: 'Asunto', f: r => esc(clamp(r.asunto, 46)) }, { l: 'Destino / área actual', f: r => `${esc(areaName(r.areaDestino || r.area))}${r.area && r.area !== r.areaDestino ? `<br><small>Ahora: ${esc(areaName(r.area))}</small>` : ''}` }, { l: 'Folios', cls: 'num', f: r => r.folios || '—' }, { l: 'Plazo', cls: 'c', f: r => expSem(r) }, { l: 'Estado', cls: 'c', f: r => stBadge(r.estado) }],
@@ -355,7 +359,7 @@ expDetalle = function (id) {
       <div class="panel"><h2>Historial y seguimiento</h2><div class="pb">${histHTML(x.historial)}</div></div></div>
     <div style="display:grid;gap:16px;align-content:start"><div class="panel"><h2>Derivar a un área</h2><div class="pb" style="display:grid;gap:10px"><div class="field"><label for="xa">Área receptora</label><select id="xa">${areaOptions(x.area === 'MP' ? (x.areaDestino || '') : x.area, { placeholder: 'Seleccione el área' })}</select></div><div class="field"><label for="xan">Proveído / indicación</label><input id="xan" class="inp" placeholder="Ej.: Para su atención y trámite correspondiente"></div><label class="check"><input type="checkbox" id="xam" disabled> Correo pendiente de configuración</label><button class="btn" data-xa>${sic('send')} Derivar expediente</button></div></div>
       <div class="panel"><h2>Actualizar estado</h2><div class="pb" style="display:grid;gap:10px"><div class="field"><label for="xs">Nuevo estado</label><select id="xs">${EXP_STATES.map(s => `<option ${s === x.estado ? 'selected' : ''}>${s}</option>`).join('')}</select></div><div class="field"><label for="xn">Nota / respuesta</label><textarea id="xn" class="inp" rows="3"></textarea></div><label class="check"><input type="checkbox" id="xm" disabled> Correo pendiente de configuración</label><button class="btn sec" data-xs>Guardar estado</button></div></div>
-      <div class="panel"><h2>Plazo</h2><div class="pb meta-list"><span>Tipo: ${esc(x.tipoTramite)} · ${(mpvCfg().plazos[x.tipoTramite] || EXP_PLAZOS[x.tipoTramite] || 10)} días hábiles</span><span>Vence: <b>${fdate(expPlazo(x).due)}</b></span><span>${expSem(x)}</span></div></div></div></div>`;
+      <div class="panel"><h2>Plazo</h2><div class="pb meta-list"><span>Tipo: ${esc(x.tipoTramite)} · ${mpvPlazo(x.tipoTramite)} días hábiles</span><span>Vence: <b>${fdate(expPlazo(x).due)}</b></span><span>${expSem(x)}</span></div></div></div></div>`;
   return {
     html, after: () => {
       const me = currentUser().usuario;
@@ -374,6 +378,10 @@ expDetalle = function (id) {
         x.historial.push({ fecha: nowISO(), usuario: me, estado: v, nota: n }); audit(`Cambio de estado: ${x.estado} → ${v}`, 'Mesa de partes', x.numero, n); x.estado = v; stamp(x);
         if ($('#xm').checked) mailOut(x.correo, `Expediente ${x.numero}: ${v}`, n || 'Su expediente cambió de estado.'); if (saveDB()) { toast('Estado actualizado.', 'ok'); route(); }
       };
+      // Dirección consulta sin modificar; el personal de un área atiende sus expedientes pero no los deriva a otra.
+      const u = currentUser() || {}; const ro = u.rol === 'directivo', areaUser = !!u.area && !['admin', 'atencion', 'directivo'].includes(u.rol);
+      if (ro || areaUser) $('[data-xa]')?.closest('.panel')?.remove();
+      if (ro) { $('[data-xs]')?.closest('.panel')?.remove(); $('.edit-grid')?.insertAdjacentHTML('beforebegin', '<p class="notice" role="status">Consulta de solo lectura: la atención la realiza Mesa de partes o el área de destino.</p>'); }
     }
   };
 };
@@ -597,6 +605,8 @@ reclamoDetalle = function (id) {
   const a0 = out.after;
   out.after = () => { a0 && a0();
     $('[data-pdf]').onclick = () => lrPdf(r, 'hoja');
+    // Dirección supervisa los reclamos sin responderlos (la atención corresponde a Atención al ciudadano).
+    if (currentUser()?.rol === 'directivo') { $$('.edit-grid textarea, .edit-grid select, .edit-grid input, .edit-grid button:not([data-pdf]):not([data-adj2])').forEach(el => { el.disabled = true; }); $('.edit-grid')?.insertAdjacentHTML('beforebegin', '<p class="notice" role="status">Consulta de solo lectura: la respuesta la registra Atención al ciudadano.</p>'); }
     const a2 = $('[data-adj2]'); if (a2) a2.onclick = () => downloadMeta(r.adjunto);
     const old = $('[data-adj]'); if (old && r.adjunto && r.adjunto.key) old.onclick = () => downloadMeta(r.adjunto);
     const d = $('[data-der]'); if (d) d.onclick = () => { const v = $('#lr-ar').value; if (!v) return toast('Seleccione el área.', 'err'); const a = areaOf(v); const ind = $('#lr-arn').value.trim(); const me = currentUser().usuario;

@@ -12,10 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,600;0,700;0,800;1,600&family=Poppins:wght@500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= portal_asset('portal.css') ?>">
-<script src="/assets/vendor/jspdf.umd.min.js" defer></script>
-<script src="/assets/vendor/jspdf.plugin.autotable.min.js" defer></script>
-<script src="/assets/vendor/xlsx.full.min.js" defer></script>
-<script src="/assets/vendor/qrcode.min.js" defer></script>
 </head>
 <body>
 <noscript><p style="padding:20px">Este portal requiere JavaScript habilitado.</p></noscript>

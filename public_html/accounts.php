@@ -32,6 +32,7 @@ function e(string $value): string { return htmlspecialchars($value, ENT_QUOTES, 
 <body><main><a href="/#/admin/dashboard">← Volver al panel</a><h1>Cuentas del portal</h1>
 <?php if ($notice): ?><p class="notice success" role="status"><?= e($notice) ?></p><?php endif ?>
 <?php if ($error): ?><p class="notice" role="alert"><?= e($error) ?></p><?php endif ?>
+<?php if (!empty($actor['cambiarClave'])): ?><p class="notice" role="alert">Por seguridad, cambia la contraseña temporal que recibiste antes de usar la intranet.</p><?php elseif ($notice === 'Contraseña actualizada.'): ?><p><a href="/#/admin/dashboard">Ir a la intranet →</a></p><?php endif ?>
 <?php if($actor['rol']==='admin'): ?><section><h2>Usuarios del portal</h2><p>Cada cuenta accede a los módulos de su rol y a los registros con los que está vinculada.</p><ul><?php foreach ($users as $user): ?><li><?= e($user['name']) ?> — <?= e($user['username']) ?> (<?= e($user['role']) ?>)</li><?php endforeach ?></ul></section>
 <section><h2>Crear usuario</h2><form method="post">
 <input type="hidden" name="_csrf" value="<?= e($_SESSION['csrf']) ?>"><input type="hidden" name="action" value="create">
