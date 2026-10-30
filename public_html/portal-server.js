@@ -2,6 +2,8 @@
 function portalURL(url) { return url.startsWith('/api/') ? '/index.php?route=' + encodeURIComponent(url.slice(1)) : url; }
 const portalBootstrap=window.PORTAL_BOOTSTRAP;
 for(const [key,value] of Object.entries(portalBootstrap.roles||{}))if(ROLES[key])Object.assign(ROLES[key],value);
+// Personal con área asignada (no Atención ni Dirección): bandeja de Mesa de partes con los expedientes derivados a su área.
+{const u=portalBootstrap.user;if(u&&u.area&&!['admin','atencion','directivo'].includes(u.rol)&&ROLES[u.rol]&&!ROLES[u.rol].mods.includes('expedientes'))ROLES[u.rol].mods=[...ROLES[u.rol].mods,'expedientes'];}
 let portalRevision=portalBootstrap.revision;
 let portalBaseline=structuredClone(portalBootstrap.data);
 const portalPasswords=new Map();
@@ -102,7 +104,9 @@ saveDB=function(){
     const patch=portalPatch(portalBaseline,DB);if(!patch.length&&!accounts.length)return true;
     const result=portalRequest('PUT','/api/portal',{patch,revision:portalRevision,accounts});
     portalRevision=result.revision;
-    if(result.normalized){result.normalized.usuarios=result.users||DB.usuarios;portalMerge(DB,result.normalized);}
+    if(result.normalized){result.normalized.usuarios=result.users||DB.usuarios;portalMerge(DB,result.normalized);
+      // Los formularios que enviaron ciudadanos mientras esta sesión estaba abierta llegan con la respuesta: ya existen en el servidor y no deben reenviarse.
+      for(const type of ['mensajes','reclamos','expedientes','suscriptores'])for(const record of DB[type]||[])portalKnown.add(type+':'+record.id);}
     portalBootstrap.user=result.user;portalPasswords.clear();portalBaseline=structuredClone(DB);return true;
   }catch(error){if(ADM.work&&ADM.workKey&&SPECS[ADM.workKey]){const col=SPECS[ADM.workKey].coll;DB[col]=DB[col].map(r=>r===ADM.work?structuredClone(r):r);}portalMerge(DB,structuredClone(portalBaseline));toast(error.message,'err');return false;}
 };
@@ -119,7 +123,8 @@ bindLogin=function(){portalOriginalLogin();const form=document.querySelector('[d
 const portalUserFields=SPECS.usuarios.fields;
 SPECS.usuarios.fields=function(work){const fields=portalUserFields(work);for(const f of fields)if(f.n==='pass1')f.hint='Mínimo 12 caracteres. La contraseña se protege con password_hash en PHP.';
   fields.push({n:'correo',l:'Correo electrónico',t:'email'});
-  fields.push({n:'personaId',l:'Persona del docente (para su CV)',t:'select',opts:()=>DB.personas.map(p=>[p.id,fullName(p)])});return fields;};
+  fields.push({n:'personaId',l:'Persona del docente (para su CV)',t:'select',opts:()=>DB.personas.map(p=>[p.id,fullName(p)])});
+  fields.push({n:'area',l:'Área de Mesa de partes (bandeja)',t:'select',opts:()=>(typeof IX!=='undefined'&&IX.areasFull?IX.areasFull():[]).filter(a=>a.activo&&a.cod!=='MP').map(a=>[a.cod,a.nombre]),hint:'El personal (salvo Atención y Dirección) verá y atenderá los expedientes derivados a esta área.'});return fields;};
 const portalUserValidate=SPECS.usuarios.validate;
 SPECS.usuarios.validate=function(work){const errors=portalUserValidate(work);delete errors.pass1;if(work.pass1||!work.has_password){if([...String(work.pass1||'')].length<12||new TextEncoder().encode(work.pass1||'').length>72)errors.pass1='La contraseña necesita al menos 12 caracteres y máximo 72 bytes.';if(work.pass1!==work.pass2)errors.pass2='Las contraseñas no coinciden.';}return errors;};
 SPECS.usuarios.afterSave=function(work){if(work.pass1)portalPasswords.set(work.id,work.pass1);delete work.pass1;delete work.pass2;};
@@ -158,6 +163,9 @@ let portalLastTracked='';
 function portalTrack(){const path=location.hash||'#/';if(path.startsWith('#/admin')||path===portalLastTracked)return;portalLastTracked=path;
   fetch(portalURL('/api/visitas'),{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':portalBootstrap.csrf},body:JSON.stringify({path})}).catch(()=>{});}
 window.addEventListener('hashchange',portalTrack);
+// Contraseña temporal: antes de usar la intranet se debe cambiar en "Mi cuenta".
+function portalForcePassword(){if(portalBootstrap.user?.cambiarClave&&location.hash.startsWith('#/admin'))location.href='/accounts.php';}
+window.addEventListener('hashchange',portalForcePassword);document.addEventListener('DOMContentLoaded',portalForcePassword);
 document.addEventListener('DOMContentLoaded',()=>{const style=document.createElement('style');style.textContent='.pz-lg-demo,.demo-users{display:none!important}';document.head.append(style);portalTrack();});
 
 // El acceso desde Bolsa laboral usa la misma sesión PHP que el resto de la intranet.
@@ -197,3 +205,11 @@ window.addEventListener('load',()=>{
   const toDataURL=url=>fetch(url).then(r=>r.ok?r.blob():Promise.reject(new Error(url))).then(blob=>new Promise((ok,bad)=>{const reader=new FileReader();reader.onload=()=>ok(reader.result);reader.onerror=bad;reader.readAsDataURL(blob);}));
   for(const [node,key,url] of refs){if(!pending.has(url))pending.set(url,toDataURL(url));pending.get(url).then(data=>{if(node[key]===url)node[key]=data;}).catch(()=>{});}
 });
+
+// Bibliotecas de PDF/QR y de Excel: se cargan después de mostrar la página (antes retrasaban la portada ~1,4 MB).
+// jsPDF y QR se usan también en el portal (cargos, hojas de reclamación); Excel solo en la intranet.
+const portalVendors={pdf:['/assets/vendor/jspdf.umd.min.js','/assets/vendor/jspdf.plugin.autotable.min.js','/assets/vendor/qrcode.min.js'],xlsx:['/assets/vendor/xlsx.full.min.js']};
+const portalVendorLoaded=new Set();
+function portalLoadVendor(group){for(const src of portalVendors[group]){if(portalVendorLoaded.has(src))continue;portalVendorLoaded.add(src);const script=document.createElement('script');script.src=src;script.async=false;document.head.append(script);}}
+document.addEventListener('DOMContentLoaded',()=>{portalLoadVendor('pdf');if(location.hash.startsWith('#/admin'))portalLoadVendor('xlsx');});
+window.addEventListener('hashchange',()=>{if(location.hash.startsWith('#/admin'))portalLoadVendor('xlsx');});

@@ -2411,6 +2411,11 @@ function mensajeDetalle(id) {
       const upd = (est, nota) => { m.estado = est; m.historial = m.historial || []; m.historial.push({ fecha: nowISO(), usuario: currentUser().usuario, estado: est, nota }); stamp(m); audit('Cambio de estado: ' + est, 'Mensajes de contacto', m.asunto, nota || ''); if (saveDB()) { toast('Estado actualizado.', 'ok'); route(); } };
       $('[data-st]').onclick = () => upd($('#mst').value);
       $('[data-reply]').onclick = () => { const t = $('#mr').value.trim(); if (t.length < 5) return toast('Escriba la respuesta.', 'err'); m.respuesta=t; upd('Atendido', `Respuesta registrada: ${clamp(t,120)}. Correo desactivado.`); };
+      // Mientras el correo del portal esté desactivado, la respuesta se envía desde el correo de quien atiende.
+      $('[data-reply]').insertAdjacentHTML('afterend', ` <button class="btn sec" type="button" data-mailto>${sic('mail')} Responder desde mi correo</button>`);
+      $('[data-mailto]').onclick = () => { const t = $('#mr').value.trim(); if (t.length < 5) return toast('Escriba la respuesta.', 'err');
+        const body = `Estimado(a) ${m.nombres}:\n\n${t}\n\n—\n${(DB.config.inst || {}).nombre || ''}`; location.href = `mailto:${encodeURIComponent(m.correo)}?subject=${encodeURIComponent('Re: ' + m.asunto)}&body=${encodeURIComponent(body)}`;
+        m.respuesta = t; upd('Atendido', `Respuesta enviada desde el correo de ${currentUser().usuario}: ${clamp(t, 120)}`); };
     }
   };
 }

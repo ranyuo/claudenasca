@@ -836,14 +836,21 @@ function inicioEmpresa(){
 }
 
 /* ---------- 1.1 horarios ---------- */
+/* Programas que puede programar el usuario: el coordinador, solo el suyo. */
+function progsVisibles(){
+  const act = DB.programas.filter(p => p.activo); const u = typeof currentUser === "function" ? currentUser() : null;
+  if(u && u.rol === "coordinador"){ const own = act.filter(p => p.id === (DB.progMap || {})[u.programaId]); if(own.length) return own; }
+  return act;
+}
 function grupoSel(){
-  const act = DB.programas.filter(p => p.activo);
+  const act = progsVisibles();
   const g = S.ui.hg || (S.ui.hg = {p:act[0] ? act[0].id : 1, c:"III", s:"A", t:"Mañana"});
+  if(act.length && !act.some(p => p.id === g.p)) g.p = act[0].id;
   return g;
 }
 function grupoPicker(g){
   return `<div class="f" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
-    <div class="fld"><label for="hg_p">Programa</label><select id="hg_p" data-chg="hg">${DB.programas.filter(p => p.activo).map(p => `<option value="${p.id}" ${p.id === g.p ? "selected" : ""}>${p.cod}</option>`).join("")}</select></div>
+    <div class="fld"><label for="hg_p">Programa</label><select id="hg_p" data-chg="hg">${progsVisibles().map(p => `<option value="${p.id}" ${p.id === g.p ? "selected" : ""}>${p.cod}</option>`).join("")}</select></div>
     <div class="fld"><label for="hg_c">Ciclo</label><select id="hg_c" data-chg="hg">${["I","II","III","IV","V","VI"].map(c => `<option ${c === g.c ? "selected" : ""}>${c}</option>`).join("")}</select></div>
     <div class="fld"><label for="hg_s">Sección</label><select id="hg_s" data-chg="hg">${["A","B"].map(c => `<option ${c === g.s ? "selected" : ""}>${c}</option>`).join("")}</select></div>
     <div class="fld"><label for="hg_t">Turno</label><select id="hg_t" data-chg="hg">${["Mañana","Tarde"].map(c => `<option ${c === g.t ? "selected" : ""}>${c}</option>`).join("")}</select></div></div>`;
@@ -2013,6 +2020,7 @@ return {
   findDoc(cod){ const d = DB.docs.find(x => x.cod === String(cod || "").trim().toUpperCase()); return d ? {cod:d.cod, tipo:DOC_T[d.tipo] || d.tipo, persona:d.persona, fecha:d.fecha, valido:d.valido !== false} : null },
   areas(){ return DB.areas.filter(a => a.activo).map(a => [a.cod, a.nombre]) },
   areasFull(){ return DB.areas.map(a => Object.assign({}, a)) },
+  tramitesFull(){ return (DB.tramites || []).map(t => Object.assign({}, t)) },
   db(){ return DB },
   persist(){ return save() },
   notifyTo(to, txt, go){ notify(to, txt, go) },
