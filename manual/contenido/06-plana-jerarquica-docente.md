@@ -63,7 +63,7 @@ Los integrantes se muestran según su **Orden** de presentación.
 | N.º | Zona | Contenido |
 |---|---|---|
 | 1 | **Fotografía** | Foto de la persona. Se recorta de forma uniforme en el portal. |
-| 2 | Datos personales | Abreviatura, tipo de personal, nombres, apellidos, DNI, correo, teléfono y página web. |
+| 2 | **Nombres** y demás datos personales | Abreviatura, tipo de personal, nombres, apellidos, DNI, correo, teléfono y página web. |
 | 3 | **Especialidad o profesión** | Texto que acompaña al nombre en las tarjetas del portal. |
 | 4 | **Programas de estudio y unidades didácticas** | Programas a los que pertenece el docente y unidades didácticas que dicta. |
 | 5 | **Información académica** | Títulos y grados, en filas. Debajo están **Experiencia profesional** y **Otros datos** (opcionales). |
