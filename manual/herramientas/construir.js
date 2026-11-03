@@ -32,7 +32,7 @@ const toc = [];
 const renderer = new marked.Renderer();
 renderer.heading = (text, level, raw) => {
   const id = slug(raw);
-  if (level <= 2) toc.push({ level, text: raw, id });
+  if (level === 1) toc.push({ level, text: raw, id });
   return `<h${level} id="${id}">${text}</h${level}>\n`;
 };
 renderer.image = (href, title, text) =>
