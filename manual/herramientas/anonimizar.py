@@ -66,6 +66,11 @@ def _limpiar(o):
 d = _limpiar(d)
 c = d['config']
 c.setdefault('redes', {})['facebook'] = ''
+for sv in d.get('servicios', []):
+    if sv.get('responsable') and not sv['responsable'].startswith('Confirmar'):
+        sv['responsable'] = random.choice(NOM) + ' ' + random.choice(APE)
+if isinstance(d.get('tupaDocs'), dict) and d['tupaDocs'].get('referencia'):
+    d['tupaDocs']['referencia'] = d['tupaDocs']['referencia'].replace('IESTP-N/', 'IESTP-ICA/')
 for k in ('seo', 'popup'):
     if isinstance(c.get(k), dict) and 'nasca' in str(c[k].get('imagen', '')): c[k]['imagen'] = ''
 json.dump(d, open(dst,'w',encoding='utf-8'), ensure_ascii=False)

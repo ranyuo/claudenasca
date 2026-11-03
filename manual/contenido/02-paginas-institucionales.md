@@ -99,7 +99,7 @@ Restaurar también crea una versión: siempre puedes volver al estado anterior.
 
 ### Retirar una página del portal
 
-Edita la página, cambia el **Estado** a **Borrador** y pulsa **Guardar cambios**. Quien entre a su dirección verá la página de «no encontrada». Las páginas fijas en borrador también dejan de verse, así que úsalo con cuidado.
+Edita la página, cambia el **Estado** a **Borrador** y pulsa **Guardar cambios**. Quien entre a su dirección verá «Página no encontrada». Las páginas fijas en borrador también dejan de verse, así que úsalo con cuidado.
 
 ### Registrar un reconocimiento
 
@@ -162,7 +162,7 @@ Los reconocimientos publicados se muestran en **Nosotros › Reconocimientos**, 
 | «Obligatorio para publicar (puede guardarlo como borrador).» | Se eligió **Publicada** con el contenido vacío | Escribe el contenido o guarda como **Borrador** |
 | «Ya existe un registro con este valor (…).» | El slug ya lo usa otra página | Cambia la **URL amigable (slug)** |
 | No aparece el botón **Nueva página** | Tu rol es Imagen institucional | Pide al Administrador que cree la página |
-| La página muestra «no encontrada» | Está en **Borrador** o la dirección está mal escrita | Publícala o revisa el slug en el listado |
+| El portal muestra «Página no encontrada» | Está en **Borrador** o la dirección está mal escrita | Publícala o revisa el slug en el listado |
 | Cambié el slug de una página fija y la dirección no cambió | Las páginas fijas tienen una dirección propia | Es normal; el slug solo cambia la dirección de las páginas nuevas |
 | Borré texto por error | — | Edita la página y usa **Restaurar** en **Versiones anteriores** |
 
