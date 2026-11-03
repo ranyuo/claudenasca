@@ -52,5 +52,21 @@ for n,(t,c,f,e,r) in enumerate(demo,1):
       "destacada":n==1,"estado":e,"autor":"Oficina de Imagen Institucional","fuente":"","creadoPor":"admin.ica","modPor":"admin.ica"})
     news.append(x)
 d['noticias'] = news
+# Restos de la institución de origen en textos (SEO, WhatsApp, ventana emergente, carrusel, páginas…):
+# se reemplazan por la institución de referencia. No se tocan rutas de archivos ni URL.
+import re as _re
+def _limpiar(o):
+    if isinstance(o, dict): return {k: _limpiar(v) for k, v in o.items()}
+    if isinstance(o, list): return [_limpiar(v) for v in o]
+    if isinstance(o, str) and not o.startswith(('/assets', 'http', 'data:')):
+        o = o.replace('istpnasca.edu.pe', 'ica.aplicacion.io')
+        o = _re.sub(r'\bNASCA\b', 'ICA', o)
+        o = _re.sub(r'\bNasca\b', 'Ica', o)
+    return o
+d = _limpiar(d)
+c = d['config']
+c.setdefault('redes', {})['facebook'] = ''
+for k in ('seo', 'popup'):
+    if isinstance(c.get(k), dict) and 'nasca' in str(c[k].get('imagen', '')): c[k]['imagen'] = ''
 json.dump(d, open(dst,'w',encoding='utf-8'), ensure_ascii=False)
 print('ok', len(d['personas']), len(d['becarios']))

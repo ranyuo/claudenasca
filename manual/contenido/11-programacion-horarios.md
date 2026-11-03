@@ -113,6 +113,9 @@ Los cambios se guardan al instante y las clases ya programadas se mueven a las n
 
 > Cambia los bloques **antes** de programar las clases del periodo. Cambiarlos con horarios publicados modifica las horas que ya ven los estudiantes.
 
+> **Incidencia detectada al elaborar este manual (versión actual de la plataforma)**
+> El perfil **Secretaría académica** ve activos los controles de **Bloques y receso**, aunque no tiene permiso para cambiar la configuración. Si cambia, por ejemplo, la duración de la hora de clase, aparece el aviso de éxito («Turno Mañana: cada hora dura 45 min.») y **las clases ya programadas se mueven** a las nuevas horas, pero los bloques **no se guardan**. Resultado: las clases quedan desalineadas con la grilla (por ejemplo, de 08:00 a 09:30 en una grilla de horas de 60 minutos), las secciones publicadas siguen como **Publicado** con las horas cambiadas y aparecen advertencias de «Horario incompleto». Ya se reportó para su corrección. Mientras tanto, **solo el administrador** debe usar **Bloques y receso**; si ocurrió, el administrador debe corregir la hora de término de cada clase afectada o restablecer los bloques.
+
 ## Paso 2 · Programar las clases de una sección
 
 Pestaña **Programación**.
