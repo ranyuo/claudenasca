@@ -64,14 +64,16 @@ Cada cuenta tiene un rol, y el rol decide qué módulos aparecen en el menú. El
 |---|---|---|
 | Administrador | Todos (38 módulos), incluida la eliminación definitiva | Sí |
 | Imagen institucional | Noticias, Eventos, Portada, Páginas institucionales, Enlaces, Campus y locales, Temas | Sí |
-| Secretaría académica | Admisión, Matrícula, Becas, Estadísticas, Plana docente y jerárquica, Egresados, Alumnos, Horarios, Certificados, Títulos, CV Docente | No: deja el contenido en revisión para que el administrador lo apruebe en **Aprobaciones** |
-| Coordinador de programa | Su programa de estudios, Egresados, Alumnos y Horarios del programa | No: requiere aprobación |
-| Transparencia / administración | Documentos de gestión, TUPA, Inversiones, Licenciamiento, Convocatorias, Servicios complementarios | Sí, salvo documentos, admisiones y convocatorias, que pasan por aprobación |
+| Secretaría académica | Admisión, Matrícula, Becas, Estadísticas, Plana docente y jerárquica, Egresados, Alumnos, Horarios, Certificados, Títulos, CV Docente | Sí, salvo **Admisión**, que pasa por **Aprobaciones** |
+| Coordinador de programa | Su programa de estudios, Egresados, Alumnos y Horarios del programa | Sí, solo en su programa |
+| Transparencia / administración | Documentos de gestión, TUPA, Inversiones, Licenciamiento, Convocatorias, Servicios complementarios | Sí, salvo **Documentos de gestión** y **Convocatorias**, que pasan por **Aprobaciones** |
 | Atención al ciudadano | Mensajes de contacto, Libro de reclamaciones, Mesa de partes, Bolsa laboral | No aplica |
-| Directivo | Estadísticas, Reclamos, Expedientes, Alumnos, Horarios, Certificados, Títulos, Bolsa laboral | No: requiere aprobación |
+| Directivo | Estadísticas, Reclamos, Expedientes, Alumnos, Horarios, Certificados, Títulos, Bolsa laboral | No publica contenido |
 | Docente | Sus horarios y su CV | No aplica |
 | Estudiante / Egresado | Horarios, certificados, títulos y bolsa laboral (solo consulta) | No aplica |
 | Empresa | Bolsa laboral | No aplica |
+
+Para cualquier rol distinto del Administrador, publicar o modificar algo ya publicado en **Documentos de gestión**, **Admisión** y **Convocatorias** requiere la aprobación del administrador: el cambio queda **En revisión** hasta que se aprueba en **Aprobaciones** (capítulo 01).
 
 ## Convenciones comunes a todos los módulos
 
