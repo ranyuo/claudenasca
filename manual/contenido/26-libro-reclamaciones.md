@@ -1,4 +1,4 @@
-# 07 · Libro de reclamaciones
+# 26 · Libro de reclamaciones
 
 ## Para qué sirve
 
@@ -51,7 +51,7 @@ El **plazo** se cuenta en **días hábiles**. Por defecto son 15 días para recl
 
 Ruta: **Libro de reclamaciones** › pestaña **Responsable y plazos**. Solo puede modificarla el administrador.
 
-![Responsable y plazos](../img/07-01-responsable-plazos.jpg)
+![Responsable y plazos](../img/26-01-responsable-plazos.jpg)
 
 | N.º | Campo | Descripción |
 |---|---|---|
@@ -68,11 +68,11 @@ El campo **Flujo de derivación interna** es un texto informativo que describe e
 
 ## Paso 2 · El ciudadano registra su reclamo (portal)
 
-![Página pública del Libro de Reclamaciones](../img/07-02-web-libro.jpg)
+![Página pública del Libro de Reclamaciones](../img/26-02-web-libro.jpg)
 
 La página pública tiene tres pestañas: **Registrar reclamo o queja** ①, **Consultar estado** ② e **Información** ③. A la derecha muestra al responsable de la atención y los plazos de respuesta.
 
-![Formulario de registro](../img/07-03-web-formulario.jpg)
+![Formulario de registro](../img/26-03-web-formulario.jpg)
 
 | N.º | Sección | Campos |
 |---|---|---|
@@ -82,7 +82,7 @@ La página pública tiene tres pestañas: **Registrar reclamo o queja** ①, **C
 | 4 | **Descripción de los hechos*** | Hasta 2000 caracteres. También se piden la **Fecha del hecho*** y el **Área o servicio involucrado** |
 | 5 | **Pedido concreto*** | Qué solución se solicita. Hasta 1000 caracteres |
 
-![Final del formulario](../img/07-04-web-envio.jpg)
+![Final del formulario](../img/26-04-web-envio.jpg)
 
 | N.º | Elemento | Descripción |
 |---|---|---|
@@ -91,7 +91,7 @@ La página pública tiene tres pestañas: **Registrar reclamo o queja** ①, **C
 | 3 | **Verificación anti-spam** | Suma sencilla para evitar envíos automáticos |
 | 4 | **Enviar reclamo** | Registra el caso |
 
-![Confirmación con el código de seguimiento](../img/07-05-web-codigo.jpg)
+![Confirmación con el código de seguimiento](../img/26-05-web-codigo.jpg)
 
 Al enviar, el ciudadano recibe:
 
@@ -104,7 +104,7 @@ Al enviar, el ciudadano recibe:
 
 ## Paso 3 · Revisar la bandeja (intranet)
 
-![Resumen del Libro de reclamaciones](../img/07-06-resumen.jpg)
+![Resumen del Libro de reclamaciones](../img/26-06-resumen.jpg)
 
 | N.º | Elemento | Para qué sirve |
 |---|---|---|
@@ -115,7 +115,7 @@ Al enviar, el ciudadano recibe:
 
 Cuando llega un reclamo nuevo, el menú lateral y la campana muestran un contador.
 
-![Bandeja de reclamos](../img/07-07-bandeja.jpg)
+![Bandeja de reclamos](../img/26-07-bandeja.jpg)
 
 | N.º | Elemento | Para qué sirve |
 |---|---|---|
@@ -125,7 +125,7 @@ Cuando llega un reclamo nuevo, el menú lateral y la campana muestran un contado
 
 ## Paso 4 · Abrir el detalle del caso
 
-![Detalle del reclamo](../img/07-08-detalle.jpg)
+![Detalle del reclamo](../img/26-08-detalle.jpg)
 
 | N.º | Sección | Descripción |
 |---|---|---|
@@ -139,7 +139,7 @@ Más abajo están **Notas internas** (comentarios del equipo que el ciudadano **
 
 ## Paso 5 · Derivar al área competente
 
-![Derivar el reclamo](../img/07-09-derivar.jpg)
+![Derivar el reclamo](../img/26-09-derivar.jpg)
 
 1. En **Plazo y derivación**, elige el área en **Derivar al área competente** ①.
 2. Escribe la **Indicación para el área** ②: qué debe revisar o hacer.
@@ -149,7 +149,7 @@ El caso pasa a **Derivado** y el historial registra el área y la indicación.
 
 ## Paso 6 · Registrar el avance
 
-![Cambiar el estado](../img/07-10-estado.jpg)
+![Cambiar el estado](../img/26-10-estado.jpg)
 
 1. En **Gestión**, elige el nuevo **Estado** ①; por ejemplo, **En atención**.
 2. Escribe un **Comentario del cambio** ② que explique el avance.
@@ -159,28 +159,28 @@ El caso pasa a **Derivado** y el historial registra el área y la indicación.
 
 ## Paso 7 · Responder y cerrar
 
-![Respuesta institucional](../img/07-11-respuesta.jpg)
+![Respuesta institucional](../img/26-11-respuesta.jpg)
 
 1. En **Respuesta institucional** ①, escribe la respuesta dirigida al ciudadano (mínimo 10 caracteres): qué se hizo y qué debe hacer la persona, si corresponde.
 2. Pulsa **Guardar respuesta y marcar atendido** ②.
 
-![Historial y notificaciones](../img/07-12-historial.jpg)
+![Historial y notificaciones](../img/26-12-historial.jpg)
 
 El caso pasa a **Atendido**. El **Historial de estados** ① muestra cada paso con la fecha, el usuario y el comentario. La sección **Notificaciones** ② registra los avisos por correo enviados a la institución y al ciudadano.
 
 > **Correo electrónico:** en la versión actual, el envío automático de correos está **desactivado**. Las notificaciones aparecen como **Omitido** y la pestaña **Correo pendiente** guarda la bitácora de los mensajes que se habrían enviado. Por eso el ciudadano debe **consultar la respuesta en el portal con su código**. Si la institución necesita enviar la respuesta por correo, hay que hacerlo manualmente desde el correo institucional, hasta que se configure el envío SMTP.
 
-![Pestaña Correo pendiente](../img/07-15-correo-pendiente.jpg)
+![Pestaña Correo pendiente](../img/26-15-correo-pendiente.jpg)
 
 La pestaña **Correo pendiente** registra la fecha, el destinatario, el asunto y el resultado de cada correo que generó el sistema.
 
 ## Paso 8 · El ciudadano consulta la respuesta (portal)
 
-![Consulta del estado](../img/07-13-web-consulta.jpg)
+![Consulta del estado](../img/26-13-web-consulta.jpg)
 
 En la pestaña **Consultar estado** ①, el ciudadano escribe su **Código de seguimiento** y su **DNI** (o el código de verificación) y pulsa **Consultar**.
 
-![Respuesta visible para el ciudadano](../img/07-14-web-respuesta.jpg)
+![Respuesta visible para el ciudadano](../img/26-14-web-respuesta.jpg)
 
 El portal muestra el avance (Recibido → Derivado → En atención → Atendido), el plazo, el área que atiende, la **respuesta institucional** y el historial. Desde ahí también se puede descargar la constancia.
 

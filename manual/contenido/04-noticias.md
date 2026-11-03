@@ -1,4 +1,4 @@
-# 03 · Noticias
+# 04 · Noticias
 
 ## Para qué sirve
 
@@ -17,7 +17,7 @@ Menú lateral › **Contenidos** › **Noticias**. Ruta: `#/admin/noticias`
 
 ## Pantalla principal
 
-![Listado de noticias](../img/03-01-listado.jpg)
+![Listado de noticias](../img/04-01-listado.jpg)
 
 | N.º | Elemento | Para qué sirve |
 |---|---|---|
@@ -31,7 +31,7 @@ En la columna **Estado** se ve la situación de cada noticia. Si una noticia est
 
 ## Formulario
 
-![Formulario de una noticia nueva](../img/03-02-formulario.jpg)
+![Formulario de una noticia nueva](../img/04-02-formulario.jpg)
 
 | N.º | Zona | Contenido |
 |---|---|---|
@@ -60,7 +60,7 @@ En la columna **Estado** se ve la situación de cada noticia. Si una noticia est
 
 ### Redactar y guardar una noticia como borrador
 
-![Formulario completado](../img/03-03-formulario-completo.jpg)
+![Formulario completado](../img/04-03-formulario-completo.jpg)
 
 1. Pulsa **Nueva noticia**.
 2. Escribe el **Título**, el **Resumen** y el **Contenido**.
@@ -71,19 +71,19 @@ En la columna **Estado** se ve la situación de cada noticia. Si una noticia est
 7. Pulsa **Vista previa** ⑤ para ver cómo quedará (ver el siguiente apartado).
 8. Pulsa **Guardar cambios** ⑥.
 
-![La noticia aparece en el listado como Borrador](../img/03-05-guardado-borrador.jpg)
+![La noticia aparece en el listado como Borrador](../img/04-05-guardado-borrador.jpg)
 
 Aparece el aviso «Cambios guardados.» y la noticia queda en el listado con el estado **Borrador** ①. Un borrador **no se ve en el portal**.
 
 ### Revisar con la vista previa
 
-![Vista previa de la noticia](../img/03-04-vista-previa.jpg)
+![Vista previa de la noticia](../img/04-04-vista-previa.jpg)
 
 La vista previa muestra la noticia tal como se verá en el portal, aunque todavía no esté publicada. Los botones de la franja superior permiten verla en tamaño **Móvil** o **Escritorio**. Pulsa **Cerrar vista previa** para volver al formulario.
 
 ### Publicar una noticia
 
-![Cambiar el estado a Publicada](../img/03-06-publicar.jpg)
+![Cambiar el estado a Publicada](../img/04-06-publicar.jpg)
 
 1. En el listado, pulsa el lápiz (**Editar**) de la noticia.
 2. Cambia el **Estado** ① a **Publicada**.
@@ -91,7 +91,7 @@ La vista previa muestra la noticia tal como se verá en el portal, aunque todav�
 
 En el **Historial** ③ queda registrado quién creó la noticia, quién la modificó por última vez y cuándo.
 
-![La noticia publicada en el listado](../img/03-07-publicada.jpg)
+![La noticia publicada en el listado](../img/04-07-publicada.jpg)
 
 La noticia pasa a **Publicada** ① y desde ese momento se ve en el portal. Si la fecha de publicación es futura, se muestra la etiqueta **Programada** y la noticia aparece en el portal cuando llega esa fecha.
 
@@ -112,19 +112,19 @@ Edita la noticia, cambia el **Estado** a **Despublicada** (si podría volver a p
 
 ### Eliminar y restaurar
 
-![Confirmación al eliminar](../img/03-10-eliminar.jpg)
+![Confirmación al eliminar](../img/04-10-eliminar.jpg)
 
 1. Pulsa la papelera (**Eliminar**) de la fila.
 2. Lee la confirmación ①: la noticia se envía a la papelera, deja de mostrarse en el portal y se puede restaurar. Pulsa **Eliminar**.
 
-![Papelera de noticias](../img/03-11-papelera.jpg)
+![Papelera de noticias](../img/04-11-papelera.jpg)
 
 3. Para recuperarla, pulsa **Ver papelera** y luego **Restaurar** ① en la fila. Vuelve al listado con el estado que tenía.
 4. Solo el **Administrador** ve el botón **Eliminar definitivamente**. Esta acción no se puede deshacer.
 
 ### Gestionar categorías
 
-![Categorías de noticias](../img/03-12-categorias.jpg)
+![Categorías de noticias](../img/04-12-categorias.jpg)
 
 En la pestaña **Categorías** se crean, editan y desactivan las categorías ①. La columna **Noticias asociadas** indica cuántas noticias usa cada una. Las categorías activas aparecen como filtros en el portal. Antes de eliminar una categoría, pasa sus noticias a otra.
 
@@ -154,11 +154,11 @@ flowchart TD
 
 ## Resultado en el portal público
 
-![Listado de noticias en el portal](../img/03-08-web-listado.jpg)
+![Listado de noticias en el portal](../img/04-08-web-listado.jpg)
 
 En `{{inst.dominio}}/#/noticias` el público ve las noticias publicadas, de la más reciente a la más antigua. Puede filtrarlas por categoría ① y abrir cada tarjeta ②. La columna lateral incluye un buscador, las categorías, las noticias destacadas y un archivo por mes.
 
-![Página de la noticia](../img/03-09-web-detalle.jpg)
+![Página de la noticia](../img/04-09-web-detalle.jpg)
 
 La página de cada noticia muestra la fecha, la categoría, el título, el resumen, la imagen o el video, el contenido y los archivos relacionados.
 

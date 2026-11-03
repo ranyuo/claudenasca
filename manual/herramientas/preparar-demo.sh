@@ -2,11 +2,12 @@
 # Crea (o reinicia) una instalación LOCAL de demostración del portal con datos ficticios,
 # lista para tomar las capturas del manual. No toca ningún portal en línea.
 # Requisitos: PHP 8.2+, MariaDB/MySQL en local, Node 18+ con Playwright.
-# Uso: herramientas/preparar-demo.sh [carpeta-de-trabajo]
+# Uso: [PUERTO=8081 DB=portal_demo_2] herramientas/preparar-demo.sh [carpeta-de-trabajo]
+# Con PUERTO y DB distintos se pueden tener varias instalaciones de prueba a la vez.
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
-TRABAJO="${1:-${TMPDIR:-/tmp}/portal-demo-manual}"
-DB=portal_demo; DBU=demo; DBP=demo_pass_local; PUERTO=8080
+TRABAJO="${1:-${TMPDIR:-/tmp}/portal-demo-manual-${PUERTO:-8080}}"
+DB=${DB:-portal_demo}; DBU=demo; DBP=demo_pass_local; PUERTO=${PUERTO:-8080}
 ADMIN_USER=admin.ica; ADMIN_PASS=DemoManual2026
 
 mysql -e "DROP DATABASE IF EXISTS $DB; CREATE DATABASE $DB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

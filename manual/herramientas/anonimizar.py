@@ -13,7 +13,7 @@ i.update({"nombre":"Instituto de Educación Superior Tecnológico Público “Ic
  "fechaCreacion":"1990-01-01","normaCreacion":"Norma de creación de referencia (dato ficticio).","logo":"",
  "descripcion":"Institución de referencia usada para elaborar el manual de uso de la plataforma. Los datos son ficticios."})
 # Responsable del Libro de reclamaciones y datos de Mesa de partes (se cargan directamente:
-# ver la incidencia de configuración documentada en el manual, capítulo 07).
+# ver la incidencia de configuración documentada en el manual, capítulo 26).
 d['config'].setdefault('lr', {}).update({"responsable":"Rosa Mendoza Soto","cargo":"Jefa de la Unidad de Bienestar y Empleabilidad",
   "correo":"reclamaciones@ica.aplicacion.io","areaInicial":"MP"})
 d['config'].setdefault('mpv', {}).update({"correo":"mesadepartes@ica.aplicacion.io","telefono":"(056) 000-000","prefijo":"MPV-ICA"})
