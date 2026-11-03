@@ -64,7 +64,7 @@ escena('01-inicio-aprobaciones', async ({ adm, ctx }) => {
   // El responsable de Transparencia envía dos documentos a aprobación
   const q = await entrarComo(ctx);
   await alto(q, 900);
-  await nuevoDocumento(q, 'Plan Anual de Trabajo 2026', 'Plan', 'Plan Anual de Trabajo del IESTP “Ica” aprobado para el periodo 2026.');
+  await nuevoDocumento(q, 'Plan de Capacitación Docente 2026', 'Plan', 'Plan de Capacitación Docente del IESTP “Ica” para el periodo 2026.');
   await arriba(q);
   await marcar(q, [[1, '#f_estado'], [2, q.locator('.hint', { hasText: 'aprobación del Administrador' })], [3, q.getByRole('button', { name: /Guardar cambios/ })]]);
   await foto(q, '01-05-enviar-aprobacion');
@@ -73,7 +73,7 @@ escena('01-inicio-aprobaciones', async ({ adm, ctx }) => {
   await q.getByRole('button', { name: /Guardar cambios/ }).click(); await espera(q, 2000);
   await ir(q, '#/admin/documentos', 1500);
   await q.fill('#lf-q', '2026'); await q.locator('[data-lf] button.btn').first().click(); await espera(q, 1200);
-  await marcar(q, [[1, q.locator('main tbody tr', { hasText: 'Plan Anual de Trabajo 2026' }).locator('td').nth(4)]]);
+  await marcar(q, [[1, q.locator('main tbody tr', { hasText: 'Plan de Capacitación Docente 2026' }).locator('td').nth(4)]]);
   await foto(q, '01-06-en-revision');
 
   // Inicio del Administrador
@@ -104,7 +104,7 @@ escena('01-inicio-aprobaciones', async ({ adm, ctx }) => {
 
   // Bandeja de aprobaciones
   await ir(p, '#/admin/aprobaciones', 1500);
-  const fila = p.locator('main tbody tr', { hasText: 'Plan Anual de Trabajo 2026' });
+  const fila = p.locator('main tbody tr', { hasText: 'Plan de Capacitación Docente 2026' });
   await marcar(p, [
     [1, p.locator('main .panel h2').first()],
     [2, fila.locator('td').nth(1)],
