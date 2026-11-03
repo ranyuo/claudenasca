@@ -1,0 +1,3 @@
+{ "name": "manual-portal", "private": true, "type": "commonjs",
+  "scripts": { "capturas": "node capturas.js", "construir": "node construir.js" },
+  "dependencies": { "marked": "^12.0.2", "mermaid": "^10.9.1" } }
