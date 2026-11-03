@@ -112,7 +112,7 @@ aside.incidencia{border-left-color:var(--rojo);background:#fdecef}
   <dl>
     <dt>Sitio</dt><dd>${esc(ficha.dominio)}</dd>
     <dt>Plataforma</dt><dd>${esc(ficha.versionPlataforma)}</dd>
-    <dt>Edición</dt><dd>Etapa 1 (piloto): Introducción, Noticias y Libro de reclamaciones</dd>
+    <dt>Edición</dt><dd>Manual completo: ${capitulos.length} capítulos, todos los módulos de la intranet</dd>
     <dt>Fecha</dt><dd>${esc(hoy)}</dd>
   </dl>
   <p class="nota">${esc(ficha.nota || '')} Las capturas se tomaron en una instalación de prueba con datos ficticios.</p>

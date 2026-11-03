@@ -2,7 +2,7 @@
 
 Manual estándar de la plataforma (portal web + intranet) que comparten las implementaciones de Marcona, Nasca, Chincha, Federico Uranga y las demás instituciones. Un solo texto sirve para todas; lo que cambia por institución (nombre, dominio, logo) se toma de una **ficha** en `instituciones/`.
 
-> **Estado:** etapa 1 (piloto). Incluye la base del manual, el capítulo de introducción y dos módulos modelo: **Noticias** y **Libro de reclamaciones**. Al aprobar este formato se redactan los demás módulos con la misma plantilla.
+> **Estado:** manual completo. Un capítulo por cada módulo de la intranet, en el orden del menú, más la introducción y un glosario.
 
 ## Estructura
 
