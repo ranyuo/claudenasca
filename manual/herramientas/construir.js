@@ -1,12 +1,16 @@
 // Construye el manual en HTML y PDF a partir de contenido/*.md y una ficha de instituciones/.
-// Uso: node construir.js [ficha]   (por defecto: ica)
+// Uso: node construir.js [ficha] [--resumen]   (por defecto: ica, manual completo)
+//   --resumen usa contenido-resumen/ y un diseño compacto (versión de ~60 páginas).
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 const { chromium } = require('playwright');
 
 const RAIZ = path.resolve(__dirname, '..');
-const fichaId = process.argv[2] || 'ica';
+const RESUMEN = process.argv.includes('--resumen');
+const fichaId = process.argv.slice(2).find(a => !a.startsWith('--')) || 'ica';
+const DIR_CONT = RESUMEN ? 'contenido-resumen' : 'contenido';
+const SUFIJO = RESUMEN ? '-resumen' : '';
 const ficha = JSON.parse(fs.readFileSync(path.join(RAIZ, 'instituciones', fichaId + '.json'), 'utf8'));
 const SALIDA = path.join(RAIZ, 'salida');
 fs.mkdirSync(SALIDA, { recursive: true });
@@ -48,9 +52,9 @@ renderer.paragraph = text => /^<figure>/.test(text) ? text : `<p>${text}</p>\n`;
 marked.use({ renderer, gfm: true });
 
 const reemplazar = s => s.replace(/\{\{inst\.(\w+)\}\}/g, (_, k) => ficha[k] ?? '');
-const capitulos = fs.readdirSync(path.join(RAIZ, 'contenido')).filter(f => /^\d+.*\.md$/.test(f)).sort();
+const capitulos = fs.readdirSync(path.join(RAIZ, DIR_CONT)).filter(f => /^\d+.*\.md$/.test(f)).sort();
 const cuerpo = capitulos.map(f => {
-  const md = reemplazar(fs.readFileSync(path.join(RAIZ, 'contenido', f), 'utf8'));
+  const md = reemplazar(fs.readFileSync(path.join(RAIZ, DIR_CONT, f), 'utf8'));
   return `<section class="capitulo">${marked.parse(md.replace(/\]\(\.\.\/img\//g, '](img/'))}</section>`;
 }).join('\n');
 
@@ -115,6 +119,7 @@ aside.incidencia{border-left-color:var(--rojo);background:#fdecef}
   a{color:inherit;text-decoration:none}
   .contenedor{max-width:none;padding:0}
 }
+${RESUMEN ? `@media print{body{font-size:9.5pt;line-height:1.42}section.capitulo{page-break-before:auto;margin-top:6mm}h1{font-size:18pt;margin:0 0 6px;padding-bottom:4px;border-bottom-width:3px;page-break-after:avoid}h2{font-size:12.5pt;margin:12px 0 5px}h3{font-size:11pt;margin:10px 0 4px}p{margin:4px 0}ul,ol{margin:4px 0;padding-left:20px}table{font-size:8.6pt;margin:6px 0 10px}td,th{padding:3px 7px}figure{margin:8px 0}figure img{max-height:105mm;width:auto;max-width:100%;margin:0 auto}figcaption{padding:4px 10px;font-size:8.5pt}aside.aviso{padding:6px 10px;margin:8px 0}}` : ''}
 </style></head>
 <body>
 <header class="portada">
@@ -124,7 +129,7 @@ aside.incidencia{border-left-color:var(--rojo);background:#fdecef}
   <dl>
     <dt>Sitio</dt><dd>${esc(ficha.dominio)}</dd>
     <dt>Plataforma</dt><dd>${esc(ficha.versionPlataforma)}</dd>
-    <dt>Edición</dt><dd>Manual completo: ${capitulos.length} capítulos, todos los módulos de la intranet</dd>
+    <dt>Edición</dt><dd>${RESUMEN ? 'Versión resumida: lo esencial de cada módulo en una o dos páginas' : 'Manual completo: ' + capitulos.length + ' capítulos, todos los módulos de la intranet'}</dd>
     <dt>Fecha</dt><dd>${esc(hoy)}</dd>
   </dl>
   <p class="nota">${esc(ficha.nota || '')} Las capturas se tomaron en una instalación de prueba con datos ficticios.</p>
@@ -140,7 +145,7 @@ mermaid.run({querySelector:'.mermaid'}).then(()=>{document.body.dataset.listo='1
 </body></html>`;
 
 (async () => {
-  const borrador = path.join(SALIDA, `.borrador-${fichaId}.html`);
+  const borrador = path.join(SALIDA, `.borrador-${fichaId}${SUFIJO}.html`);
   fs.writeFileSync(borrador, html);
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1100, height: 900 } });
@@ -152,18 +157,18 @@ mermaid.run({querySelector:'.mermaid'}).then(()=>{document.body.dataset.listo='1
   // HTML final: diagramas ya convertidos en SVG, sin depender de scripts.
   await p.evaluate(() => document.querySelectorAll('script').forEach(s => s.remove()));
   const final = '<!doctype html>\n' + await p.evaluate(() => document.documentElement.outerHTML);
-  const salidaHtml = path.join(SALIDA, `manual-${fichaId}.html`);
+  const salidaHtml = path.join(SALIDA, `manual-${fichaId}${SUFIJO}.html`);
   fs.writeFileSync(salidaHtml, final);
 
   // PDF
   await p.emulateMedia({ media: 'print' });
   await p.pdf({
-    path: path.join(SALIDA, `manual-${fichaId}.pdf`), format: 'A4', printBackground: true,
+    path: path.join(SALIDA, `manual-${fichaId}${SUFIJO}.pdf`), format: 'A4', printBackground: true,
     margin: { top: '18mm', bottom: '18mm', left: '16mm', right: '16mm' }, displayHeaderFooter: true,
     headerTemplate: `<div style="font-size:8px;width:100%;padding:0 16mm;color:#5b6475;text-align:right">Manual de uso · ${esc(ficha.nombreCorto)}</div>`,
     footerTemplate: '<div style="font-size:8px;width:100%;text-align:center;color:#5b6475">Página <span class="pageNumber"></span> de <span class="totalPages"></span></div>',
   });
   await b.close();
   fs.unlinkSync(borrador);
-  console.log(`Listo: salida/manual-${fichaId}.html y salida/manual-${fichaId}.pdf (${capitulos.length} capítulos, ${nFig} figuras)`);
+  console.log(`Listo: salida/manual-${fichaId}${SUFIJO}.html y salida/manual-${fichaId}${SUFIJO}.pdf (${capitulos.length} capítulos, ${nFig} figuras)`);
 })().catch(e => { console.error(e); process.exit(1); });
