@@ -10,18 +10,20 @@ Manual estándar de la plataforma (portal web + intranet) que comparten las impl
 manual/
 ├── README.md                 este archivo
 ├── plantilla-modulo.md       plantilla obligatoria para cada capítulo de módulo
-├── contenido/                capítulos en Markdown (se ordenan por su número)
-│   ├── 00-introduccion.md
-│   ├── 03-noticias.md
-│   └── 07-libro-reclamaciones.md
+├── contenido/                un capítulo por módulo, numerado en el orden del menú
+│   ├── 00-introduccion.md        acceso, panel, roles y convenciones
+│   ├── 01 … 36                   un archivo por módulo (01-inicio-aprobaciones.md … 36-copias-seguridad.md)
+│   └── 37-glosario-faq.md        glosario y preguntas frecuentes
 ├── img/                      capturas generadas automáticamente (no editar a mano)
 ├── instituciones/            ficha de cada implementación (nombre, dominio, versión)
 ├── herramientas/
 │   ├── preparar-demo.sh      instala una copia LOCAL del portal con datos ficticios
 │   ├── anonimizar.py         reemplaza identidad, personal y becarios por datos ficticios
-│   ├── capturas.js           recorre la plataforma y toma las capturas numeradas
+│   ├── capturas.js           ejecuta las escenas y toma las capturas numeradas
+│   ├── lib.js                utilidades comunes (navegar, marcar con números, fotografiar)
+│   ├── escenas/              una escena de captura por capítulo (NN-nombre.js)
 │   └── construir.js          genera el manual en HTML y PDF
-└── salida/                   manuales generados (HTML y PDF)
+└── salida/                   manuales generados (HTML, PDF e imágenes comprimidas)
 ```
 
 ## Volúmenes previstos
@@ -59,7 +61,7 @@ Crea o reinicia la instalación de demostración en `http://127.0.0.1:8080`:
 ./preparar-demo.sh
 ```
 
-Toma todas las capturas. También se puede tomar un solo capítulo pasando su prefijo, por ejemplo `node capturas.js 07-`:
+Toma todas las capturas. También se puede tomar un solo capítulo pasando su prefijo, por ejemplo `node capturas.js 26-`. Los capítulos 10, 11, 16, 17 y 18 dependen entre sí y deben ejecutarse en ese orden:
 
 ```bash
 node capturas.js

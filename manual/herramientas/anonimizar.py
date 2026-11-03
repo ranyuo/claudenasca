@@ -66,6 +66,9 @@ def _limpiar(o):
 d = _limpiar(d)
 c = d['config']
 c.setdefault('redes', {})['facebook'] = ''
+_docs = d.get('academico', {}).get('cfg', {}).get('docs') or {}
+for k, v in list(_docs.items()):
+    if '/assets/nasca/' in json.dumps(v): _docs[k] = None
 for sv in d.get('servicios', []):
     if sv.get('responsable') and not sv['responsable'].startswith('Confirmar'):
         real = sv['responsable']

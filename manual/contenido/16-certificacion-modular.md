@@ -131,7 +131,7 @@ Debajo se muestran las barras de **Certificaciones por programa** y **Certificac
 
 ![Ficha vista por la estudiante](../img/16-11-vista-estudiante.jpg)
 
-El estudiante o egresado entra a **Certificación modular** y ve directamente su ficha: sus datos ①, sus módulos con el estado de certificación ②, el botón **Emitir constancia de certificación** ③ (si tiene al menos una certificación) y su **Historial académico** ④. No puede registrar ni modificar datos.
+El estudiante o egresado entra a **Certificación modular** (la página se titula **Constancias y certificados**) y ve directamente su ficha: sus datos ①, sus módulos con el estado de certificación ②, el botón **Emitir constancia de certificación** ③ (si tiene al menos una certificación) y su **Historial académico** ④. No puede registrar ni modificar datos.
 
 ## Flujo y estados
 

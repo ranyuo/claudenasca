@@ -11,6 +11,18 @@ const ficha = JSON.parse(fs.readFileSync(path.join(RAIZ, 'instituciones', fichaI
 const SALIDA = path.join(RAIZ, 'salida');
 fs.mkdirSync(SALIDA, { recursive: true });
 
+// Copias comprimidas de las capturas (1400 px de ancho, JPEG 72) en salida/img/,
+// para que el PDF y la versión web pesen menos. Solo se regeneran si cambió el original.
+const { execFileSync } = require('child_process');
+const IMG_SRC = path.join(RAIZ, 'img'), IMG_OUT = path.join(SALIDA, 'img');
+fs.mkdirSync(IMG_OUT, { recursive: true });
+for (const f of fs.readdirSync(IMG_SRC).filter(f => /\.jpe?g$/.test(f) && !f.startsWith('_'))) {
+  const src = path.join(IMG_SRC, f), dst = path.join(IMG_OUT, f);
+  if (fs.existsSync(dst) && fs.statSync(dst).mtimeMs >= fs.statSync(src).mtimeMs) continue;
+  try { execFileSync('convert', [src, '-resize', '1400x>', '-strip', '-quality', '72', dst]); }
+  catch { fs.copyFileSync(src, dst); }
+}
+
 const hoy = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Lima' });
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -39,7 +51,7 @@ const reemplazar = s => s.replace(/\{\{inst\.(\w+)\}\}/g, (_, k) => ficha[k] ?? 
 const capitulos = fs.readdirSync(path.join(RAIZ, 'contenido')).filter(f => /^\d+.*\.md$/.test(f)).sort();
 const cuerpo = capitulos.map(f => {
   const md = reemplazar(fs.readFileSync(path.join(RAIZ, 'contenido', f), 'utf8'));
-  return `<section class="capitulo">${marked.parse(md)}</section>`;
+  return `<section class="capitulo">${marked.parse(md.replace(/\]\(\.\.\/img\//g, '](img/'))}</section>`;
 }).join('\n');
 
 // Numeración de capturas (Figura N)
