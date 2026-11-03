@@ -68,7 +68,10 @@ c = d['config']
 c.setdefault('redes', {})['facebook'] = ''
 for sv in d.get('servicios', []):
     if sv.get('responsable') and not sv['responsable'].startswith('Confirmar'):
+        real = sv['responsable']
         sv['responsable'] = random.choice(NOM) + ' ' + random.choice(APE)
+        for k in ('descripcion', 'texto', 'detalle'):
+            if isinstance(sv.get(k), str): sv[k] = sv[k].replace(real, sv['responsable'])
 if isinstance(d.get('tupaDocs'), dict) and d['tupaDocs'].get('referencia'):
     d['tupaDocs']['referencia'] = d['tupaDocs']['referencia'].replace('IESTP-N/', 'IESTP-ICA/')
 for k in ('seo', 'popup'):
