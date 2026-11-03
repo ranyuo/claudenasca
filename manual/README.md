@@ -75,6 +75,7 @@ node construir.js ica
 ```
 
 Versión resumida (unas 55 páginas): `node construir.js ica --resumen` → `salida/manual-ica-resumen.pdf`.
+En Word: después del paso anterior, `node construir-word.js ica` → `salida/manual-ica-resumen.docx`.
 
 Para la edición de una institución concreta, usa su ficha, por ejemplo `node construir.js marcona`. El resultado queda en `salida/manual-<ficha>.html` y `salida/manual-<ficha>.pdf`.
 
