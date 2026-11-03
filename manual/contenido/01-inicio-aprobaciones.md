@@ -161,7 +161,7 @@ flowchart TD
 | Borrador | En preparación o devuelto con observaciones | No |
 | En revisión | Enviado al Administrador; aparece en **Aprobaciones** | No |
 | Publicado | Aprobado por el Administrador | **Sí** |
-| Histórico (solo documentos) | Versión anterior de un documento reemplazada por una nueva | Sí, en el historial del documento |
+| Histórico (solo documentos) | Versión anterior de un documento reemplazada por una nueva | Sí, con la etiqueta **Histórico** |
 
 ## Resultado en el portal público
 
