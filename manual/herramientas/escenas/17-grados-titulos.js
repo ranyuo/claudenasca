@@ -13,6 +13,19 @@ async function elegir(p, sel, texto) {
   if (v === null) throw new Error(`Opción «${texto}» no encontrada en ${sel}`);
   await p.selectOption(sel, v);
 }
+
+// El logo de documentos de la semilla no corresponde a la institución de ejemplo: durante la escena se usa el
+// logo del portal (subido desde Configuración académica) y al final se restaura el valor original.
+async function logoIca(p) {
+  await ir(p, '#/admin/ix-config'); await p.locator('[data-tab="config:documentos"]').click(); await espera(p, 600);
+  const orig = await p.evaluate(() => (IX.db().cfg.docs || {}).logoIzq || null);
+  const svg = await p.evaluate(() => { const i = document.querySelector('img[src^="data:image/svg"]'); return i ? decodeURIComponent(i.src.split(',').slice(1).join(',')) : ''; });
+  if (!svg) return { orig, cambiado: false };
+  const f = require('path').join(require('os').tmpdir(), 'logo-ica-manual.svg'); require('fs').writeFileSync(f, svg);
+  await p.setInputFiles('#dc_logoIzq', f); await espera(p, 2000);
+  return { orig, cambiado: true };
+}
+async function restaurarLogo(p, l) { if (l.cambiado) await p.evaluate(o => { IX.db().cfg.docs.logoIzq = o; return IX.persist(); }, l.orig); }
 const campo = (p, k) => p.locator(`#mform [data-fld="${k}"]`);
 
 escena('17-grados-titulos', async ({ adm, ctx }) => {
@@ -28,7 +41,7 @@ escena('17-grados-titulos', async ({ adm, ctx }) => {
   await marcar(p, [[1, campo(p, 'est')], [2, campo(p, 'culm')], [3, campo(p, 'tit')], [4, campo(p, 'cod')], [5, campo(p, 'resol')]]);
   await foto(p, '17-02-formulario');
   await p.fill('#f_tit', '2026-10-15');
-  await p.locator('#mform button[type=submit]').click(); await espera(p, 4000);
+  await p.locator('#mform button[type=submit]').click(); await espera(p, 6500);
 
   // Registro de titulados
   const fila = p.locator('#ix-root tbody tr', { hasText: COD });
@@ -36,11 +49,14 @@ escena('17-grados-titulos', async ({ adm, ctx }) => {
   await foto(p, '17-01-registro');
 
   // Reporte de validación
+  const logo = await logoIca(p);
+  await ir(p, '#/admin/ix-titulos');
   await fila.locator('[data-act="docTit"]').click(); await espera(p, 1500);
   await alto(p, 1250);
   await marcar(p, [[1, p.locator('#mform .paper dl')], [2, p.locator('#mform .pf')], [3, p.locator('#mform [data-act="pdfTit"]')]]);
   await foto(p, '17-03-validacion');
   await p.keyboard.press('Escape'); await espera(p, 400);
+  await restaurarLogo(p, logo);
 
   // Consulta y validación
   await alto(p, 900);
@@ -77,7 +93,7 @@ escena('17-grados-titulos', async ({ adm, ctx }) => {
   }
   await alto(e, 850);
   await ir(e, '#/admin/ix-titulos', 1800);
-  await marcar(e, [[1, e.locator('#ix-root .ficha dl')], [2, e.locator('#ix-root [data-act="docTit"]')], [3, e.locator('nav, aside').filter({ hasText: 'Grados y títulos' }).first()]]);
+  await marcar(e, [[1, e.locator('#ix-root .ficha dl')], [2, e.locator('#ix-root [data-act="docTit"]')], [3, e.locator('a', { hasText: 'Grados y títulos' }).first()]]);
   await foto(e, '17-06-vista-egresada');
   await e.context().close();
 });

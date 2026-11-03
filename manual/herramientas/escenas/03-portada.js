@@ -39,7 +39,7 @@ escena('03-portada', async ({ adm, browser, ctx }) => {
   await p.fill('[name=texto]', 'Ocho programas de estudio con título a nombre de la Nación. Inscríbete en línea hasta el 15 de febrero.');
   await p.fill('[name=boton]', 'Postula aquí');
   await p.fill('[name=enlace]', '#/admision');
-  await p.locator('input[data-imgf="imagen"]').setInputFiles({ name: 'admision-2027.png', mimeType: 'image/png', buffer: await imagen(browser, 'Admisión 2027', 'IESTP “Ica” · Formación técnica de calidad', '#0a2a5e', '#1c7ed6') });
+  await p.locator('input[data-imgf="imagen"]').setInputFiles({ name: 'admision-2027.png', mimeType: 'image/png', buffer: await imagen(browser, '', 'IESTP “Ica”', '#0a2a5e', '#1c7ed6') });
   await espera(p, 2500);
   await p.fill('[name=orden]', '1');
   await p.getByRole('button', { name: /Guardar cambios/ }).click(); await espera(p, 1200);
@@ -64,7 +64,7 @@ escena('03-portada', async ({ adm, browser, ctx }) => {
   await q.locator('.modal [data-close], .modal .close, .modal button[aria-label*="errar"]').first().click({ timeout: 1500 }).catch(() => {});
   const dots = q.locator('.hero-dots button');
   await dots.last().click(); await espera(q, 900);
-  await marcar(q, [[1, q.locator('.slide.on .cap h2')], [2, q.locator('.slide.on .cap a.btn')], [3, q.locator('.hero-dots')], [4, q.locator('.hero-arrow.r')]]);
+  await marcar(q, [[1, q.locator('.slide.on .cap h2')], [2, q.locator('.slide.on .cap a.btn')], [3, q.locator('.hero-dots')], [4, q.locator('.hero-arrow.r')], [5, q.locator('.home-announcement')]]);
   await foto(q, '03-04-web-carrusel');
 
   // Bloques, accesos y cifras
@@ -94,8 +94,9 @@ escena('03-portada', async ({ adm, browser, ctx }) => {
   await foto(p, '03-08-beneficios');
 
   // Accesos y cifras en el portal
+  await alto(q, 1300);
   await ir(q, '#/', 2500);
-  await subirA(q, q.locator('section.quick'), 140);
+  await q.locator('section.stats').scrollIntoViewIfNeeded(); await subirA(q, q.locator('section.quick'), 90);
   await marcar(q, [[1, q.locator('section.quick')], [2, q.locator('section.stats')]]);
   await foto(q, '03-09-web-accesos-cifras');
 
@@ -111,6 +112,9 @@ escena('03-portada', async ({ adm, browser, ctx }) => {
   await p.fill('[name=inicio]', hoy(0));
   await p.fill('[name=fin]', hoy(20));
   await p.locator('input[data-imgf="imagen"]').setInputFiles({ name: 'comunicado.png', mimeType: 'image/png', buffer: await imagen(browser, 'Admisión 2027', 'Inscripciones abiertas', '#5a1a7a', '#d6336c', 1200, 750) });
+  await espera(p, 1000);
+  const reemp = p.locator('.modal').getByRole('button', { name: 'Reemplazar' });
+  if (await reemp.count()) await reemp.first().click();
   await espera(p, 2500);
   await arriba(p);
   await marcar(p, [[1, p.locator('[name=activo]').locator('xpath=ancestor::label[1]')], [2, campo('[name=titulo]')], [3, campo('[name=texto]')], [4, campo('[name=boton]')], [5, campo('[name=enlace]')], [6, campo('[name=inicio]')], [7, campo('[name=fin]')], [8, p.locator('[data-img="imagen"]')], [9, p.getByRole('button', { name: /Guardar cambios/ })]]);

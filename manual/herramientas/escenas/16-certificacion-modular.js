@@ -22,6 +22,19 @@ async function elegir(p, sel, texto) {
   if (v === null) throw new Error(`Opción «${texto}» no encontrada en ${sel}`);
   await p.selectOption(sel, v);
 }
+
+// El logo de documentos de la semilla no corresponde a la institución de ejemplo: durante la escena se usa el
+// logo del portal (subido desde Configuración académica) y al final se restaura el valor original.
+async function logoIca(p) {
+  await ir(p, '#/admin/ix-config'); await p.locator('[data-tab="config:documentos"]').click(); await espera(p, 600);
+  const orig = await p.evaluate(() => (IX.db().cfg.docs || {}).logoIzq || null);
+  const svg = await p.evaluate(() => { const i = document.querySelector('img[src^="data:image/svg"]'); return i ? decodeURIComponent(i.src.split(',').slice(1).join(',')) : ''; });
+  if (!svg) return { orig, cambiado: false };
+  const f = require('path').join(require('os').tmpdir(), 'logo-ica-manual.svg'); require('fs').writeFileSync(f, svg);
+  await p.setInputFiles('#dc_logoIzq', f); await espera(p, 2000);
+  return { orig, cambiado: true };
+}
+async function restaurarLogo(p, l) { if (l.cambiado) await p.evaluate(o => { IX.db().cfg.docs.logoIzq = o; return IX.persist(); }, l.orig); }
 const campo = (p, k) => p.locator(`#mform [data-fld="${k}"]`);
 const enviar = async p => { await p.locator('#mform button[type=submit]').click(); await espera(p, 1500); };
 const pestana = async (p, k) => { await ir(p, '#/admin/ix-certificados'); await p.locator(`[data-tab="certificados:${k}"]`).click(); await espera(p, 700); };
@@ -87,8 +100,9 @@ escena('16-certificacion-modular', async ({ adm, ctx }) => {
   }
 
   // 4. Consulta y constancia
+  const logo = await logoIca(p);
   await pestana(p, 'consulta');
-  await alto(p, 1100);
+  await alto(p, 1500);
   await p.fill('#cq', '70946318'); await p.locator('[data-form="cq"] button').click(); await espera(p, 900);
   await marcar(p, [[1, p.locator('[data-form="cq"]')], [2, p.locator('#ix-root .ficha dl').first()], [3, p.locator('#ix-root .ficha table').first()], [4, p.locator('[data-act="docCert"]')], [5, p.locator('[data-act="newCertFor"]')], [6, p.locator('#ix-root .ficha').nth(1)]]);
   await foto(p, '16-07-consulta');
@@ -97,6 +111,7 @@ escena('16-certificacion-modular', async ({ adm, ctx }) => {
   await marcar(p, [[1, p.locator('#mform .paper table')], [2, p.locator('#mform .pf')], [3, p.locator('#mform [data-act="pdfCert"]')]]);
   await foto(p, '16-08-constancia');
   await p.keyboard.press('Escape'); await espera(p, 400);
+  await restaurarLogo(p, logo);
 
   // 5. Reportes
   await alto(p, 900);

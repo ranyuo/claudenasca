@@ -17,10 +17,11 @@ escena('36-respaldos', async ({ adm }) => {
   await foto(p, '36-01-intranet', { clip: { x: 0, y: 0, width: 1366, height: 260 } });
 
   // 2. Pantalla de respaldos
-  await alto(p, 900);
+  await alto(p, 1900);
   await p.goto(BASE + '/respaldos.php'); await espera(p, 900);
   await marcar(p, [[1, seccion('Crear y descargar')], [2, seccion('Restaurar una copia')], [3, seccion('Respaldos diarios')]]);
   await foto(p, '36-02-pantalla');
+  await alto(p, 900);
 
   // 3. Crear un respaldo completo
   await p.getByRole('button', { name: 'Crear respaldo completo' }).click(); await espera(p, 2500);

@@ -16,7 +16,7 @@ escena('35-auditoria', async ({ adm, ctx }) => {
   await alto(p, 950);
   await ir(p, '#/admin/auditoria');
   await marcar(p, [[1, p.getByRole('link', { name: /Consultar y exportar el historial completo/ })], [2, p.locator('[data-acsv]')], [3, p.locator('form[data-af]')],
-    [4, p.locator('main table thead').first()], [5, p.locator('main .panel .pb').last()]]);
+    [4, p.locator('main table thead').first()]]);
   await foto(p, '35-01-auditoria');
 
   // 2. Filtro por módulo «Cuentas»
@@ -36,8 +36,9 @@ escena('35-auditoria', async ({ adm, ctx }) => {
   // 4. Búsqueda de intentos fallidos y exportación
   await p.fill('input[name=q]', 'Intento de acceso fallido');
   await p.getByRole('button', { name: 'Filtrar historial' }).click(); await espera(p, 900);
-  await marcar(p, [[1, 'input[name=q]'], [2, p.locator('tbody tr').first()]]);
-  await foto(p, '35-04-intentos-fallidos', { clip: { x: 0, y: 0, width: 1366, height: 620 } });
+  await alto(p, 1150);
+  await marcar(p, [[1, 'input[name=q]'], [2, p.getByText(/registros\. Página/).first()], [3, p.locator('tbody tr').first()]]);
+  await foto(p, '35-04-intentos-fallidos');
   const [descarga] = await Promise.all([p.waitForEvent('download', { timeout: 15000 }), p.getByRole('link', { name: /Exportar todos los resultados a CSV/ }).click()]);
   console.log('  · CSV exportado: ' + descarga.suggestedFilename());
   await descarga.cancel().catch(() => {});

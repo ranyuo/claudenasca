@@ -53,7 +53,7 @@ escena('21-estadisticas', async ({ adm, pub }) => {
   const celdaMal = filas.filter({ hasText: 'Guía Oficial de Turismo' }).first().locator('input').nth(3);
   await celdaMal.fill('-12');
   await p.locator('form[data-stf] button').last().click(); await espera(p, 700);
-  await marcar(p, [[1, p.locator('main .chips a[aria-current=true]')], [2, celdaMal], [3, p.locator('.toast').last()]]);
+  await marcar(p, [[1, p.locator('main .chips a[aria-current=true]')], [2, celdaMal]]);
   await foto(p, '21-03-error');
   await celdaMal.fill(String(DATOS['Guía Oficial de Turismo'][3]));
   await celdaMal.evaluate(e => e.style.borderColor = '');

@@ -28,6 +28,10 @@ for p in d.get('personas', []):
     if 'nombrePublicado' in p: p['nombrePublicado'] = f"{p['nombres']} {p['apellidos']}"
 for b in d.get('becarios', []):
     fake(b); b['dni'] = str(random.randint(10000000, 99999999))
+# Áreas receptoras (Mesa de partes y derivaciones): responsables y correos ficticios.
+for n, ar in enumerate(d.get('academico', {}).get('areas', [])):
+    ar['resp'] = random.choice(NOM) + ' ' + random.choice(APE)
+    ar['correo'] = (ar.get('cod') or f'area{n}').lower() + '@ica.aplicacion.io'
 for j in d.get('jerarquica', []):
     for k in ('nombre','nombres'):
         if k in j and j[k]: j[k] = random.choice(NOM)+' '+random.choice(APE)
