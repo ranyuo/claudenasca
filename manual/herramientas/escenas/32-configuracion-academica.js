@@ -34,8 +34,8 @@ escena('32-configuracion-academica', async ({ adm }) => {
   await p.fill('#dc_pie', 'Av. Los Maestros 245, Ica · secretaria@ica.aplicacion.io · Telf. (056) 214578');
   await p.locator('form[data-form="docsCfg"] button[type=submit]').click(); await espera(p, 6000);
   await alto(p, 1800); await arriba(p);
-  await marcar(p, [[1, p.locator('#ix-root .panel', { hasText: 'Logotipos' }).first()], [2, p.locator('#ix-root .panel', { hasText: 'Encabezado' }).first()],
-    [3, p.locator('#ix-root .panel', { hasText: 'Mostrar firma' }).first()], [4, p.locator('#ix-root .panel', { hasText: 'Pie de página' }).first()],
+  const panel = t => p.locator('#ix-root .panel').filter({ has: p.locator('h2', { hasText: new RegExp('^' + t + '$') }) }).first();
+  await marcar(p, [[1, panel('Logotipos')], [2, panel('Encabezado')], [3, panel('Firma')], [4, panel('Pie de página')],
     [5, p.locator('form[data-form="docsCfg"] .btnrow').last()], [6, p.locator('#ix-root .ap-preview')]]);
   await foto(p, '32-03-documentos');
 
