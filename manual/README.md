@@ -14,6 +14,7 @@ manual/
 │   ├── 00-introduccion.md        acceso, panel, roles y convenciones
 │   ├── 01 … 36                   un archivo por módulo (01-inicio-aprobaciones.md … 36-copias-seguridad.md)
 │   └── 37-glosario-faq.md        glosario y preguntas frecuentes
+├── contenido-resumen/        versión resumida (~55 páginas): lo esencial de cada módulo
 ├── img/                      capturas generadas automáticamente (no editar a mano)
 ├── instituciones/            ficha de cada implementación (nombre, dominio, versión)
 ├── herramientas/
@@ -72,6 +73,8 @@ Genera el manual general (institución de referencia: IESTP “Ica”):
 ```bash
 node construir.js ica
 ```
+
+Versión resumida (unas 55 páginas): `node construir.js ica --resumen` → `salida/manual-ica-resumen.pdf`.
 
 Para la edición de una institución concreta, usa su ficha, por ejemplo `node construir.js marcona`. El resultado queda en `salida/manual-<ficha>.html` y `salida/manual-<ficha>.pdf`.
 

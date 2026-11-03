@@ -119,7 +119,7 @@ aside.incidencia{border-left-color:var(--rojo);background:#fdecef}
   a{color:inherit;text-decoration:none}
   .contenedor{max-width:none;padding:0}
 }
-${RESUMEN ? `@media print{body{font-size:9.5pt;line-height:1.42}section.capitulo{page-break-before:auto;margin-top:6mm}h1{font-size:18pt;margin:0 0 6px;padding-bottom:4px;border-bottom-width:3px;page-break-after:avoid}h2{font-size:12.5pt;margin:12px 0 5px}h3{font-size:11pt;margin:10px 0 4px}p{margin:4px 0}ul,ol{margin:4px 0;padding-left:20px}table{font-size:8.6pt;margin:6px 0 10px}td,th{padding:3px 7px}figure{margin:8px 0}figure img{max-height:105mm;width:auto;max-width:100%;margin:0 auto}figcaption{padding:4px 10px;font-size:8.5pt}aside.aviso{padding:6px 10px;margin:8px 0}}` : ''}
+${RESUMEN ? `@media print{body{font-size:9.5pt;line-height:1.42}section.capitulo{page-break-before:auto;margin-top:6mm}h1{font-size:18pt;margin:0 0 6px;padding-bottom:4px;border-bottom-width:3px;page-break-after:avoid}h2{font-size:12.5pt;margin:12px 0 5px}h3{font-size:11pt;margin:10px 0 4px}p{margin:4px 0}ul,ol{margin:4px 0;padding-left:20px}table{font-size:8.6pt;margin:6px 0 10px}td,th{padding:3px 7px}figure{margin:8px 0}figure img{max-height:140mm;width:auto;max-width:100%;margin:0 auto}figcaption{padding:4px 10px;font-size:8.5pt}aside.aviso{padding:6px 10px;margin:8px 0}}` : ''}
 </style></head>
 <body>
 <header class="portada">
