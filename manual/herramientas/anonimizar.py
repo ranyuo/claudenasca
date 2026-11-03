@@ -60,12 +60,13 @@ def _limpiar(o):
     if isinstance(o, list): return [_limpiar(v) for v in o]
     if isinstance(o, str) and not o.startswith(('/assets', 'http', 'data:')):
         o = o.replace('istpnasca.edu.pe', 'ica.aplicacion.io')
+        o = o.replace('importacion-nasca', 'carga-inicial')
         o = _re.sub(r'\bNASCA\b', 'ICA', o)
         o = _re.sub(r'\bNasca\b', 'Ica', o)
     return o
 d = _limpiar(d)
 c = d['config']
-c.setdefault('redes', {})['facebook'] = ''
+c.setdefault('redes', {})['facebook'] = 'https://www.facebook.com/'  # enlace genérico, sin página real
 _docs = d.get('academico', {}).get('cfg', {}).get('docs') or {}
 for k, v in list(_docs.items()):
     if '/assets/nasca/' in json.dumps(v): _docs[k] = None

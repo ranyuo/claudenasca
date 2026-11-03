@@ -155,6 +155,9 @@ escena('11-programacion-horarios', async ({ adm, ctx }) => {
   // 9. Vista por docente
   await ir(p, '#/admin/ix-horarios');
   await p.locator('[data-tab="horarios:docente"]').click(); await espera(p, 700);
+  // Elige al docente con clases programadas en este capítulo (en la pasada completa hay más docentes).
+  const vDoc = await p.locator('#hdoc option').evaluateAll((os, n) => (os.find(o => o.textContent.includes(n)) || {}).value, docA);
+  if (vDoc) { await p.selectOption('#hdoc', vDoc); await espera(p, 900); }
   await marcar(p, [[1, '#hdoc'], [2, p.locator('#ix-root .panel-h').first()], [3, p.locator('#ix-root .cell.ses').first()]]);
   await foto(p, '11-12-vista-docente');
   await alto(p, 850);

@@ -21,7 +21,7 @@ cat > "$TRABAJO/portal-private/config.php" <<PHP
 return ['db_host'=>'127.0.0.1','db_port'=>3306,'db_name'=>'$DB','db_user'=>'$DBU','db_password'=>'$DBP',
   'install_key'=>'$KEY','secure_cookies'=>false,'timezone'=>'America/Lima'];
 PHP
-pkill -f "php -S 127.0.0.1:$PUERTO" 2>/dev/null || true
+pkill -f "[p]hp -S 127.0.0.1:$PUERTO" 2>/dev/null || true
 (cd "$TRABAJO/public_html" && setsid nohup php -S 127.0.0.1:$PUERTO > "$TRABAJO/php.log" 2>&1 < /dev/null &)
 for _ in $(seq 1 30); do curl -sf -o /dev/null "http://127.0.0.1:$PUERTO/install.php" && break; sleep 0.3; done
 
