@@ -7,7 +7,7 @@ La plataforma tiene dos partes que trabajan con la misma información:
 - **Portal web público** (`{{inst.dominio}}`): lo que ve cualquier persona. Muestra la información institucional, los programas de estudio, la transparencia y las noticias, y ofrece servicios en línea como Mesa de partes, Libro de reclamaciones, consulta de certificados y bolsa laboral.
 - **Intranet** (`{{inst.dominio}}/#/admin`): el panel donde el personal autorizado administra ese contenido y atiende los trámites. Todo lo que se publica en la intranet aparece en el portal en cuanto se guarda; no hay que hacer ningún otro paso.
 
-Este manual describe la versión estándar de la plataforma, que es la misma en todas las instituciones. Las capturas provienen de una **instalación de demostración con datos ficticios** («IESTP “Demostración”»). En tu institución verás tu propio nombre, logotipo y colores.
+Este manual describe la versión estándar de la plataforma, que es la misma en todas las instituciones. Como institución de referencia se usa el **IESTP “Ica”**: todas las capturas se tomaron en una instalación de prueba con **datos ficticios** (personas, reclamos y noticias de ejemplo). En tu institución verás tu propio nombre, logotipo y colores.
 
 ## Ingresar a la intranet
 

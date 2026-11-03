@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8080';
-const USER = process.env.DEMO_USER || 'admin.demo';
+const USER = process.env.DEMO_USER || 'admin.ica';
 const PASS = process.env.DEMO_PASS || 'DemoManual2026';
 const OUT = path.resolve(__dirname, '..', 'img');
 const SOLO = process.argv[2] || '';
@@ -226,7 +226,7 @@ escena('07-reclamos', async ({ adm, pub }) => {
   const campo = t => p.locator('label', { hasText: t }).first().locator('xpath=..');
   await inp('Responsable institucional').fill('Rosa Mendoza Soto');
   await inp('Cargo').fill('Jefa de la Unidad de Bienestar y Empleabilidad');
-  await inp('Correo institucional').fill('reclamaciones@demo.edu.pe');
+  await inp('Correo institucional').fill('reclamaciones@ica.aplicacion.io');
   await inp('Área que recibe').selectOption({ label: 'Mesa de Partes' }).catch(() => {});
   await marcar(p, [[1, campo('Responsable institucional')], [2, campo('Área que recibe')], [3, campo('reclamos (días')], [4, campo('Alertar')],
     [5, p.getByRole('button', { name: /^Guardar$/ })]]);

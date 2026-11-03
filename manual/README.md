@@ -40,7 +40,7 @@ Las guías B y C se arman reutilizando las secciones del volumen A; no se redact
 2. Se escribe en segunda persona y en imperativo: «Pulsa **Guardar cambios**». Los nombres de botones, pestañas y campos van en **negrita** y se copian tal como aparecen en pantalla.
 3. Cada captura lleva números rojos (①②③) y, debajo, una tabla que explica cada número.
 4. Los flujos con estados llevan un diagrama (bloque `mermaid`).
-5. No se incluyen datos personales reales. Todas las capturas salen de la instalación de demostración.
+5. No se incluyen datos personales reales. Todas las capturas salen de la instalación de prueba del IESTP “Ica”, la institución de referencia, con datos ficticios.
 6. Los errores de la plataforma que se detecten al documentar se registran en un recuadro **Incidencia** dentro del capítulo y se reportan para su corrección.
 
 ## Cómo regenerar las capturas y el manual
@@ -65,13 +65,13 @@ Toma todas las capturas. También se puede tomar un solo capítulo pasando su pr
 node capturas.js
 ```
 
-Genera el manual con la ficha de una institución:
+Genera el manual general (institución de referencia: IESTP “Ica”):
 
 ```bash
-node construir.js demo
+node construir.js ica
 ```
 
-Ejemplos con otras fichas: `node construir.js marcona`, `node construir.js nasca`. El resultado queda en `salida/manual-<ficha>.html` y `salida/manual-<ficha>.pdf`.
+Para la edición de una institución concreta, usa su ficha, por ejemplo `node construir.js marcona`. El resultado queda en `salida/manual-<ficha>.html` y `salida/manual-<ficha>.pdf`.
 
 `capturas.js` **se niega a correr contra un dominio que no sea local**. Crea y modifica registros, así que nunca debe apuntar a un portal en producción.
 

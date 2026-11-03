@@ -1,12 +1,12 @@
 // Construye el manual en HTML y PDF a partir de contenido/*.md y una ficha de instituciones/.
-// Uso: node construir.js [ficha]   (por defecto: demo)
+// Uso: node construir.js [ficha]   (por defecto: ica)
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 const { chromium } = require('playwright');
 
 const RAIZ = path.resolve(__dirname, '..');
-const fichaId = process.argv[2] || 'demo';
+const fichaId = process.argv[2] || 'ica';
 const ficha = JSON.parse(fs.readFileSync(path.join(RAIZ, 'instituciones', fichaId + '.json'), 'utf8'));
 const SALIDA = path.join(RAIZ, 'salida');
 fs.mkdirSync(SALIDA, { recursive: true });
@@ -115,7 +115,7 @@ aside.incidencia{border-left-color:var(--rojo);background:#fdecef}
     <dt>Edición</dt><dd>Etapa 1 (piloto): Introducción, Noticias y Libro de reclamaciones</dd>
     <dt>Fecha</dt><dd>${esc(hoy)}</dd>
   </dl>
-  <p class="nota">${esc(ficha.nota || '')} Las capturas se tomaron en una instalación de demostración con datos ficticios.</p>
+  <p class="nota">${esc(ficha.nota || '')} Las capturas se tomaron en una instalación de prueba con datos ficticios.</p>
 </header>
 <div class="contenedor">
 <nav class="indice"><h2>Contenido</h2><ol>${indice}</ol></nav>

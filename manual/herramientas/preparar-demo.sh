@@ -7,7 +7,7 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 TRABAJO="${1:-${TMPDIR:-/tmp}/portal-demo-manual}"
 DB=portal_demo; DBU=demo; DBP=demo_pass_local; PUERTO=8080
-ADMIN_USER=admin.demo; ADMIN_PASS=DemoManual2026
+ADMIN_USER=admin.ica; ADMIN_PASS=DemoManual2026
 
 mysql -e "DROP DATABASE IF EXISTS $DB; CREATE DATABASE $DB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   CREATE USER IF NOT EXISTS '$DBU'@'localhost' IDENTIFIED BY '$DBP'; GRANT ALL ON $DB.* TO '$DBU'@'localhost'; FLUSH PRIVILEGES;"
@@ -28,7 +28,7 @@ for _ in $(seq 1 30); do curl -sf -o /dev/null "http://127.0.0.1:$PUERTO/install
 CJ="$TRABAJO/cookies.txt"
 T=$(curl -s -c "$CJ" "http://127.0.0.1:$PUERTO/install.php" | grep -o 'name="_csrf" value="[^"]*"' | cut -d'"' -f4)
 curl -s -b "$CJ" -c "$CJ" "http://127.0.0.1:$PUERTO/install.php" --data-urlencode "_csrf=$T" --data-urlencode "install_key=$KEY" \
-  -d name=Administrador+Demo -d username=$ADMIN_USER -d email=admin@demo.edu.pe \
+  -d name=Administrador+del+portal -d username=$ADMIN_USER -d email=admin@ica.aplicacion.io \
   -d password=$ADMIN_PASS -d password_confirmation=$ADMIN_PASS | grep -q "Instalación completada"
 
 # Sustituye identidad y personas reales por datos ficticios
